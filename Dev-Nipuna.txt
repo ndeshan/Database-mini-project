@@ -115,3 +115,9 @@ mysql>
 mysql> INSERT INTO USER_CONTACT VALUES('U001', '0771234567'),('U001','0112345678'),('U002','0769876543'),('U003','0712345678'),('U004','0723456789'),('U005', '0701122334'),('U006', '0755667788'),('U007', '0766778899'),('U008', '0744556677'),('U009', '0733445566'),('U010', '0788990011'),('U011', '0702233445'),('U012', '0713344556'),('U013', '0724455667'),('U014', '0771232143');
 Query OK, 15 rows affected (0.224 sec)
 Records: 15  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql>
+mysql> INSERT INTO STUDENT (ST_Id, Registration_No, Status, Year, Department, Batch) VALUES ('S001', 'ICT2024001', 'Proper', 2024, 'ICT', 2024),('S002', 'ICT2024002', 'Proper', 2024, 'ICT', 2024),('S003', 'ICT2024003', 'Proper', 2024, 'ICT', 2024),('S004', 'ICT2024004', 'Proper',  2024, 'ICT', 2024),('S005', 'ICT2024005', 'Proper', 2024, 'ICT', 2024),('S006', 'ICT2024006', 'Proper',  2024, 'ICT', 2024),('S007', 'ICT2024007', 'Proper',  2024, 'ICT', 2024),('S008', 'ICT2024008', 'Proper',  2024, 'ICT', 2024),('S009', 'ICT2024009', 'Proper', 2024, 'ICT', 2024),('S010', 'ICT2024010', 'Proper',  2024, 'ICT', 2024),('S011', 'ICT2024011', 'Repeat',  2024, 'ICT', 2024),('S012', 'ICT2024012', 'Repeat',  2024, 'ICT', 2024),('S013', 'ICT2024013', 'Repeat',  2024, 'ICT', 2024),('S014', 'ICT2024014', 'Repeat',  2024, 'ICT', 2024),('S015', 'ICT2024015', 'Repeat',  2024, 'ICT', 2024),('S016', 'ICT2024016', 'Suspended',  2024, 'ICT', 2024),('S017', 'ICT2024017', 'Suspended',  2024, 'ICT', 2024),('S018', 'ICT2024018', 'Suspended',  2024, 'ICT', 2024),('S019', 'ICT2024019', 'Suspended',  2024, 'ICT', 2024),('S020', 'ICT2024020', 'Suspended',  2024, 'ICT', 2024);
+Query OK, 20 rows affected (0.253 sec)
+Records: 20  Duplicates: 0  Warnings: 0
