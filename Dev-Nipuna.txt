@@ -104,3 +104,9 @@ mysql> INSERT INTO USER_ROLE VALUES
 Query OK, 5 rows affected (0.265 sec)
 Records: 5  Duplicates: 0  Warnings: 0
 
+mysql>
+mysql> INSERT INTO USER (U_Id, Fname, Lname, Email, Address, Gender, Dob, Role) VALUES ('U001', 'Nimal', 'Perera', 'nimal.perera@ruhuna.lk', 'Galle Road, Colombo', 'M', '2001-03-12', 'Student'),('U002', 'Kamani', 'Fernando', 'kamani.fernando@ruhuna.lk', 'Kandy Road, Kadawatha', 'F', '2000-07-25', 'Student'),('U003', 'Ravi', 'Silva', 'ravi.silva@ruhuna.lk', 'Temple Road, Moratuwa', 'M', '1985-05-18', 'Lecturer'),('U004', 'Dilini', 'Wickramasinghe', 'dilini.w@ruhuna.lk', 'Rajagiriya, Colombo', 'F', '1982-11-30', 'Lecturer'),('U005', 'Tharindu', 'Jayasinghe', 'tharindu.j@ruhuna.lk', 'Nugegoda, Colombo', 'M', '2002-01-15', 'Student'),('U006', 'Anjali', 'Rajapaksa', 'anjali.r@ruhuna.lk', 'Matara Road, Galle', 'F', '2001-08-22', 'Student'),('U007', 'Chaminda', 'Weerasinghe', 'chaminda.w@ruhuna.lk', 'Kurunegala', 'M', '2000-04-10', 'Student'),('U008', 'Yasodha', 'Gunaratne', 'yasodha.g@ruhuna.lk', 'Jaffna', 'F', '1987-09-05', 'Lecturer'),('U009', 'Sahan', 'Bandara', 'sahan.b@ruhuna.lk', 'Galle Face, Colombo', 'M', '1980-02-14', 'Dean'),('U010', 'Nadeesha', 'Herath', 'nadeesha.h@ruhuna.lk', 'Nuwara Eliya', 'F', '2001-06-30', 'Student'),('U011', 'Amila', 'Rathnayake', 'amila.r@ruhuna.lk', 'Badulla', 'M', '1990-07-20', 'Technical Officer'),('U012', 'Lahiru', 'De Silva', 'lahiru.d@ruhuna.lk', 'Panadura', 'M', '1992-03-11', 'Technical Officer'),('U013', 'nipuna', 'deshan', 'nipuna@ruhuna.lk', 'Galle', 'M', '1975-01-01', 'Admin'),('U014', 'seelawathi', 'ganga', 'seelawathi.g@ruhuna.lk', 'galle', 'F', '1987-09-07', 'Lecturer');
+Query OK, 14 rows affected (0.164 sec)
+Records: 14  Duplicates: 0  Warnings: 0
+
+mysql>
