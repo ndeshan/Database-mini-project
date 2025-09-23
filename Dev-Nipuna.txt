@@ -1,0 +1,19 @@
+mysql> CREATE DATABASE Student_Management;
+Query OK, 1 row affected (0.447 sec)
+
+mysql> use Student_Management;
+Database changed
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mydb               |
+| mysql              |
+| performance_schema |
+| sakila             |
+| student_management |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.040 sec)
