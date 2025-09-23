@@ -17,3 +17,62 @@ mysql> SHOW DATABASES;
 | world              |
 +--------------------+
 8 rows in set (0.040 sec)
+
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+mysql> SHOW TABLES;
+Empty set (0.058 sec)
+
+mysql> CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin1234';
+Query OK, 0 rows affected (0.431 sec)
+
+mysql> CREATE USER 'dean'@'localhost' IDENTIFIED BY 'dean1234';
+Query OK, 0 rows affected (0.241 sec)
+
+mysql> CREATE USER 'lecturer'@'localhost' IDENTIFIED BY 'lecturer1234';
+Query OK, 0 rows affected (0.270 sec)
+
+mysql> CREATE USER 'student'@'localhost' IDENTIFIED BY 'student1234';
+Query OK, 0 rows affected (0.133 sec)
+
+mysql> CREATE USER 'to'@'localhost' IDENTIFIED BY 'to1234';
+Query OK, 0 rows affected (0.301 sec)
+
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
+Query OK, 0 rows affected (0.260 sec)
+
+mysql> GRANT ALL PRIVILEGES ON Student_Management.* TO 'dean'@'localhost';
+Query OK, 0 rows affected (0.202 sec)
+
+mysql> GRANT ALL PRIVILEGES ON Student_Management.* TO 'lecturer'@'localhost';
+Query OK, 0 rows affected (0.108 sec)
+
+mysql> GRANT SELECT, INSERT, UPDATE ON Student_Management.ATTENDENCE TO 'to'@'localhost';
+ERROR 1146 (42S02): Table 'student_management.ATTENDENCE' doesn't exist
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected, 1 warning (0.172 sec)
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+mysql> CREATE TABLE USER_ROLE (
+    ->     Role_Name VARCHAR(50) PRIMARY KEY,
+    ->     Description TEXT
+    -> );
+Query OK, 0 rows affected (0.329 sec)
+
+mysql> CREATE TABLE USER (U_Id VARCHAR(15) PRIMARY KEY, Fname VARCHAR(45), Lname VARCHAR(45), Email VARCHAR(45), Address VARCHAR(45), Gender VARCHAR(45), Dob DATE, Role VARCHAR(50), FOREIGN KEY (Role) REFERENCES USER_ROLE(Role_Name));
+Query OK, 0 rows affected (0.945 sec)
+
+mysql> CREATE TABLE STUDENT ( ST_Id VARCHAR(15) PRIMARY KEY, Registration_No VARCHAR(15) UNIQUE NOT NULL,Status ENUM('Proper', 'Repeat', 'Suspended') NOT NULL DEFAULT 'Proper', Year INT, Department VARCHAR(45), Batch INT DEFAULT 2024);
+Query OK, 0 rows affected (0.655 sec)
+
+mysql> CREATE TABLE COURSE_UNIT (Course_code INT PRIMARY KEY, Name VARCHAR(100),Type ENUM('Theory', 'Practical', 'Lab') NOT NULL, Credit INT NOT NULL, Lec_Name VARCHAR(45), Year INT, Semester VARCHAR(20), Department_Offering VARCHAR(50) DEFAULT 'ICT', Theory_Hours INT DEFAULT 15, Practical_Hours INT DEFAULT 15);
+Query OK, 0 rows affected (0.637 sec)
+
+mysql> CREATE TABLE ATTENDENCE ( Attend_Id VARCHAR(15) PRIMARY KEY, ST_Id VARCHAR(15) NOT NULL, Course_code INT NOT NULL, Date DATE NOT NULL, Time TIME, Session_Type ENUM('Theory', 'Practical') NOT NULL, Status ENUM('Present', 'Absent', 'Late') DEFAULT 'Present', Is_Medical_Day BOOLEAN DEFAULT FALSE, FOREIGN KEY (ST_Id) REFERENCES STUDENT(ST_Id), FOREIGN KEY (Course_code) REFERENCES COURSE_UNIT(Course_code));
+Query OK, 0 rows affected (0.791 sec)
