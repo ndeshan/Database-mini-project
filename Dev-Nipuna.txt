@@ -129,3 +129,161 @@ mysql> INSERT INTO COURSE_UNIT VALUES('ENG1222', 'English II', 'Theory', 3, 'Dr.
 Query OK, 8 rows affected (0.134 sec)
 Records: 8  Duplicates: 0  Warnings: 0
 
+
+////////////////////////////////////////////////////////////////////
+
+
+mysql>
+mysql> DESCRIBE attendence;
++----------------+---------------------------------+------+-----+---------+-------+
+| Field          | Type                            | Null | Key | Default | Extra |
++----------------+---------------------------------+------+-----+---------+-------+
+| Attend_Id      | varchar(15)                     | NO   | PRI | NULL    |       |
+| ST_Id          | varchar(15)                     | NO   | MUL | NULL    |       |
+| Course_code    | varchar(15)                     | YES  | MUL | NULL    |       |
+| Date           | date                            | NO   |     | NULL    |       |
+| Time           | time                            | YES  |     | NULL    |       |
+| Session_Type   | enum('Theory','Practical')      | NO   |     | NULL    |       |
+| Status         | enum('Present','Absent','Late') | YES  |     | Present |       |
+| Is_Medical_Day | tinyint(1)                      | YES  |     | 0       |       |
++----------------+---------------------------------+------+-----+---------+-------+
+8 rows in set (0.018 sec)
+
+mysql> DESCRIBE course_unit;
++---------------------+----------------------------------+------+-----+---------+-------+
+| Field               | Type                             | Null | Key | Default | Extra |
++---------------------+----------------------------------+------+-----+---------+-------+
+| Course_code         | varchar(15)                      | NO   | PRI | NULL    |       |
+| Name                | varchar(100)                     | YES  |     | NULL    |       |
+| Type                | enum('Theory','Practical','Lab') | NO   |     | NULL    |       |
+| Credit              | int                              | NO   |     | NULL    |       |
+| Lec_Name            | varchar(45)                      | YES  |     | NULL    |       |
+| Year                | int                              | YES  |     | NULL    |       |
+| Semester            | varchar(20)                      | YES  |     | NULL    |       |
+| Department_Offering | varchar(50)                      | YES  |     | ICT     |       |
+| Theory_Hours        | int                              | YES  |     | 15      |       |
+| Practical_Hours     | int                              | YES  |     | 15      |       |
++---------------------+----------------------------------+------+-----+---------+-------+
+10 rows in set (0.013 sec)
+
+mysql> DESCRIBE student;
++-----------------+-------------------------------------+------+-----+---------+-------+
+| Field           | Type                                | Null | Key | Default | Extra |
++-----------------+-------------------------------------+------+-----+---------+-------+
+| ST_Id           | varchar(15)                         | NO   | PRI | NULL    |       |
+| Registration_No | varchar(15)                         | NO   | UNI | NULL    |       |
+| Status          | enum('Proper','Repeat','Suspended') | NO   |     | Proper  |       |
+| Year            | int                                 | YES  |     | NULL    |       |
+| Department      | varchar(45)                         | YES  |     | NULL    |       |
+| Batch           | int                                 | YES  |     | 2024    |       |
++-----------------+-------------------------------------+------+-----+---------+-------+
+6 rows in set (0.019 sec)
+
+mysql> DESCRIBE user;
++---------+-------------+------+-----+---------+-------+
+| Field   | Type        | Null | Key | Default | Extra |
++---------+-------------+------+-----+---------+-------+
+| U_Id    | varchar(15) | NO   | PRI | NULL    |       |
+| Fname   | varchar(45) | YES  |     | NULL    |       |
+| Lname   | varchar(45) | YES  |     | NULL    |       |
+| Email   | varchar(45) | YES  |     | NULL    |       |
+| Address | varchar(45) | YES  |     | NULL    |       |
+| Gender  | varchar(45) | YES  |     | NULL    |       |
+| Dob     | date        | YES  |     | NULL    |       |
+| Role    | varchar(50) | YES  | MUL | NULL    |       |
++---------+-------------+------+-----+---------+-------+
+8 rows in set (0.017 sec)
+
+mysql> DESCRIBE user_role;
++-------------+-------------+------+-----+---------+-------+
+| Field       | Type        | Null | Key | Default | Extra |
++-------------+-------------+------+-----+---------+-------+
+| Role_Name   | varchar(50) | NO   | PRI | NULL    |       |
+| Description | text        | YES  |     | NULL    |       |
++-------------+-------------+------+-----+---------+-------+
+2 rows in set (0.014 sec)
+
+mysql> SELECT * FROM attendence;
+Empty set (0.006 sec)
+
+mysql> SELECT * FROM course_unit;
++-------------+---------------------------------------+--------+--------+---------------------------+------+------------+---------------------+--------------+-----------------+
+| Course_code | Name                                  | Type   | Credit | Lec_Name                  | Year | Semester   | Department_Offering | Theory_Hours | Practical_Hours |
++-------------+---------------------------------------+--------+--------+---------------------------+------+------------+---------------------+--------------+-----------------+
+| ENG1222     | English II                            | Theory |      3 | Dr. Ravi Silva            | 2024 | Semester 2 | ICT                 |           15 |               0 |
+| ICT1212     | Database Management Systems           | Theory |      3 | Dr. Ravi Silva            | 2024 | Semester 2 | ICT                 |           15 |               0 |
+| ICT1222     | Database Management Systems Practicum | Lab    |      2 | Dr. Ravi Silva            | 2024 | Semester 2 | ICT                 |            0 |              15 |
+| ICT1233     | Server Side Web Development           | Theory |      3 | Prof. Anura Bandara       | 2024 | Semester 2 | Engineering         |           15 |               0 |
+| ICT1242     | Computer Archutecture                 | Lab    |      2 | Prof. Anura Bandara       | 2024 | Semester 2 | Engineering         |            0 |              15 |
+| ICT1253     | Computer Networks                     | Theory |      2 | Ms. Dilini Wickramasinghe | 2024 | Semester 2 | Business            |           15 |               0 |
+| TCS1212     | Fundamentals of Management            | Theory |      3 | Ms. Dilini Wickramasinghe | 2024 | Semester 2 | Business            |           15 |               0 |
+| TMS1233     | Discrete Mathematics                  | Theory |      4 | Dr. Yasodha Gunaratne     | 2024 | Semester 2 | Medicine            |           15 |               0 |
++-------------+---------------------------------------+--------+--------+---------------------------+------+------------+---------------------+--------------+-----------------+
+8 rows in set (0.009 sec)
+
+mysql> SELECT * FROM student;
++-------+-----------------+-----------+------+------------+-------+
+| ST_Id | Registration_No | Status    | Year | Department | Batch |
++-------+-----------------+-----------+------+------------+-------+
+| S001  | ICT2024001      | Proper    | 2024 | ICT        |  2024 |
+| S002  | ICT2024002      | Proper    | 2024 | ICT        |  2024 |
+| S003  | ICT2024003      | Proper    | 2024 | ICT        |  2024 |
+| S004  | ICT2024004      | Proper    | 2024 | ICT        |  2024 |
+| S005  | ICT2024005      | Proper    | 2024 | ICT        |  2024 |
+| S006  | ICT2024006      | Proper    | 2024 | ICT        |  2024 |
+| S007  | ICT2024007      | Proper    | 2024 | ICT        |  2024 |
+| S008  | ICT2024008      | Proper    | 2024 | ICT        |  2024 |
+| S009  | ICT2024009      | Proper    | 2024 | ICT        |  2024 |
+| S010  | ICT2024010      | Proper    | 2024 | ICT        |  2024 |
+| S011  | ICT2024011      | Repeat    | 2024 | ICT        |  2024 |
+| S012  | ICT2024012      | Repeat    | 2024 | ICT        |  2024 |
+| S013  | ICT2024013      | Repeat    | 2024 | ICT        |  2024 |
+| S014  | ICT2024014      | Repeat    | 2024 | ICT        |  2024 |
+| S015  | ICT2024015      | Repeat    | 2024 | ICT        |  2024 |
+| S016  | ICT2024016      | Suspended | 2024 | ICT        |  2024 |
+| S017  | ICT2024017      | Suspended | 2024 | ICT        |  2024 |
+| S018  | ICT2024018      | Suspended | 2024 | ICT        |  2024 |
+| S019  | ICT2024019      | Suspended | 2024 | ICT        |  2024 |
+| S020  | ICT2024020      | Suspended | 2024 | ICT        |  2024 |
++-------+-----------------+-----------+------+------------+-------+
+20 rows in set (0.013 sec)
+
+mysql> SELECT * FROM user;
++------+------------+----------------+---------------------------+-----------------------+--------+------------+-------------------+
+| U_Id | Fname      | Lname          | Email                     | Address               | Gender | Dob        | Role              |
++------+------------+----------------+---------------------------+-----------------------+--------+------------+-------------------+
+| U001 | Nimal      | Perera         | nimal.perera@ruhuna.lk    | Galle Road, Colombo   | M      | 2001-03-12 | Student           |
+| U002 | Kamani     | Fernando       | kamani.fernando@ruhuna.lk | Kandy Road, Kadawatha | F      | 2000-07-25 | Student           |
+| U003 | Ravi       | Silva          | ravi.silva@ruhuna.lk      | Temple Road, Moratuwa | M      | 1985-05-18 | Lecturer          |
+| U004 | Dilini     | Wickramasinghe | dilini.w@ruhuna.lk        | Rajagiriya, Colombo   | F      | 1982-11-30 | Lecturer          |
+| U005 | Tharindu   | Jayasinghe     | tharindu.j@ruhuna.lk      | Nugegoda, Colombo     | M      | 2002-01-15 | Student           |
+| U006 | Anjali     | Rajapaksa      | anjali.r@ruhuna.lk        | Matara Road, Galle    | F      | 2001-08-22 | Student           |
+| U007 | Chaminda   | Weerasinghe    | chaminda.w@ruhuna.lk      | Kurunegala            | M      | 2000-04-10 | Student           |
+| U008 | Yasodha    | Gunaratne      | yasodha.g@ruhuna.lk       | Jaffna                | F      | 1987-09-05 | Lecturer          |
+| U009 | Sahan      | Bandara        | sahan.b@ruhuna.lk         | Galle Face, Colombo   | M      | 1980-02-14 | Dean              |
+| U010 | Nadeesha   | Herath         | nadeesha.h@ruhuna.lk      | Nuwara Eliya          | F      | 2001-06-30 | Student           |
+| U011 | Amila      | Rathnayake     | amila.r@ruhuna.lk         | Badulla               | M      | 1990-07-20 | Technical Officer |
+| U012 | Lahiru     | De Silva       | lahiru.d@ruhuna.lk        | Panadura              | M      | 1992-03-11 | Technical Officer |
+| U013 | nipuna     | deshan         | nipuna@ruhuna.lk          | Galle                 | M      | 1975-01-01 | Admin             |
+| U014 | seelawathi | ganga          | seelawathi.g@ruhuna.lk    | galle                 | F      | 1987-09-07 | Lecturer          |
++------+------------+----------------+---------------------------+-----------------------+--------+------------+-------------------+
+14 rows in set (0.010 sec)
+
+mysql> SELECT * FROM user_role;
++-------------------+-----------------------------------+
+| Role_Name         | Description                       |
++-------------------+-----------------------------------+
+| Admin             | Full access with GRANT OPTION     |
+| Dean              | Full access without GRANT         |
+| Lecturer          | Full access without user creation |
+| Student           | Read-only access to own results   |
+| Technical Officer | Read/Write/Update attendance      |
++-------------------+-----------------------------------+
+5 rows in set (0.009 sec)
+
+mysql>
+
+
+
+
+
