@@ -121,3 +121,11 @@ mysql>
 mysql> INSERT INTO STUDENT (ST_Id, Registration_No, Status, Year, Department, Batch) VALUES ('S001', 'ICT2024001', 'Proper', 2024, 'ICT', 2024),('S002', 'ICT2024002', 'Proper', 2024, 'ICT', 2024),('S003', 'ICT2024003', 'Proper', 2024, 'ICT', 2024),('S004', 'ICT2024004', 'Proper',  2024, 'ICT', 2024),('S005', 'ICT2024005', 'Proper', 2024, 'ICT', 2024),('S006', 'ICT2024006', 'Proper',  2024, 'ICT', 2024),('S007', 'ICT2024007', 'Proper',  2024, 'ICT', 2024),('S008', 'ICT2024008', 'Proper',  2024, 'ICT', 2024),('S009', 'ICT2024009', 'Proper', 2024, 'ICT', 2024),('S010', 'ICT2024010', 'Proper',  2024, 'ICT', 2024),('S011', 'ICT2024011', 'Repeat',  2024, 'ICT', 2024),('S012', 'ICT2024012', 'Repeat',  2024, 'ICT', 2024),('S013', 'ICT2024013', 'Repeat',  2024, 'ICT', 2024),('S014', 'ICT2024014', 'Repeat',  2024, 'ICT', 2024),('S015', 'ICT2024015', 'Repeat',  2024, 'ICT', 2024),('S016', 'ICT2024016', 'Suspended',  2024, 'ICT', 2024),('S017', 'ICT2024017', 'Suspended',  2024, 'ICT', 2024),('S018', 'ICT2024018', 'Suspended',  2024, 'ICT', 2024),('S019', 'ICT2024019', 'Suspended',  2024, 'ICT', 2024),('S020', 'ICT2024020', 'Suspended',  2024, 'ICT', 2024);
 Query OK, 20 rows affected (0.253 sec)
 Records: 20  Duplicates: 0  Warnings: 0
+
+
+mysql>
+mysql>
+mysql> INSERT INTO COURSE_UNIT VALUES('ENG1222', 'English II', 'Theory', 3, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ICT', 15, 0),('ICT1212', 'Database Management Systems', 'Theory', 3, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ICT', 15, 0),('ICT1222', 'Database Management Systems Practicum', 'Lab', 2, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ICT', 0, 15),('ICT1233', 'Server Side Web Development', 'Theory', 3, 'Prof. Anura Bandara', 2024, 'Semester 2', 'Engineering', 15, 0),('ICT1242', 'Computer Archutecture', 'Lab', 2, 'Prof. Anura Bandara', 2024, 'Semester 2', 'Engineering', 0, 15),('ICT1253', 'Computer Networks', 'Theory', 2, 'Ms. Dilini Wickramasinghe', 2024, 'Semester 2', 'Business', 15, 0),('TCS1212', 'Fundamentals of Management', 'Theory', 3, 'Ms. Dilini Wickramasinghe', 2024, 'Semester 2', 'Business', 15, 0),('TMS1233', 'Discrete Mathematics', 'Theory', 4, 'Dr. Yasodha Gunaratne', 2024, 'Semester 2', 'Medicine', 15, 0);
+Query OK, 8 rows affected (0.134 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
