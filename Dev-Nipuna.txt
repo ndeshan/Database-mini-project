@@ -17,3 +17,45 @@ mysql> SHOW DATABASES;
 | world              |
 +--------------------+
 8 rows in set (0.040 sec)
+
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+mysql> SHOW TABLES;
+Empty set (0.058 sec)
+
+mysql> CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin1234';
+Query OK, 0 rows affected (0.431 sec)
+
+mysql> CREATE USER 'dean'@'localhost' IDENTIFIED BY 'dean1234';
+Query OK, 0 rows affected (0.241 sec)
+
+mysql> CREATE USER 'lecturer'@'localhost' IDENTIFIED BY 'lecturer1234';
+Query OK, 0 rows affected (0.270 sec)
+
+mysql> CREATE USER 'student'@'localhost' IDENTIFIED BY 'student1234';
+Query OK, 0 rows affected (0.133 sec)
+
+mysql> CREATE USER 'to'@'localhost' IDENTIFIED BY 'to1234';
+Query OK, 0 rows affected (0.301 sec)
+
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
+Query OK, 0 rows affected (0.260 sec)
+
+mysql> GRANT ALL PRIVILEGES ON Student_Management.* TO 'dean'@'localhost';
+Query OK, 0 rows affected (0.202 sec)
+
+mysql> GRANT ALL PRIVILEGES ON Student_Management.* TO 'lecturer'@'localhost';
+Query OK, 0 rows affected (0.108 sec)
+
+mysql> GRANT SELECT, INSERT, UPDATE ON Student_Management.ATTENDENCE TO 'to'@'localhost';
+ERROR 1146 (42S02): Table 'student_management.ATTENDENCE' doesn't exist
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected, 1 warning (0.172 sec)
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+
