@@ -76,3 +76,31 @@ Query OK, 0 rows affected (0.637 sec)
 
 mysql> CREATE TABLE ATTENDENCE ( Attend_Id VARCHAR(15) PRIMARY KEY, ST_Id VARCHAR(15) NOT NULL, Course_code INT NOT NULL, Date DATE NOT NULL, Time TIME, Session_Type ENUM('Theory', 'Practical') NOT NULL, Status ENUM('Present', 'Absent', 'Late') DEFAULT 'Present', Is_Medical_Day BOOLEAN DEFAULT FALSE, FOREIGN KEY (ST_Id) REFERENCES STUDENT(ST_Id), FOREIGN KEY (Course_code) REFERENCES COURSE_UNIT(Course_code));
 Query OK, 0 rows affected (0.791 sec)
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+mysql> SHOW TABLES;
++------------------------------+
+| Tables_in_student_management |
++------------------------------+
+| attendence                   |
+| course_unit                  |
+| student                      |
+| user                         |
+| user_role                    |
++------------------------------+
+5 rows in set (0.109 sec)
+
+
+mysql> INSERT INTO USER_ROLE VALUES
+    -> ('Admin', 'Full access with GRANT OPTION'),
+    -> ('Dean', 'Full access without GRANT'),
+    -> ('Lecturer', 'Full access without user creation'),
+    -> ('Technical Officer', 'Read/Write/Update attendance'),
+    -> ('Student', 'Read-only access to own results');
+Query OK, 5 rows affected (0.265 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
