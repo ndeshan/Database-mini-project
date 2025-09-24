@@ -76,3 +76,48 @@ Query OK, 0 rows affected (0.637 sec)
 
 mysql> CREATE TABLE ATTENDENCE ( Attend_Id VARCHAR(15) PRIMARY KEY, ST_Id VARCHAR(15) NOT NULL, Course_code INT NOT NULL, Date DATE NOT NULL, Time TIME, Session_Type ENUM('Theory', 'Practical') NOT NULL, Status ENUM('Present', 'Absent', 'Late') DEFAULT 'Present', Is_Medical_Day BOOLEAN DEFAULT FALSE, FOREIGN KEY (ST_Id) REFERENCES STUDENT(ST_Id), FOREIGN KEY (Course_code) REFERENCES COURSE_UNIT(Course_code));
 Query OK, 0 rows affected (0.791 sec)
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+mysql> SHOW TABLES;
++------------------------------+
+| Tables_in_student_management |
++------------------------------+
+| attendence                   |
+| course_unit                  |
+| student                      |
+| user                         |
+| user_role                    |
++------------------------------+
+5 rows in set (0.109 sec)
+
+
+mysql> INSERT INTO USER_ROLE VALUES
+    -> ('Admin', 'Full access with GRANT OPTION'),
+    -> ('Dean', 'Full access without GRANT'),
+    -> ('Lecturer', 'Full access without user creation'),
+    -> ('Technical Officer', 'Read/Write/Update attendance'),
+    -> ('Student', 'Read-only access to own results');
+Query OK, 5 rows affected (0.265 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> INSERT INTO USER (U_Id, Fname, Lname, Email, Address, Gender, Dob, Role) VALUES ('U001', 'Nimal', 'Perera', 'nimal.perera@ruhuna.lk', 'Galle Road, Colombo', 'M', '2001-03-12', 'Student'),('U002', 'Kamani', 'Fernando', 'kamani.fernando@ruhuna.lk', 'Kandy Road, Kadawatha', 'F', '2000-07-25', 'Student'),('U003', 'Ravi', 'Silva', 'ravi.silva@ruhuna.lk', 'Temple Road, Moratuwa', 'M', '1985-05-18', 'Lecturer'),('U004', 'Dilini', 'Wickramasinghe', 'dilini.w@ruhuna.lk', 'Rajagiriya, Colombo', 'F', '1982-11-30', 'Lecturer'),('U005', 'Tharindu', 'Jayasinghe', 'tharindu.j@ruhuna.lk', 'Nugegoda, Colombo', 'M', '2002-01-15', 'Student'),('U006', 'Anjali', 'Rajapaksa', 'anjali.r@ruhuna.lk', 'Matara Road, Galle', 'F', '2001-08-22', 'Student'),('U007', 'Chaminda', 'Weerasinghe', 'chaminda.w@ruhuna.lk', 'Kurunegala', 'M', '2000-04-10', 'Student'),('U008', 'Yasodha', 'Gunaratne', 'yasodha.g@ruhuna.lk', 'Jaffna', 'F', '1987-09-05', 'Lecturer'),('U009', 'Sahan', 'Bandara', 'sahan.b@ruhuna.lk', 'Galle Face, Colombo', 'M', '1980-02-14', 'Dean'),('U010', 'Nadeesha', 'Herath', 'nadeesha.h@ruhuna.lk', 'Nuwara Eliya', 'F', '2001-06-30', 'Student'),('U011', 'Amila', 'Rathnayake', 'amila.r@ruhuna.lk', 'Badulla', 'M', '1990-07-20', 'Technical Officer'),('U012', 'Lahiru', 'De Silva', 'lahiru.d@ruhuna.lk', 'Panadura', 'M', '1992-03-11', 'Technical Officer'),('U013', 'nipuna', 'deshan', 'nipuna@ruhuna.lk', 'Galle', 'M', '1975-01-01', 'Admin'),('U014', 'seelawathi', 'ganga', 'seelawathi.g@ruhuna.lk', 'galle', 'F', '1987-09-07', 'Lecturer');
+Query OK, 14 rows affected (0.164 sec)
+Records: 14  Duplicates: 0  Warnings: 0
+
+mysql>
+
+mysql>
+mysql> INSERT INTO USER_CONTACT VALUES('U001', '0771234567'),('U001','0112345678'),('U002','0769876543'),('U003','0712345678'),('U004','0723456789'),('U005', '0701122334'),('U006', '0755667788'),('U007', '0766778899'),('U008', '0744556677'),('U009', '0733445566'),('U010', '0788990011'),('U011', '0702233445'),('U012', '0713344556'),('U013', '0724455667'),('U014', '0771232143');
+Query OK, 15 rows affected (0.224 sec)
+Records: 15  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql>
+mysql> INSERT INTO STUDENT (ST_Id, Registration_No, Status, Year, Department, Batch) VALUES ('S001', 'ICT2024001', 'Proper', 2024, 'ICT', 2024),('S002', 'ICT2024002', 'Proper', 2024, 'ICT', 2024),('S003', 'ICT2024003', 'Proper', 2024, 'ICT', 2024),('S004', 'ICT2024004', 'Proper',  2024, 'ICT', 2024),('S005', 'ICT2024005', 'Proper', 2024, 'ICT', 2024),('S006', 'ICT2024006', 'Proper',  2024, 'ICT', 2024),('S007', 'ICT2024007', 'Proper',  2024, 'ICT', 2024),('S008', 'ICT2024008', 'Proper',  2024, 'ICT', 2024),('S009', 'ICT2024009', 'Proper', 2024, 'ICT', 2024),('S010', 'ICT2024010', 'Proper',  2024, 'ICT', 2024),('S011', 'ICT2024011', 'Repeat',  2024, 'ICT', 2024),('S012', 'ICT2024012', 'Repeat',  2024, 'ICT', 2024),('S013', 'ICT2024013', 'Repeat',  2024, 'ICT', 2024),('S014', 'ICT2024014', 'Repeat',  2024, 'ICT', 2024),('S015', 'ICT2024015', 'Repeat',  2024, 'ICT', 2024),('S016', 'ICT2024016', 'Suspended',  2024, 'ICT', 2024),('S017', 'ICT2024017', 'Suspended',  2024, 'ICT', 2024),('S018', 'ICT2024018', 'Suspended',  2024, 'ICT', 2024),('S019', 'ICT2024019', 'Suspended',  2024, 'ICT', 2024),('S020', 'ICT2024020', 'Suspended',  2024, 'ICT', 2024);
+Query OK, 20 rows affected (0.253 sec)
+Records: 20  Duplicates: 0  Warnings: 0
