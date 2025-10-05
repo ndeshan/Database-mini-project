@@ -19,3 +19,30 @@ mysql> DESC GRADE_SCALE;
 4 rows in set (0.01 sec)
 
 mysql>
+//////////////////////////////////////////////////////////////////////////////////////
+
+
+mysql> CREATE TABLE STUDENT_RESULT (
+    ->     Result_Id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     ST_Id VARCHAR(15) NOT NULL,
+    ->     Semester VARCHAR(20),
+    ->     SGPA DECIMAL(3,2),
+    ->     CGPA DECIMAL(3,2),
+    ->     FOREIGN KEY (ST_Id) REFERENCES STUDENT(ST_Id)
+    -> );
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> DESC STUDENT_RESULT;
++-----------+--------------+------+-----+---------+----------------+
+| Field     | Type         | Null | Key | Default | Extra          |
++-----------+--------------+------+-----+---------+----------------+
+| Result_Id | int          | NO   | PRI | NULL    | auto_increment |
+| ST_Id     | varchar(15)  | NO   | MUL | NULL    |                |
+| Semester  | varchar(20)  | YES  |     | NULL    |                |
+| SGPA      | decimal(3,2) | YES  |     | NULL    |                |
+| CGPA      | decimal(3,2) | YES  |     | NULL    |                |
++-----------+--------------+------+-----+---------+----------------+
+5 rows in set (0.00 sec)
+
+mysql>
+//////////////////////////////////////////////////////////////////////////////////////
