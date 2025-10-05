@@ -46,3 +46,34 @@ mysql> DESC STUDENT_RESULT;
 
 mysql>
 //////////////////////////////////////////////////////////////////////////////////////
+
+
+mysql> CREATE TABLE COURSE_ENROLLMENT (
+    ->     Enrollment_Id INT AUTO_INCREMENT PRIMARY KEY,
+    ->     ST_Id VARCHAR(15) NOT NULL,
+    ->     Course_code VARCHAR(15) NOT NULL,
+    ->     Enrolled_Date DATE DEFAULT '2025-09-23',
+    ->     Attendance_Eligible BOOLEAN DEFAULT FALSE,
+    ->     CA_Eligible BOOLEAN DEFAULT FALSE,
+    ->     Final_Eligible BOOLEAN DEFAULT FALSE,
+    ->     FOREIGN KEY (ST_Id) REFERENCES STUDENT(ST_Id),
+    ->     FOREIGN KEY (Course_code) REFERENCES COURSE_UNIT(Course_code)
+    -> );
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> desc COURSE_ENROLLMENT;
++---------------------+-------------+------+-----+------------+----------------+
+| Field               | Type        | Null | Key | Default    | Extra          |
++---------------------+-------------+------+-----+------------+----------------+
+| Enrollment_Id       | int         | NO   | PRI | NULL       | auto_increment |
+| ST_Id               | varchar(15) | NO   | MUL | NULL       |                |
+| Course_code         | varchar(15) | NO   | MUL | NULL       |                |
+| Enrolled_Date       | date        | YES  |     | 2025-09-23 |                |
+| Attendance_Eligible | tinyint(1)  | YES  |     | 0          |                |
+| CA_Eligible         | tinyint(1)  | YES  |     | 0          |                |
+| Final_Eligible      | tinyint(1)  | YES  |     | 0          |                |
++---------------------+-------------+------+-----+------------+----------------+
+7 rows in set (0.00 sec)
+
+mysql>
+///////////////////////////////////////////////////////////////////////////////////////
