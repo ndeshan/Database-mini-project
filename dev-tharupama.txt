@@ -1,0 +1,21 @@
+mysql> CREATE TABLE GRADE_SCALE (
+    ->     Min_Marks DECIMAL(5,2) NOT NULL,
+    ->     Max_Marks DECIMAL(5,2) NOT NULL,
+    ->     Grade CHAR(2) NOT NULL,
+    ->     Grade_Point DECIMAL(3,2) NOT NULL,
+    ->     PRIMARY KEY (Min_Marks, Max_Marks)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> DESC GRADE_SCALE;
++-------------+--------------+------+-----+---------+-------+
+| Field       | Type         | Null | Key | Default | Extra |
++-------------+--------------+------+-----+---------+-------+
+| Min_Marks   | decimal(5,2) | NO   | PRI | NULL    |       |
+| Max_Marks   | decimal(5,2) | NO   | PRI | NULL    |       |
+| Grade       | char(2)      | NO   |     | NULL    |       |
+| Grade_Point | decimal(3,2) | NO   |     | NULL    |       |
++-------------+--------------+------+-----+---------+-------+
+4 rows in set (0.01 sec)
+
+mysql>
