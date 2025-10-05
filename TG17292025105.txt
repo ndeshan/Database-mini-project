@@ -1,0 +1,30 @@
+
+CREATE TABLE MEDICAL_RECORD (
+    Medi_Id INT PRIMARY KEY AUTO_INCREMENT,
+    ST_Id VARCHAR(15) NOT NULL,
+    Course_Id VARCHAR(15) NOT NULL,
+    Date_Submit DATE NOT NULL,
+    Valid_From DATE,
+    Valid_To DATE,
+    Medi_Type ENUM('Attendance', 'CA', 'Final_Exam') NOT NULL DEFAULT 'Attendance',
+    Approve BOOLEAN DEFAULT FALSE,
+    Approved_By VARCHAR(15),
+    FOREIGN KEY (ST_Id) REFERENCES STUDENT(ST_Id),
+    FOREIGN KEY (Course_Id) REFERENCES COURSE_UNIT(Course_code)
+);
+
+CREATE TABLE USER_COURSE (
+    U_Id VARCHAR(15),
+    Course_Id VARCHAR(15),
+    PRIMARY KEY (U_Id, Course_Id),
+    FOREIGN KEY (U_Id) REFERENCES USER(U_Id),
+    FOREIGN KEY (Course_Id) REFERENCES COURSE_UNIT(Course_code)
+);
+
+CREATE TABLE STUDENT_COURSE (
+    ST_Id VARCHAR(15),
+    Course_code VARCHAR(15),
+    PRIMARY KEY (ST_Id, Course_code),
+    FOREIGN KEY (ST_Id) REFERENCES STUDENT(ST_Id),
+    FOREIGN KEY (Course_code) REFERENCES COURSE_UNIT(Course_code)
+);
