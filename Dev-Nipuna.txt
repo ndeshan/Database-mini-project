@@ -136,6 +136,19 @@ mysql> drop table attendence;
 Query OK, 0 rows affected (0.549 sec)
 
 
+mysql> CREATE TABLE ATTENDENCE_ICT (
+    ->     Attend_Id VARCHAR(10) PRIMARY KEY,
+    ->     ST_Id VARCHAR(20) NOT NULL,
+    ->     Course_code VARCHAR(15) NOT NULL,
+    ->     Date DATE NOT NULL,
+    ->     Time TIME NOT NULL,
+    ->     Session_Type ENUM('Theory', 'Practical', 'Lab') NOT NULL,
+    ->     Status ENUM('Present', 'Absent', 'Late', 'Medical') NOT NULL,
+    ->     Is_Medical_Day BOOLEAN DEFAULT FALSE
+    ->
+    -> );
+Query OK, 0 rows affected (0.601 sec)
+
 
 
 
