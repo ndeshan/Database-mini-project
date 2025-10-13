@@ -82,3 +82,18 @@ mysql> DROP DATABASE student_management;
 Query OK, 16 rows affected (0.38 sec)
 
 mysql>
+
+//////////////////////////////////////////////
+mysql> CREATE TABLE attendance (
+    ->     Attendance_Id VARCHAR(20) NOT NULL PRIMARY KEY,
+    ->     ST_Id VARCHAR(20) NOT NULL,
+    ->     Course_code VARCHAR(15) NOT NULL,
+    ->     Session_Date DATE NOT NULL,
+    ->     Week_Number INT NOT NULL,
+    ->     Session_Number INT NOT NULL,
+    ->     Session_Type ENUM('Theory','Practical','Lab') NOT NULL,
+    ->     Status ENUM('Present','Absent','Medical') DEFAULT 'Present'
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql>
