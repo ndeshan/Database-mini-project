@@ -97,3 +97,30 @@ mysql> CREATE TABLE attendance (
 Query OK, 0 rows affected (0.03 sec)
 
 mysql>
+//////////////////////////////////////////////////
+mysql> ALTER TABLE attendance
+    ->     ADD CONSTRAINT fk_attendance_student
+    ->         FOREIGN KEY (ST_Id) REFERENCES student(Registration_No)
+    ->         ON UPDATE CASCADE ON DELETE CASCADE,
+    ->     ADD CONSTRAINT fk_attendance_course
+    ->         FOREIGN KEY (Course_code) REFERENCES course_unit(Course_code)
+    ->         ON UPDATE CASCADE ON DELETE RESTRICT;
+Query OK, 0 rows affected (0.09 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC attendence;
+ERROR 1146 (42S02): Table 'student_management.attendence' doesn't exist
+mysql> DESC attendance;
++----------------+------------------------------------+------+-----+---------+-------+
+| Field          | Type                               | Null | Key | Default | Extra |
++----------------+------------------------------------+------+-----+---------+-------+
+| Attendance_Id  | varchar(20)                        | NO   | PRI | NULL    |       |
+| ST_Id          | varchar(20)                        | NO   | MUL | NULL    |       |
+| Course_code    | varchar(15)                        | NO   | MUL | NULL    |       |
+| Session_Date   | date                               | NO   |     | NULL    |       |
+| Week_Number    | int                                | NO   |     | NULL    |       |
+| Session_Number | int                                | NO   |     | NULL    |       |
+| Session_Type   | enum('Theory','Practical','Lab')   | NO   |     | NULL    |       |
+| Status         | enum('Present','Absent','Medical') | YES  |     | Present |       |
++----------------+------------------------------------+------+-----+---------+-------+
+8 rows in set (0.00 sec)
