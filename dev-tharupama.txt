@@ -1659,3 +1659,22 @@ mysql> SELECT * FROM attendance_summary;
 | tg/2023/0015 | BST1253     |             15 |      15 |      0 |       0 |     100.00 | Eligible    |
 +--------------+-------------+----------------+---------+--------+---------+------------+-------------+
 89 rows in set (0.01 sec)
+//////////////////////////////////////////////////////////////////
+mysql> ALTER TABLE attendance DROP COLUMN Session_Number;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+
+mysql> DESC attendance;
++---------------+------------------------------------+------+-----+---------+-------+
+| Field         | Type                               | Null | Key | Default | Extra |
++---------------+------------------------------------+------+-----+---------+-------+
+| Attendance_Id | varchar(20)                        | NO   | PRI | NULL    |       |
+| ST_Id         | varchar(20)                        | NO   | MUL | NULL    |       |
+| Course_code   | varchar(15)                        | NO   | MUL | NULL    |       |
+| Session_Date  | date                               | NO   |     | NULL    |       |
+| Week_Number   | int                                | NO   |     | NULL    |       |
+| Session_Type  | enum('Theory','Practical','Lab')   | NO   |     | NULL    |       |
+| Status        | enum('Present','Absent','Medical') | YES  |     | Present |       |
++---------------+------------------------------------+------+-----+---------+-------+
+7 rows in set (0.00 sec)
+
