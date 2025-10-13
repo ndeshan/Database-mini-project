@@ -1537,3 +1537,9 @@ mysql> SELECT * FROM attendance;
 1335 rows in set (0.00 sec)
 
 mysql>
+////////////////////////////////////////
+mysql> UPDATE attendance
+    -> SET session_type = 'Lab'
+    -> WHERE course_code IN ('ICT1222', 'ICT1242', 'TMS1231', 'TMS1261');
+Query OK, 270 rows affected (0.01 sec)
+Rows matched: 270  Changed: 270  Warnings: 0
