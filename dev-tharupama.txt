@@ -77,3 +77,8 @@ mysql> desc COURSE_ENROLLMENT;
 
 mysql>
 ///////////////////////////////////////////////////////////////////////////////////////
+
+mysql> DROP DATABASE student_management;
+Query OK, 16 rows affected (0.38 sec)
+
+mysql>
