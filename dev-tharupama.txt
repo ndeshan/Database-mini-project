@@ -124,3 +124,62 @@ mysql> DESC attendance;
 | Status         | enum('Present','Absent','Medical') | YES  |     | Present |       |
 +----------------+------------------------------------+------+-----+---------+-------+
 8 rows in set (0.00 sec)
+////////////////////////////////////////
+mysql> DELIMITER //
+mysql>
+mysql> CREATE PROCEDURE generate_attendance()
+    -> BEGIN
+    ->     DECLARE counter INT DEFAULT 1;
+    ->     DECLARE week INT;
+    ->     DECLARE student_id VARCHAR(20);
+    ->     DECLARE course_id VARCHAR(15);
+    ->     DECLARE done INT DEFAULT 0;
+    ->
+    ->
+    ->     DECLARE student_cursor CURSOR FOR
+    ->         SELECT ST_Id, Course_code
+    ->         FROM course_enrollment
+    ->         WHERE Official_Confirmation = 'COMFIRMED';
+    ->
+    ->     DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+    ->
+    ->
+    ->     DELETE FROM attendance;
+    ->
+    ->     OPEN student_cursor;
+    ->
+    ->     student_loop: LOOP
+    ->         FETCH student_cursor INTO student_id, course_id;
+    ->
+    ->         IF done THEN
+    ->             LEAVE student_loop;
+    ->         END IF;
+    ->
+    ->
+    ->         SET week = 1;
+    ->         WHILE week <= 15 DO
+    ->             INSERT INTO attendance VALUES (
+    ->                 CONCAT('ATT', LPAD(counter, 4, '0')),
+    ->                 student_id,
+    ->                 course_id,
+    ->                 DATE_ADD('2025-01-06', INTERVAL week WEEK),
+    ->                 week,
+    ->                 week,
+    ->                 'Theory',
+    ->                 'Present'
+    ->             );
+    ->
+    ->             SET counter = counter + 1;
+    ->             SET week = week + 1;
+    ->         END WHILE;
+    ->
+    ->     END LOOP;
+    ->
+    ->     CLOSE student_cursor;
+    ->
+    ->     SELECT CONCAT('Done! Created ', counter - 1, ' records') AS Result;
+    -> END //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> DELIMITER ;
+mysql>
