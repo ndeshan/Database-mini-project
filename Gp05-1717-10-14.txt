@@ -1,0 +1,12 @@
+CREATE TABLE course_unit (
+  Course_code VARCHAR(15) NOT NULL PRIMARY KEY,
+  Name VARCHAR(100),
+  Type ENUM('Theory','Practical','Lab') NOT NULL,
+  Credit INT NOT NULL,
+  Lec_Name VARCHAR(45),
+  Year INT,
+  Semester VARCHAR(20),
+  Department_Offering ENUM('ICT','ET','BST') DEFAULT 'ICT',
+  Theory_Hours INT DEFAULT 15,
+  Practical_Hours INT DEFAULT 15
+);
