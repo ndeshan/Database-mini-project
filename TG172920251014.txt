@@ -1,0 +1,13 @@
+CREATE TABLE medical_record (
+  Medical_Id VARCHAR(10) NOT NULL PRIMARY KEY,
+  ST_Id VARCHAR(20) NOT NULL,
+  Course_code VARCHAR(15) NOT NULL,
+  Date_Submit DATE NOT NULL,
+  Valid_From DATE NOT NULL,
+  Valid_To DATE NOT NULL,
+  Medical_Type ENUM('Attendance','CA','Final_Exam','Quiz') NOT NULL,
+  Approve TINYINT(1) DEFAULT 1,
+  Approved_By VARCHAR(20) NOT NULL,
+  FOREIGN KEY (ST_Id) REFERENCES student(Registration_No),
+  FOREIGN KEY (Course_code) REFERENCES course_unit(Course_code)
+);
