@@ -123,3 +123,23 @@ VALUES
 ('to/2023/006', '0707890125');
 
 
+INSERT INTO student (Registration_No, Fname, Lname, Year, Department, Batch, Status)
+VALUES
+('tg/2023/0002', 'Kamani', 'Fernando', 1, 'ICT', 2024, 'Proper'),
+('tg/2023/0003', 'Tharindu', 'Jayasinghe', 1, 'ICT', 2024, 'Proper'),
+('tg/2023/0004', 'Anjali', 'Rajapaksa', 1, 'ICT', 2024, 'Proper'),
+('tg/2023/0005', 'Chaminda', 'Weerasinghe', 1, 'ICT', 2024, 'Proper'),
+('tg/2023/0006', 'Nadeesha', 'Herath', 1, 'ICT', 2024, 'Proper'),
+('tg/2023/0007', 'Dinuka', 'Amarasinghe', 1, 'ET', 2024, 'Proper'),
+('tg/2023/0008', 'Ishara', 'Gunawardena', 1, 'ET', 2024, 'Proper'),
+('tg/2023/0009', 'Rukshan', 'Mendis', 1, 'ET', 2024, 'Proper'),
+('tg/2023/0010', 'Shanika', 'Wijesinghe', 1, 'ET', 2024, 'Proper'),
+('tg/2023/0011', 'Kavindu', 'Rathnayake', 1, 'ET', 2024, 'Repeat'),
+('tg/2023/0012', 'Piumi', 'De Silva', 1, 'BST', 2024, 'Repeat'),
+('tg/2023/0013', 'Sachin', 'Kumara', 1, 'BST', 2024, 'Repeat'),
+('tg/2023/0014', 'Thilini', 'Peries', 1, 'BST', 2024, 'Repeat'),
+('tg/2023/0015', 'Yohan', 'Edirisinghe', 1, 'BST', 2024, 'Repeat'),
+('tg/2024/0001', 'Nimal', 'Perera', 1, 'ICT', 2024, 'Proper');
+
+
+
