@@ -12,17 +12,17 @@ DECLARE CA_10_marks DECIMAL(5,2);
 
 DECLARE mark_code varchar(15);
 DECLARE get_course_code varchar(15);
-DECLARE Student_Id varchar(20);
+DECLARE get_Student_Id varchar(20);
 
 DECLARE cursor01 CURSOR FOR
-	SELECT ST_Id,Course_code,Quiz_01, Quiz_02,Quiz_03 FROM mark;     //should change name ST_id to student_id and Course_code TO  course_code
+	SELECT student_id,course_code,Quiz_01, Quiz_02,Quiz_03 FROM mark;
 
 DECLARE CONTINUE HANDLER FOR NOT FOUND SET done=TRUE;
 
 OPEN cursor01;
 
 read_loop:LOOP
-		FETCH cursor01 INTO Student_Id , get_course_code,
+		FETCH cursor01 INTO get_Student_Id , get_course_code,
 		quiz01,quiz02,quiz03;
 	IF done THEN
 		LEAVE read_loop;
@@ -35,8 +35,8 @@ read_loop:LOOP
 
 	UPDATE student_result
 	SET  CA_Marks=CA_10_marks
-	WHERE ST_Id=Student_Id
-	AND Course_code= get_course_code;
+	WHERE student_id=get_Student_Id
+	AND course_code= get_course_code;
 END LOOP;
 
 CLOSE cursor01;
