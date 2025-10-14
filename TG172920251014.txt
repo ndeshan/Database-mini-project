@@ -1,3 +1,16 @@
+
+
+
+CREATE TABLE student (
+  Registration_No VARCHAR(20) NOT NULL PRIMARY KEY,
+  Fname VARCHAR(45),
+  Lname VARCHAR(45),
+  Year INT,
+  Department VARCHAR(45),
+  Batch INT DEFAULT 2024,
+  Status ENUM('Proper','Repeat','Suspended') NOT NULL DEFAULT 'Proper'
+);
+
 CREATE TABLE medical_record (
   Medical_Id VARCHAR(10) NOT NULL PRIMARY KEY,
   ST_Id VARCHAR(20) NOT NULL,
@@ -10,15 +23,4 @@ CREATE TABLE medical_record (
   Approved_By VARCHAR(20) NOT NULL,
   FOREIGN KEY (ST_Id) REFERENCES student(Registration_No),
   FOREIGN KEY (Course_code) REFERENCES course_unit(Course_code)
-);
-
-
-CREATE TABLE student (
-  Registration_No VARCHAR(20) NOT NULL PRIMARY KEY,
-  Fname VARCHAR(45),
-  Lname VARCHAR(45),
-  Year INT,
-  Department VARCHAR(45),
-  Batch INT DEFAULT 2024,
-  Status ENUM('Proper','Repeat','Suspended') NOT NULL DEFAULT 'Proper'
 );
