@@ -15,7 +15,7 @@ DECLARE get_course_code varchar(15);
 DECLARE Student_Id varchar(20);
 
 DECLARE cursor01 CURSOR FOR
-	SELECT ST_Id,Course_code,Quiz_01, Quiz_02,Quiz_03 FROM mark;
+	SELECT ST_Id,Course_code,Quiz_01, Quiz_02,Quiz_03 FROM mark;     //should change name ST_id to student_id and Course_code TO  course_code
 
 DECLARE CONTINUE HANDLER FOR NOT FOUND SET done=TRUE;
 
