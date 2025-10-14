@@ -1,4 +1,21 @@
+CREATE TABLE user (
+  U_Id VARCHAR(15) NOT NULL PRIMARY KEY,
+  Fname VARCHAR(45),
+  Lname VARCHAR(45),
+  Email VARCHAR(45),
+  Address VARCHAR(45),
+  Gender VARCHAR(45),
+  Dob DATE,
+  Role VARCHAR(50),
+  Department VARCHAR(100)
+);
 
+CREATE TABLE user_contact (
+  U_Id VARCHAR(15) NOT NULL,
+  Contact_No VARCHAR(15) NOT NULL,
+  PRIMARY KEY (U_Id, Contact_No),
+  FOREIGN KEY (U_Id) REFERENCES user(U_Id)
+);
 
 
 CREATE TABLE student (
