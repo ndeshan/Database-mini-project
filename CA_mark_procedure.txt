@@ -1,0 +1,51 @@
+DELIMITER //
+CREATE PROCEDURE calculate_CA_marks()
+
+BEGIN
+DECLARE done BOOLEAN DEFAULT FALSE;
+DECLARE quiz01 DECIMAL(5,2);
+DECLARE quiz02 DECIMAL(5,2);
+DECLARE quiz03 DECIMAL(5,2);
+DECLARE sum DECIMAL(5,2);
+DECLARE minNum DECIMAL(5,2);
+DECLARE CA_10_marks DECIMAL(5,2);
+
+DECLARE mark_code varchar(15);
+DECLARE get_course_code varchar(15);
+DECLARE Student_Id varchar(20);
+
+DECLARE cursor01 CURSOR FOR
+	SELECT ST_Id,Course_code,Quiz_01, Quiz_02,Quiz_03 FROM mark;
+
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done=TRUE;
+
+OPEN cursor01;
+
+read_loop:LOOP
+		FETCH cursor01 INTO Student_Id , get_course_code,
+		quiz01,quiz02,quiz03;
+	IF done THEN
+		LEAVE read_loop;
+	END IF;
+
+	SET sum=quiz01+quiz02+quiz03;
+	SET minNum=LEAST(quiz01,quiz02,quiz03);
+	SET sum=sum-minNum;
+	SET CA_10_marks=(sum/200)*10;
+
+	UPDATE student_result
+	SET  CA_Marks=CA_10_marks
+	WHERE ST_Id=Student_Id
+	AND Course_code= get_course_code;
+END LOOP;
+
+CLOSE cursor01;
+
+END//
+
+
+CALL  calculate_CA_marks()//
+DROP PROCEDURE calculate_CA_marks//
+
+SELECT *
+FROM student_result;
