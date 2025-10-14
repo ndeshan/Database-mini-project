@@ -11,3 +11,14 @@ CREATE TABLE medical_record (
   FOREIGN KEY (ST_Id) REFERENCES student(Registration_No),
   FOREIGN KEY (Course_code) REFERENCES course_unit(Course_code)
 );
+
+
+CREATE TABLE student (
+  Registration_No VARCHAR(20) NOT NULL PRIMARY KEY,
+  Fname VARCHAR(45),
+  Lname VARCHAR(45),
+  Year INT,
+  Department VARCHAR(45),
+  Batch INT DEFAULT 2024,
+  Status ENUM('Proper','Repeat','Suspended') NOT NULL DEFAULT 'Proper'
+);
