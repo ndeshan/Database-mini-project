@@ -41,3 +41,39 @@ CREATE TABLE medical_record (
   FOREIGN KEY (ST_Id) REFERENCES student(Registration_No),
   FOREIGN KEY (Course_code) REFERENCES course_unit(Course_code)
 );
+
+
+
+
+INSERT INTO user (U_Id, Fname, Lname, Email, Address, Gender, Dob, Role, Department)
+VALUES
+('admin/2023/001', 'Nipuna', 'Deshan', 'nipuna.deshan@ruhuna.lk', 'Galle', 'M', '1975-01-01', 'Admin', 'ICT'),
+('dean FOT', 'Sahan', 'Bandara', 'sahan.bandara@ruhuna.lk', 'Galle Face, Colombo', 'M', '1980-02-14', 'Dean', 'BST'),
+('lc/2023/002', 'Dilini', 'Wickramasinghe', 'dilini.wickramasinghe@ruhuna.lk', 'Rajagiriya, Colombo', 'F', '1982-11-30', 'Lecturer', 'BST'),
+('lc/2023/003', 'Yasodha', 'Gunaratne', 'yasodha.gunaratne@ruhuna.lk', 'Jaffna', 'F', '1987-09-05', 'Lecturer', 'BST'),
+('lc/2023/004', 'Seelawathi', 'Ganga', 'seelawathi.ganga@ruhuna.lk', 'Galle', 'F', '1987-09-07', 'Lecturer', 'BST'),
+('lc/2023/005', 'Mahesh', 'Ranasinghe', 'mahesh.ranasinghe@ruhuna.lk', 'Kandy', 'M', '1984-03-22', 'Lecturer', 'ICT'),
+('lc/2023/006', 'Nirmala', 'Herath', 'nirmala.herath@ruhuna.lk', 'Anuradhapura', 'F', '1986-12-11', 'Lecturer', 'BST'),
+('lc/2024/001', 'Ravi', 'Silva', 'ravi.silva@ruhuna.lk', 'Temple Road, Moratuwa', 'M', '1985-05-18', 'Lecturer', 'ICT'),
+('tg/2023/0002', 'Kamani', 'Fernando', 'kamani.fernando@ruhuna.lk', 'Kandy Road, Kadawatha', 'F', '2000-07-25', 'Student', 'ICT'),
+('tg/2023/0003', 'Tharindu', 'Jayasinghe', 'tharindu.jayasinghe@ruhuna.lk', 'Nugegoda, Colombo', 'M', '2002-01-15', 'Student', 'ICT'),
+('tg/2023/0004', 'Anjali', 'Rajapaksa', 'anjali.rajapaksa@ruhuna.lk', 'Matara Road, Galle', 'F', '2001-08-22', 'Student', 'ICT'),
+('tg/2023/0005', 'Chaminda', 'Weerasinghe', 'chaminda.weerasinghe@ruhuna.lk', 'Kurunegala', 'M', '2000-04-10', 'Student', 'ICT'),
+('tg/2023/0006', 'Nadeesha', 'Herath', 'nadeesha.herath@ruhuna.lk', 'Nuwara Eliya', 'F', '2001-06-30', 'Student', 'ICT'),
+('tg/2023/0007', 'Dinuka', 'Amarasinghe', 'dinuka.amarasinghe@ruhuna.lk', 'Moratuwa', 'M', '2002-11-05', 'Student', 'ET'),
+('tg/2023/0008', 'Ishara', 'Gunawardena', 'ishara.gunawardena@ruhuna.lk', 'Ratnapura', 'F', '2001-12-18', 'Student', 'ET'),
+('tg/2023/0009', 'Rukshan', 'Mendis', 'rukshan.mendis@ruhuna.lk', 'Panadura', 'M', '2000-09-23', 'Student', 'ET'),
+('tg/2023/0010', 'Shanika', 'Wijesinghe', 'shanika.wijesinghe@ruhuna.lk', 'Kalutara', 'F', '2002-02-14', 'Student', 'ET'),
+('tg/2023/0011', 'Kavindu', 'Rathnayake', 'kavindu.rathnayake@ruhuna.lk', 'Gampaha', 'M', '2001-05-30', 'Student', 'ET'),
+('tg/2023/0012', 'Piumi', 'De Silva', 'piumi.desilva@ruhuna.lk', 'Avissawella', 'F', '2000-08-12', 'Student', 'BST'),
+('tg/2023/0013', 'Sachin', 'Kumara', 'sachin.kumara@ruhuna.lk', 'Hambantota', 'M', '2002-07-19', 'Student', 'BST'),
+('tg/2023/0014', 'Thilini', 'Peries', 'thilini.peries@ruhuna.lk', 'Batticaloa', 'F', '2001-10-25', 'Student', 'BST'),
+('tg/2023/0015', 'Yohan', 'Edirisinghe', 'yohan.edirisinghe@ruhuna.lk', 'Trincomalee', 'M', '2000-01-08', 'Student', 'BST'),
+('tg/2024/0001', 'Nimal', 'Perera', 'nimal.perera@ruhuna.lk', 'Galle Road, Colombo', 'M', '2001-03-12', 'Student', 'ict'),
+('to/2023/001', 'Amila', 'Rathnayake', 'amila.rathnayake@ruhuna.lk', 'Badulla', 'M', '1990-07-20', 'Technical Officer', 'ET'),
+('to/2023/002', 'Lahiru', 'De Silva', 'lahiru.desilva@ruhuna.lk', 'Panadura', 'M', '1992-03-11', 'Technical Officer', 'ICT'),
+('to/2023/003', 'Chathura', 'Fernando', 'chathura.fernando@ruhuna.lk', 'Colombo', 'M', '1991-05-14', 'Technical Officer', 'ICT'),
+('to/2023/004', 'Sanduni', 'Jayawardena', 'sanduni.jayawardena@ruhuna.lk', 'Matara', 'F', '1993-08-27', 'Technical Officer', 'BST'),
+('to/2023/005', 'Kasun', 'Madushanka', 'kasun.madushanka@ruhuna.lk', 'Galle', 'M', '1990-11-03', 'Technical Officer', 'BST'),
+('to/2023/006', 'Nipuni', 'Abeywickrama', 'nipuni.abeywickrama@ruhuna.lk', 'Kegalle', 'F', '1992-01-19', 'Technical Officer', 'BST');
+
