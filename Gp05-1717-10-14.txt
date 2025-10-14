@@ -46,3 +46,92 @@ INSERT INTO course_unit (
 ('TMS1242', 'Computer Programming Techniques', 'Theory', 3, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ET', 15, 0),
 ('TMS1253', 'Engineering Properties of Matter', 'Theory', 3, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ET', 15, 0),
 ('TMS1261', 'Engineering Properties of Matter Laboratory', 'Lab', 2, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ET', 0, 15);
+
+
+
+
+
+
+
+
+
+mysql> UPDATE course_unit
+    -> SET Department_Offering ='ICT'
+    -> WHERE  Course_code='TCS1212';
+Query OK, 1 row affected (2.779 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> UPDATE course_unit
+    -> SET Type = 'Practical'
+    -> WHERE Type = 'Lab';
+Query OK, 4 rows affected (0.221 sec)
+Rows matched: 4  Changed: 4  Warnings: 0
+
+mysql>
+mysql> ALTER TABLE course_unit
+    -> MODIFY COLUMN Type ENUM('Theory', 'Practical', 'Both') NOT NULL;
+Query OK, 22 rows affected (1.494 sec)
+Records: 22  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> UPDATE course_unit
+    -> SET Type = 'Both'
+    -> WHERE  Course_code='ICT1253';
+Query OK, 1 row affected (0.149 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>
+mysql> UPDATE course_unit
+    -> SET Type = 'Both'
+    -> WHERE  Course_code='ICT1233';
+Query OK, 1 row affected (0.097 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql>
+mysql> UPDATE course_unit
+    -> SET Type = 'Theory'
+    -> WHERE  Course_code='ICT1242';
+Query OK, 1 row affected (0.207 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+
+
+UPDATE course_unit 
+SET Credit = 3 
+WHERE Course_code = 'TMS1233';
+
+UPDATE course_unit 
+SET Theory_Hours = 45, Practical_Hours=0 
+WHERE Course_code = 'TMS1233';
+
+UPDATE course_unit 
+SET Theory_Hours = 30, Practical_Hours=30,Credit=3 
+WHERE Course_code = 'ICT1233';
+
+UPDATE course_unit 
+SET Theory_Hours = 30, Practical_Hours=30,Credit=3 
+WHERE Course_code = 'ICT1253';
+
+
+UPDATE course_unit 
+SET Theory_Hours = 30, Practical_Hours=0,Credit=2 
+WHERE Course_code = 'ICT1242';
+
+
+UPDATE course_unit 
+SET Theory_Hours = 0, Practical_Hours=60,Credit=2 
+WHERE Course_code = 'ICT1222';
+
+UPDATE course_unit 
+SET Theory_Hours = 30, Practical_Hours=0,Credit=2 
+WHERE Course_code = 'ICT1212';
+
+UPDATE course_unit 
+SET Theory_Hours = 30, Practical_Hours=0,Credit=2 
+WHERE Course_code = 'ENG1222';
+
+
+UPDATE course_unit 
+SET Theory_Hours = 30, Practical_Hours=0,Credit=2 
+WHERE Course_code = 'TCS1212';
+
