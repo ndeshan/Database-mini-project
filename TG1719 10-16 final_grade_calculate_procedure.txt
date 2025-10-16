@@ -1,0 +1,75 @@
+DELIMITER //
+
+CREATE PROCEDURE calculateFinalMark()
+
+
+BEGIN 
+
+DECLARE get_ca_marks DECIMAL(5,2);
+DECLARE get_theory_marks DECIMAL(5,2);
+DECLARE get_practical_marks DECIMAL(5,2);
+DECLARE get_type ENUM('Theory','Practical','Both');
+DECLARE done BOOLEAN DEFAULT FALSE;
+DECLARE get_course_id CHAR(15);
+DECLARE get_student_id CHAR(15);
+DECLARE get_Eligibility CHAR(15);
+
+DECLARE final_marks_60 DECIMAL(5,2);
+DECLARE Final_marks DECIMAL(5,2);
+DECLARE cursor01 CURSOR FOR 
+
+SELECT  s.CA_Marks,m.Final_Theory,m.Final_Practical ,m.Type,m.course_code,m.student_id,
+a.Eligibility
+FROM  student_result s
+INNER JOIN  mark m ON m.student_id=s.student_id 
+AND s.course_code =m.course_code 
+
+INNER JOIN attendance_summary a ON a.ST_Id=s.student_id AND
+ a.Course_code= s.course_code ;
+
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done=TRUE;
+
+
+OPEN cursor01;
+
+read_loop:LOOP
+
+FETCH cursor01 INTO get_ca_marks,get_theory_marks,get_practical_marks,get_type,
+get_course_id, get_student_id,get_Eligibility;
+
+IF done THEN
+	LEAVE read_loop;
+END IF;
+
+IF get_Eligibility='Eligible' THEN 
+
+	IF get_type='Theory' THEN
+		SET final_marks_60=(get_theory_marks/100)*60;
+	ELSEIF get_type='Practical' THEN
+		SET final_marks_60=(get_practical_marks/100)*60;
+	ELSEIF get_type='Both' THEN
+		SET final_marks_60=((get_practical_marks+get_theory_marks)/200)*60;
+
+	END IF;
+END IF;
+
+	SET Final_marks=final_marks_60+get_ca_marks;
+UPDATE student_result 
+SET Final_Marks=Final_marks
+WHERE student_id=get_student_id AND course_code=get_course_id;
+
+END LOOP;
+
+CLOSE cursor01;
+
+END//
+
+DELIMITER ;
+
+CALL calculateFinalMark();
+DROP PROCEDURE calculateFinalMark;
+
+SELECT *
+FROM student_result;
+
+
