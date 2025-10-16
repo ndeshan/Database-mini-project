@@ -6,3 +6,9 @@ ALTER TABLE medical_record DROP COLUMN Medical_type;
 
 ALTER TABLE medical_record
 ADD COLUMN att_id VARCHAR(20);
+
+
+ALTER TABLE medical_record
+ADD CONSTRAINT FK_attendance_medical
+FOREIGN KEY (att_id)
+REFERENCES Attendance(Attendance_Id);
