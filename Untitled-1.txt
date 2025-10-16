@@ -36,3 +36,6 @@ CREATE PROCEDURE update_attendance(
 		AND Week_Number = Week_Number_in;
 END //
 DELIMITER ;
+
+
+
