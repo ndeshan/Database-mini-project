@@ -1,1 +1,8 @@
 ALTER TABLE medical_record DROP COLUMN Medical_type;
+
+
+
+
+
+ALTER TABLE medical_record
+ADD COLUMN att_id VARCHAR(20);
