@@ -1682,3 +1682,47 @@ mysql> UPDATE attendance SET session_type = "Practical" WHERE session_type = "La
 Query OK, 270 rows affected (0.03 sec)
 Rows matched: 270  Changed: 270  Warnings: 0
 
+////////////////////////////////////////////////////////////////////////
+
+mysql> DELIMITER //
+mysql> DROP PROCEDURE IF EXISTS update_attendance//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE PROCEDURE update_attendance(
+    ->  IN ST_Id_in VARCHAR(20),
+    ->  IN Course_code_in VARCHAR(15),
+    ->  IN Week_Number_in INT,
+    ->  IN in_status VARCHAR(10)
+    -> )
+    ->     BEGIN
+    ->  DECLARE new_status VARCHAR(10);
+    ->
+    ->
+    ->  IF in_status IN ('p','P','Present') THEN
+    ->          SET new_status = 'Present';
+    ->  ELSEIF in_status IN ('a','A','Absent') THEN
+    ->          SET new_status = 'Absent';
+    ->  ELSE
+    ->
+    ->
+    ->          SELECT 'Invalid status value. Use p/a/m or Present/Absent/Medical.' AS message;
+    ->
+    ->  END IF;
+    ->
+    ->
+    ->  UPDATE attendance
+    ->  SET Status = new_status
+    ->  WHERE ST_Id = ST_Id_in
+    ->          AND Course_code = Course_code_in
+    ->          AND Week_Number = Week_Number_in;
+    ->
+    ->
+    ->
+    ->
+    ->  SELECT * FROM attendance WHERE ST_Id = ST_Id_in AND Course_code = Course_code_in
+    ->          AND Week_Number = Week_Number_in;
+    -> END //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> DELIMITER ;
+
