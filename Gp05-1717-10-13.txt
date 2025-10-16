@@ -41,7 +41,7 @@ Query OK, 0 rows affected (0.133 sec)
 mysql> CREATE USER 'to'@'localhost' IDENTIFIED BY 'to1234';
 Query OK, 0 rows affected (0.301 sec)
 
-mysql> GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
+mysql> GRANT ALL PRIVILEGES ON student_management.* TO 'admin'@'localhost' WITH GRANT OPTION;
 Query OK, 0 rows affected (0.260 sec)
 
 mysql> GRANT ALL PRIVILEGES ON Student_Management.* TO 'dean'@'localhost';
