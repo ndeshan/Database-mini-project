@@ -1,0 +1,9 @@
+CREATE TABLE exam (
+    Exam_Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
+    ST_Id VARCHAR(20) NOT NULL,
+    Course_code VARCHAR(15) NOT NULL,
+    Is_Eligible TINYINT(1) DEFAULT 1,
+    Status ENUM('Scheduled', 'Ongoing', 'Completed', 'Cancelled') DEFAULT 'Scheduled',
+    Exam_Type ENUM('Quiz_01', 'Quiz_02', 'Quiz_03', 'Assessment_01', 'Assessment_02', 'Mid_Semester', 'Final') NOT NULL,
+    Semester VARCHAR(20) DEFAULT 'Semester 2'
+);
