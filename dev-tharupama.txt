@@ -2286,3 +2286,82 @@ mysql> SELECT * FROM attendance_percentage_by_hours;
 | tg/2023/0015 | BST1253     |             15 |       0 |     15 |       0 |       0.00 | Not Eligible |
 +--------------+-------------+----------------+---------+--------+---------+------------+--------------+
 89 rows in set (0.01 sec)
+
+/////////////////////////////////////////////////////////////////////////////////////////////////
+mysql> DELIMITER //
+mysql> DROP PROCEDURE IF EXISTS update_attendance//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CREATE PROCEDURE update_attendance(
+    ->     IN in_ST_Id VARCHAR(50),
+    ->     IN in_Course_code VARCHAR(50),
+    ->     IN in_Week_Number INT,
+    ->     IN in_session_type VARCHAR(20),
+    ->     IN in_status_flag VARCHAR(5)
+    -> )
+    -> BEGIN
+    ->
+    ->     DECLARE s_type VARCHAR(20);
+    ->     DECLARE new_status VARCHAR(20);
+    ->
+    ->
+    ->
+    ->
+    ->     IF in_session_type IN ('t','theory','T','Theory') THEN
+    ->         SET s_type = 'Theory';
+    ->     ELSEIF in_session_type IN ('p','practical','P','Practical') THEN
+    ->         SET s_type = 'Practical';
+    ->     ELSE
+    ->         SELECT "invalid please enter ('t','theory','T','Theory') or ('p','practical','P','Practical')" AS message;
+    ->     END IF;
+    ->
+    ->
+    ->
+    ->     IF in_status_flag IN ('p','present','P','Present') THEN
+    ->         SET new_status = 'Present';
+    ->     ELSEIF in_status_flag IN ('a','absent','A','Absent') THEN
+    ->         SET new_status = 'Absent';
+    ->     ELSE
+    ->         SELECT "invalid please enter ('p','present','P','Present') or ('a','absent','A','Absent')" AS message;
+    ->     END IF;
+    ->
+    ->
+    ->     UPDATE attendance
+    ->     SET Status = new_status
+    ->     WHERE ST_Id = in_ST_Id
+    ->       AND Course_code = in_Course_code
+    ->       AND Week_Number = in_Week_Number
+    ->       AND Session_Type = s_type;
+    ->
+    ->
+    ->
+    ->     SELECT * FROM attendance
+    ->     WHERE ST_Id = in_ST_Id
+    ->       AND Course_code = in_Course_code
+    ->       AND Week_Number = in_Week_Number
+    ->       AND Session_Type = s_type;
+    -> END//
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> DELIMITER ;
+mysql>
+mysql>
+mysql> CALL update_attendance("tg/2024/0001","ICT1253",1,"p","a");
++---------------+--------------+-------------+--------------+-------------+--------------+--------+
+| Attendance_Id | ST_Id        | Course_code | Session_Date | Week_Number | Session_Type | Status |
++---------------+--------------+-------------+--------------+-------------+--------------+--------+
+| ATT1426       | tg/2024/0001 | ICT1253     | 2025-01-13   |           1 | Practical    | Absent |
++---------------+--------------+-------------+--------------+-------------+--------------+--------+
+1 row in set (0.01 sec)
+
+Query OK, 0 rows affected (0.03 sec)
+
+mysql> CALL update_attendance("tg/2024/0001","ICT1253",1,"t","a");
++---------------+--------------+-------------+--------------+-------------+--------------+--------+
+| Attendance_Id | ST_Id        | Course_code | Session_Date | Week_Number | Session_Type | Status |
++---------------+--------------+-------------+--------------+-------------+--------------+--------+
+| ATT0076       | tg/2024/0001 | ICT1253     | 2025-01-13   |           1 | Theory       | Absent |
++---------------+--------------+-------------+--------------+-------------+--------------+--------+
+1 row in set (0.01 sec)
+
+Query OK, 0 rows affected (0.03 sec)
