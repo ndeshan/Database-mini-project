@@ -1934,3 +1934,133 @@ mysql> INSERT INTO attendance (
 Query OK, 90 rows affected (0.01 sec)
 Records: 90  Duplicates: 0  Warnings: 0
 
+////////////////////////////////////////////////////////////////////////////////////
+mysql> CREATE VIEW attendance_percentage_by_hours AS
+    -> SELECT
+    ->   a.ST_Id,
+    ->   a.Course_code,
+    ->   COUNT(*) AS Total_Sessions,
+    ->   SUM(CASE WHEN a.Status = 'Present' THEN 1 ELSE 0 END) AS Present,
+    ->   SUM(CASE WHEN a.Status = 'Absent' THEN 1 ELSE 0 END) AS Absent,
+    ->   SUM(CASE WHEN a.Status = 'Medical' THEN 1 ELSE 0 END) AS Medical,
+    ->
+    ->   CASE WHEN (cu.Theory_Hours + cu.Practical_Hours) = 0 THEN 0
+    ->        ELSE 100.0 * (
+    ->          (
+    ->            SUM(CASE WHEN a.Status = 'Present' AND a.Session_Type = 'Theory' THEN 1 ELSE 0 END) * (cu.Theory_Hours / 15.0)
+    ->            + SUM(CASE WHEN a.Status = 'Present' AND a.Session_Type = 'Practical' THEN 1 ELSE 0 END) * (cu.Practical_Hours / 15.0)
+    ->          ) / (cu.Theory_Hours + cu.Practical_Hours)
+    ->        ) END AS Percentage,
+    ->   CASE WHEN (cu.Theory_Hours + cu.Practical_Hours) = 0 THEN 'Not Applicable'
+    ->        WHEN 100.0 * (
+    ->          (
+    ->            SUM(CASE WHEN a.Status = 'Present' AND a.Session_Type = 'Theory' THEN 1 ELSE 0 END) * (cu.Theory_Hours / 15.0)
+    ->            + SUM(CASE WHEN a.Status = 'Present' AND a.Session_Type = 'Practical' THEN 1 ELSE 0 END) * (cu.Practical_Hours / 15.0)
+    ->          ) / (cu.Theory_Hours + cu.Practical_Hours)
+    ->        ) >= 80 THEN 'Eligible'
+    ->        ELSE 'Not Eligible' END AS Eligibility
+    -> FROM attendance a
+    -> JOIN course_unit cu ON cu.Course_code = a.Course_code
+    -> GROUP BY a.ST_Id, a.Course_code;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql>
+mysql>
+mysql> SELECT * FROM attendance_percentage_by_hours;
++--------------+-------------+----------------+---------+--------+---------+---------------+--------------+
+| ST_Id        | Course_code | Total_Sessions | Present | Absent | Medical | Percentage    | Eligibility  |
++--------------+-------------+----------------+---------+--------+---------+---------------+--------------+
+| tg/2023/0006 | BST1212     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0012 | BST1212     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0015 | BST1212     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0006 | BST1222     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0006 | BST1232     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0012 | BST1232     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0014 | BST1232     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0015 | BST1232     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0006 | BST1242     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0012 | BST1242     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0006 | BST1253     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0012 | BST1253     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0015 | BST1253     |             15 |      14 |      1 |       0 |  93.333333300 | Eligible     |
+| tg/2023/0006 | BST1262     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0014 | BST1262     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0006 | BST1272     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0012 | BST1272     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2024/0001 | ENG1222     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0002 | ENG1222     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0004 | ENG1222     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0005 | ENG1222     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0007 | ENG1222     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0008 | ENG1222     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0003 | ENT1212     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0009 | ENT1212     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0010 | ENT1212     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0011 | ENT1212     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2024/0001 | ICT1212     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0002 | ICT1212     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0004 | ICT1212     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0005 | ICT1212     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0007 | ICT1212     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0008 | ICT1212     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2024/0001 | ICT1222     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0002 | ICT1222     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0004 | ICT1222     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0005 | ICT1222     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0007 | ICT1222     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0008 | ICT1222     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2024/0001 | ICT1233     |             30 |      30 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0002 | ICT1233     |             30 |      30 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0004 | ICT1233     |             30 |      30 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0005 | ICT1233     |             30 |      30 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0007 | ICT1233     |             30 |      30 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0008 | ICT1233     |             30 |      30 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2024/0001 | ICT1242     |             15 |      15 |      0 |       0 |   0.000000000 | Not Eligible |
+| tg/2023/0002 | ICT1242     |             15 |      15 |      0 |       0 |   0.000000000 | Not Eligible |
+| tg/2023/0004 | ICT1242     |             15 |      15 |      0 |       0 |   0.000000000 | Not Eligible |
+| tg/2023/0005 | ICT1242     |             15 |      15 |      0 |       0 |   0.000000000 | Not Eligible |
+| tg/2023/0007 | ICT1242     |             15 |      15 |      0 |       0 |   0.000000000 | Not Eligible |
+| tg/2023/0008 | ICT1242     |             15 |      15 |      0 |       0 |   0.000000000 | Not Eligible |
+| tg/2024/0001 | ICT1253     |             30 |      30 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0002 | ICT1253     |             30 |      30 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0004 | ICT1253     |             30 |      30 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0005 | ICT1253     |             30 |      30 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0007 | ICT1253     |             30 |      30 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0008 | ICT1253     |             30 |      30 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2024/0001 | TCS1212     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0002 | TCS1212     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0004 | TCS1212     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0005 | TCS1212     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0007 | TCS1212     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0008 | TCS1212     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0003 | TMS1213     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0009 | TMS1213     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0010 | TMS1213     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0003 | TMS1222     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0009 | TMS1222     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0010 | TMS1222     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0011 | TMS1222     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0003 | TMS1231     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0009 | TMS1231     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0010 | TMS1231     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2024/0001 | TMS1233     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0002 | TMS1233     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0004 | TMS1233     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0005 | TMS1233     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0007 | TMS1233     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0008 | TMS1233     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0003 | TMS1242     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0009 | TMS1242     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0010 | TMS1242     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0011 | TMS1242     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0003 | TMS1253     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0009 | TMS1253     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0010 | TMS1253     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0003 | TMS1261     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0009 | TMS1261     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
+| tg/2023/0010 | TMS1261     |             15 |      15 |      0 |       0 | 100.000000000 | Eligible     |
++--------------+-------------+----------------+---------+--------+---------+---------------+--------------+
+89 rows in set (0.01 sec)
+
+mysql>
+
