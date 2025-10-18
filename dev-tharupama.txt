@@ -2365,3 +2365,176 @@ mysql> CALL update_attendance("tg/2024/0001","ICT1253",1,"t","a");
 1 row in set (0.01 sec)
 
 Query OK, 0 rows affected (0.03 sec)
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+mysql> DELIMITER //
+mysql>
+mysql> CREATE PROCEDURE attendance_by_stid(IN id VARCHAR(20))
+    -> BEGIN
+    -> SELECT * FROM attendance WHERE ST_Id = id;
+    -> END //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CALL attendence_by_stid("tg/2023/0002");
+    -> ^C
+mysql> DELIMITER ;
+mysql> CALL attendence_by_stid("tg/2023/0002");
+ERROR 1305 (42000): PROCEDURE student_management.attendence_by_stid does not exist
+mysql> CALL attendance_by_stid("tg/2023/0002");
++---------------+--------------+-------------+--------------+-------------+--------------+---------+
+| Attendance_Id | ST_Id        | Course_code | Session_Date | Week_Number | Session_Type | Status  |
++---------------+--------------+-------------+--------------+-------------+--------------+---------+
+| ATT0121       | tg/2023/0002 | ENG1222     | 2025-01-13   |           1 | Theory       | Present |
+| ATT0122       | tg/2023/0002 | ENG1222     | 2025-01-20   |           2 | Theory       | Present |
+| ATT0123       | tg/2023/0002 | ENG1222     | 2025-01-27   |           3 | Theory       | Present |
+| ATT0124       | tg/2023/0002 | ENG1222     | 2025-02-03   |           4 | Theory       | Present |
+| ATT0125       | tg/2023/0002 | ENG1222     | 2025-02-10   |           5 | Theory       | Present |
+| ATT0126       | tg/2023/0002 | ENG1222     | 2025-02-17   |           6 | Theory       | Present |
+| ATT0127       | tg/2023/0002 | ENG1222     | 2025-02-24   |           7 | Theory       | Present |
+| ATT0128       | tg/2023/0002 | ENG1222     | 2025-03-03   |           8 | Theory       | Present |
+| ATT0129       | tg/2023/0002 | ENG1222     | 2025-03-10   |           9 | Theory       | Present |
+| ATT0130       | tg/2023/0002 | ENG1222     | 2025-03-17   |          10 | Theory       | Present |
+| ATT0131       | tg/2023/0002 | ENG1222     | 2025-03-24   |          11 | Theory       | Present |
+| ATT0132       | tg/2023/0002 | ENG1222     | 2025-03-31   |          12 | Theory       | Present |
+| ATT0133       | tg/2023/0002 | ENG1222     | 2025-04-07   |          13 | Theory       | Present |
+| ATT0134       | tg/2023/0002 | ENG1222     | 2025-04-14   |          14 | Theory       | Present |
+| ATT0135       | tg/2023/0002 | ENG1222     | 2025-04-21   |          15 | Theory       | Present |
+| ATT0136       | tg/2023/0002 | ICT1212     | 2025-01-13   |           1 | Theory       | Present |
+| ATT0137       | tg/2023/0002 | ICT1212     | 2025-01-20   |           2 | Theory       | Present |
+| ATT0138       | tg/2023/0002 | ICT1212     | 2025-01-27   |           3 | Theory       | Present |
+| ATT0139       | tg/2023/0002 | ICT1212     | 2025-02-03   |           4 | Theory       | Present |
+| ATT0140       | tg/2023/0002 | ICT1212     | 2025-02-10   |           5 | Theory       | Present |
+| ATT0141       | tg/2023/0002 | ICT1212     | 2025-02-17   |           6 | Theory       | Present |
+| ATT0142       | tg/2023/0002 | ICT1212     | 2025-02-24   |           7 | Theory       | Present |
+| ATT0143       | tg/2023/0002 | ICT1212     | 2025-03-03   |           8 | Theory       | Present |
+| ATT0144       | tg/2023/0002 | ICT1212     | 2025-03-10   |           9 | Theory       | Present |
+| ATT0145       | tg/2023/0002 | ICT1212     | 2025-03-17   |          10 | Theory       | Present |
+| ATT0146       | tg/2023/0002 | ICT1212     | 2025-03-24   |          11 | Theory       | Present |
+| ATT0147       | tg/2023/0002 | ICT1212     | 2025-03-31   |          12 | Theory       | Present |
+| ATT0148       | tg/2023/0002 | ICT1212     | 2025-04-07   |          13 | Theory       | Present |
+| ATT0149       | tg/2023/0002 | ICT1212     | 2025-04-14   |          14 | Theory       | Present |
+| ATT0150       | tg/2023/0002 | ICT1212     | 2025-04-21   |          15 | Theory       | Present |
+| ATT0151       | tg/2023/0002 | ICT1222     | 2025-01-13   |           1 | Practical    | Present |
+| ATT0152       | tg/2023/0002 | ICT1222     | 2025-01-20   |           2 | Practical    | Present |
+| ATT0153       | tg/2023/0002 | ICT1222     | 2025-01-27   |           3 | Practical    | Present |
+| ATT0154       | tg/2023/0002 | ICT1222     | 2025-02-03   |           4 | Practical    | Present |
+| ATT0155       | tg/2023/0002 | ICT1222     | 2025-02-10   |           5 | Practical    | Present |
+| ATT0156       | tg/2023/0002 | ICT1222     | 2025-02-17   |           6 | Practical    | Present |
+| ATT0157       | tg/2023/0002 | ICT1222     | 2025-02-24   |           7 | Practical    | Present |
+| ATT0158       | tg/2023/0002 | ICT1222     | 2025-03-03   |           8 | Practical    | Present |
+| ATT0159       | tg/2023/0002 | ICT1222     | 2025-03-10   |           9 | Practical    | Present |
+| ATT0160       | tg/2023/0002 | ICT1222     | 2025-03-17   |          10 | Practical    | Present |
+| ATT0161       | tg/2023/0002 | ICT1222     | 2025-03-24   |          11 | Practical    | Present |
+| ATT0162       | tg/2023/0002 | ICT1222     | 2025-03-31   |          12 | Practical    | Present |
+| ATT0163       | tg/2023/0002 | ICT1222     | 2025-04-07   |          13 | Practical    | Present |
+| ATT0164       | tg/2023/0002 | ICT1222     | 2025-04-14   |          14 | Practical    | Present |
+| ATT0165       | tg/2023/0002 | ICT1222     | 2025-04-21   |          15 | Practical    | Present |
+| ATT0166       | tg/2023/0002 | ICT1233     | 2025-01-13   |           1 | Theory       | Present |
+| ATT0167       | tg/2023/0002 | ICT1233     | 2025-01-20   |           2 | Theory       | Present |
+| ATT0168       | tg/2023/0002 | ICT1233     | 2025-01-27   |           3 | Theory       | Present |
+| ATT0169       | tg/2023/0002 | ICT1233     | 2025-02-03   |           4 | Theory       | Present |
+| ATT0170       | tg/2023/0002 | ICT1233     | 2025-02-10   |           5 | Theory       | Present |
+| ATT0171       | tg/2023/0002 | ICT1233     | 2025-02-17   |           6 | Theory       | Present |
+| ATT0172       | tg/2023/0002 | ICT1233     | 2025-02-24   |           7 | Theory       | Present |
+| ATT0173       | tg/2023/0002 | ICT1233     | 2025-03-03   |           8 | Theory       | Present |
+| ATT0174       | tg/2023/0002 | ICT1233     | 2025-03-10   |           9 | Theory       | Present |
+| ATT0175       | tg/2023/0002 | ICT1233     | 2025-03-17   |          10 | Theory       | Present |
+| ATT0176       | tg/2023/0002 | ICT1233     | 2025-03-24   |          11 | Theory       | Present |
+| ATT0177       | tg/2023/0002 | ICT1233     | 2025-03-31   |          12 | Theory       | Present |
+| ATT0178       | tg/2023/0002 | ICT1233     | 2025-04-07   |          13 | Theory       | Present |
+| ATT0179       | tg/2023/0002 | ICT1233     | 2025-04-14   |          14 | Theory       | Present |
+| ATT0180       | tg/2023/0002 | ICT1233     | 2025-04-21   |          15 | Theory       | Present |
+| ATT0181       | tg/2023/0002 | ICT1242     | 2025-01-13   |           1 | Practical    | Present |
+| ATT0182       | tg/2023/0002 | ICT1242     | 2025-01-20   |           2 | Practical    | Present |
+| ATT0183       | tg/2023/0002 | ICT1242     | 2025-01-27   |           3 | Practical    | Present |
+| ATT0184       | tg/2023/0002 | ICT1242     | 2025-02-03   |           4 | Practical    | Present |
+| ATT0185       | tg/2023/0002 | ICT1242     | 2025-02-10   |           5 | Practical    | Present |
+| ATT0186       | tg/2023/0002 | ICT1242     | 2025-02-17   |           6 | Practical    | Present |
+| ATT0187       | tg/2023/0002 | ICT1242     | 2025-02-24   |           7 | Practical    | Present |
+| ATT0188       | tg/2023/0002 | ICT1242     | 2025-03-03   |           8 | Practical    | Present |
+| ATT0189       | tg/2023/0002 | ICT1242     | 2025-03-10   |           9 | Practical    | Present |
+| ATT0190       | tg/2023/0002 | ICT1242     | 2025-03-17   |          10 | Practical    | Present |
+| ATT0191       | tg/2023/0002 | ICT1242     | 2025-03-24   |          11 | Practical    | Present |
+| ATT0192       | tg/2023/0002 | ICT1242     | 2025-03-31   |          12 | Practical    | Present |
+| ATT0193       | tg/2023/0002 | ICT1242     | 2025-04-07   |          13 | Practical    | Present |
+| ATT0194       | tg/2023/0002 | ICT1242     | 2025-04-14   |          14 | Practical    | Present |
+| ATT0195       | tg/2023/0002 | ICT1242     | 2025-04-21   |          15 | Practical    | Present |
+| ATT0196       | tg/2023/0002 | ICT1253     | 2025-01-13   |           1 | Theory       | Present |
+| ATT0197       | tg/2023/0002 | ICT1253     | 2025-01-20   |           2 | Theory       | Present |
+| ATT0198       | tg/2023/0002 | ICT1253     | 2025-01-27   |           3 | Theory       | Present |
+| ATT0199       | tg/2023/0002 | ICT1253     | 2025-02-03   |           4 | Theory       | Present |
+| ATT0200       | tg/2023/0002 | ICT1253     | 2025-02-10   |           5 | Theory       | Present |
+| ATT0201       | tg/2023/0002 | ICT1253     | 2025-02-17   |           6 | Theory       | Present |
+| ATT0202       | tg/2023/0002 | ICT1253     | 2025-02-24   |           7 | Theory       | Present |
+| ATT0203       | tg/2023/0002 | ICT1253     | 2025-03-03   |           8 | Theory       | Present |
+| ATT0204       | tg/2023/0002 | ICT1253     | 2025-03-10   |           9 | Theory       | Present |
+| ATT0205       | tg/2023/0002 | ICT1253     | 2025-03-17   |          10 | Theory       | Present |
+| ATT0206       | tg/2023/0002 | ICT1253     | 2025-03-24   |          11 | Theory       | Present |
+| ATT0207       | tg/2023/0002 | ICT1253     | 2025-03-31   |          12 | Theory       | Present |
+| ATT0208       | tg/2023/0002 | ICT1253     | 2025-04-07   |          13 | Theory       | Present |
+| ATT0209       | tg/2023/0002 | ICT1253     | 2025-04-14   |          14 | Theory       | Present |
+| ATT0210       | tg/2023/0002 | ICT1253     | 2025-04-21   |          15 | Theory       | Present |
+| ATT0211       | tg/2023/0002 | TCS1212     | 2025-01-13   |           1 | Theory       | Present |
+| ATT0212       | tg/2023/0002 | TCS1212     | 2025-01-20   |           2 | Theory       | Present |
+| ATT0213       | tg/2023/0002 | TCS1212     | 2025-01-27   |           3 | Theory       | Present |
+| ATT0214       | tg/2023/0002 | TCS1212     | 2025-02-03   |           4 | Theory       | Present |
+| ATT0215       | tg/2023/0002 | TCS1212     | 2025-02-10   |           5 | Theory       | Present |
+| ATT0216       | tg/2023/0002 | TCS1212     | 2025-02-17   |           6 | Theory       | Present |
+| ATT0217       | tg/2023/0002 | TCS1212     | 2025-02-24   |           7 | Theory       | Present |
+| ATT0218       | tg/2023/0002 | TCS1212     | 2025-03-03   |           8 | Theory       | Present |
+| ATT0219       | tg/2023/0002 | TCS1212     | 2025-03-10   |           9 | Theory       | Present |
+| ATT0220       | tg/2023/0002 | TCS1212     | 2025-03-17   |          10 | Theory       | Present |
+| ATT0221       | tg/2023/0002 | TCS1212     | 2025-03-24   |          11 | Theory       | Present |
+| ATT0222       | tg/2023/0002 | TCS1212     | 2025-03-31   |          12 | Theory       | Present |
+| ATT0223       | tg/2023/0002 | TCS1212     | 2025-04-07   |          13 | Theory       | Present |
+| ATT0224       | tg/2023/0002 | TCS1212     | 2025-04-14   |          14 | Theory       | Present |
+| ATT0225       | tg/2023/0002 | TCS1212     | 2025-04-21   |          15 | Theory       | Present |
+| ATT0226       | tg/2023/0002 | TMS1233     | 2025-01-13   |           1 | Theory       | Present |
+| ATT0227       | tg/2023/0002 | TMS1233     | 2025-01-20   |           2 | Theory       | Present |
+| ATT0228       | tg/2023/0002 | TMS1233     | 2025-01-27   |           3 | Theory       | Present |
+| ATT0229       | tg/2023/0002 | TMS1233     | 2025-02-03   |           4 | Theory       | Present |
+| ATT0230       | tg/2023/0002 | TMS1233     | 2025-02-10   |           5 | Theory       | Present |
+| ATT0231       | tg/2023/0002 | TMS1233     | 2025-02-17   |           6 | Theory       | Present |
+| ATT0232       | tg/2023/0002 | TMS1233     | 2025-02-24   |           7 | Theory       | Present |
+| ATT0233       | tg/2023/0002 | TMS1233     | 2025-03-03   |           8 | Theory       | Present |
+| ATT0234       | tg/2023/0002 | TMS1233     | 2025-03-10   |           9 | Theory       | Present |
+| ATT0235       | tg/2023/0002 | TMS1233     | 2025-03-17   |          10 | Theory       | Present |
+| ATT0236       | tg/2023/0002 | TMS1233     | 2025-03-24   |          11 | Theory       | Present |
+| ATT0237       | tg/2023/0002 | TMS1233     | 2025-03-31   |          12 | Theory       | Present |
+| ATT0238       | tg/2023/0002 | TMS1233     | 2025-04-07   |          13 | Theory       | Present |
+| ATT0239       | tg/2023/0002 | TMS1233     | 2025-04-14   |          14 | Theory       | Present |
+| ATT0240       | tg/2023/0002 | TMS1233     | 2025-04-21   |          15 | Theory       | Present |
+| ATT1351       | tg/2023/0002 | ICT1233     | 2025-01-13   |           1 | Practical    | Present |
+| ATT1352       | tg/2023/0002 | ICT1233     | 2025-01-20   |           2 | Practical    | Present |
+| ATT1353       | tg/2023/0002 | ICT1233     | 2025-01-27   |           3 | Practical    | Present |
+| ATT1354       | tg/2023/0002 | ICT1233     | 2025-02-03   |           4 | Practical    | Present |
+| ATT1355       | tg/2023/0002 | ICT1233     | 2025-02-10   |           5 | Practical    | Present |
+| ATT1356       | tg/2023/0002 | ICT1233     | 2025-02-17   |           6 | Practical    | Present |
+| ATT1357       | tg/2023/0002 | ICT1233     | 2025-02-24   |           7 | Practical    | Present |
+| ATT1358       | tg/2023/0002 | ICT1233     | 2025-03-03   |           8 | Practical    | Present |
+| ATT1359       | tg/2023/0002 | ICT1233     | 2025-03-10   |           9 | Practical    | Present |
+| ATT1360       | tg/2023/0002 | ICT1233     | 2025-03-17   |          10 | Practical    | Present |
+| ATT1361       | tg/2023/0002 | ICT1233     | 2025-03-24   |          11 | Practical    | Present |
+| ATT1362       | tg/2023/0002 | ICT1233     | 2025-03-31   |          12 | Practical    | Present |
+| ATT1363       | tg/2023/0002 | ICT1233     | 2025-04-07   |          13 | Practical    | Present |
+| ATT1364       | tg/2023/0002 | ICT1233     | 2025-04-14   |          14 | Practical    | Present |
+| ATT1365       | tg/2023/0002 | ICT1233     | 2025-04-21   |          15 | Practical    | Present |
+| ATT1441       | tg/2023/0002 | ICT1253     | 2025-01-13   |           1 | Practical    | Present |
+| ATT1442       | tg/2023/0002 | ICT1253     | 2025-01-20   |           2 | Practical    | Present |
+| ATT1443       | tg/2023/0002 | ICT1253     | 2025-01-27   |           3 | Practical    | Present |
+| ATT1444       | tg/2023/0002 | ICT1253     | 2025-02-03   |           4 | Practical    | Present |
+| ATT1445       | tg/2023/0002 | ICT1253     | 2025-02-10   |           5 | Practical    | Present |
+| ATT1446       | tg/2023/0002 | ICT1253     | 2025-02-17   |           6 | Practical    | Present |
+| ATT1447       | tg/2023/0002 | ICT1253     | 2025-02-24   |           7 | Practical    | Present |
+| ATT1448       | tg/2023/0002 | ICT1253     | 2025-03-03   |           8 | Practical    | Present |
+| ATT1449       | tg/2023/0002 | ICT1253     | 2025-03-10   |           9 | Practical    | Present |
+| ATT1450       | tg/2023/0002 | ICT1253     | 2025-03-17   |          10 | Practical    | Present |
+| ATT1451       | tg/2023/0002 | ICT1253     | 2025-03-24   |          11 | Practical    | Present |
+| ATT1452       | tg/2023/0002 | ICT1253     | 2025-03-31   |          12 | Practical    | Present |
+| ATT1453       | tg/2023/0002 | ICT1253     | 2025-04-07   |          13 | Practical    | Present |
+| ATT1454       | tg/2023/0002 | ICT1253     | 2025-04-14   |          14 | Practical    | Present |
+| ATT1455       | tg/2023/0002 | ICT1253     | 2025-04-21   |          15 | Practical    | Present |
++---------------+--------------+-------------+--------------+-------------+--------------+---------+
+150 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.82 sec)
