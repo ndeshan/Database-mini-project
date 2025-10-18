@@ -1,27 +1,19 @@
-DROP PROCEDURE IF EXISTS attendance_by_stid_cid_seperate_type;
+DROP PROCEDURE IF EXISTS attendance_by_stid;
 DELIMITER //
-CREATE PROCEDURE attendance_by_stid_cid_seperate_type(
-	IN st_id VARCHAR(20),
-	IN c_id VARCHAR(20),
-	IN s_type VARCHAR(2)
-)
+CREATE PROCEDURE attendance_by_stid(IN p_stid VARCHAR(20))
 BEGIN
-
-	DECLARE se_type VARCHAR(20);
-
-	IF s_type IN ('t','T') THEN
-		SET se_type = 'Theory';
-	ELSEIF s_type IN ('p','P') THEN
-		SET se_type = 'Practical';
-	ELSE
-		SELECT 'Invalid input please enter (\'t\',\'T\') or (\'p\',\'P\')' AS MESSAGE;
-		
-	END IF;
-
-	SELECT Session_Date, Week_Number, Session_Type, Status
-	FROM attendance
-	WHERE ST_Id = st_id
-	  AND Course_code = c_id
-	  AND Session_Type = se_type;
+  SELECT
+    a.Course_code,
+    a.Session_Type,
+    SUM(CASE WHEN a.Status = 'Present' THEN 1 ELSE 0 END) AS Present,
+    SUM(CASE WHEN a.Status = 'Absent'  THEN 1 ELSE 0 END) AS Absent,
+    COUNT(*) AS Total,
+  MAX(s.Percentage) AS Percentage,
+  MAX(s.Eligibility) AS Eligibility
+  FROM attendance AS a
+  JOIN attendance_percentage_by_hours AS s ON a.ST_Id = s.ST_Id
+    AND a.Course_code = s.Course_code
+  WHERE a.ST_Id = p_stid
+  GROUP BY a.Course_code, a.Session_Type;
 END //
 DELIMITER ;

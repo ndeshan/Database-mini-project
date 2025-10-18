@@ -2966,3 +2966,37 @@ mysql>  CALL attendance_by_stid_cid_seperate_type("tg/2023/0002","ICT1253","t");
 90 rows in set (0.00 sec)
 
 Query OK, 0 rows affected (1.55 sec)
+///////////////////////////////////////////////////
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE attendance_by_stid(IN p_stid VARCHAR(20))
+    -> BEGIN
+    ->   SELECT
+    ->     a.Course_code,
+    ->     a.Session_Type,
+    ->     SUM(CASE WHEN a.Status = 'Present' THEN 1 ELSE 0 END) AS Present,
+    ->     SUM(CASE WHEN a.Status = 'Absent'  THEN 1 ELSE 0 END) AS Absent,
+    ->     COUNT(*) AS Total,
+    ->   MAX(s.Percentage) AS Percentage,
+    ->   MAX(s.Eligibility) AS Eligibility
+    ->   FROM attendance AS a
+    ->   JOIN attendance_percentage_by_hours AS s ON a.ST_Id = s.ST_Id
+    ->     AND a.Course_code = s.Course_code
+    ->   WHERE a.ST_Id = p_stid
+    ->   GROUP BY a.Course_code, a.Session_Type;
+    -> END //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> DELIMITER ;
+mysql> CALL attendance_by_stid("tg/2023/0012");
++-------------+--------------+---------+--------+-------+------------+--------------+
+| Course_code | Session_Type | Present | Absent | Total | Percentage | Eligibility  |
++-------------+--------------+---------+--------+-------+------------+--------------+
+| BST1212     | Theory       |      15 |      0 |    15 |     100.00 | Eligible     |
+| BST1232     | Theory       |      15 |      0 |    15 |     100.00 | Eligible     |
+| BST1242     | Theory       |      15 |      0 |    15 |     100.00 | Eligible     |
+| BST1253     | Theory       |      11 |      4 |    15 |      73.33 | Not Eligible |
+| BST1272     | Theory       |      15 |      0 |    15 |     100.00 | Eligible     |
++-------------+--------------+---------+--------+-------+------------+--------------+
+5 rows in set (0.01 sec)
+
+Query OK, 0 rows affected (0.06 sec)
