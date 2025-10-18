@@ -101,13 +101,19 @@ END IF;
 	SET Final_Grade=grade
 	WHERE student_id=get_student_id AND course_code =get_course_id;
 
-	
+IF( grade ='E' OR grade= 'D' OR grade='C-' OR grade='E(CA&ESA)' OR grade='E(CA)' OR grade='E(ESA)') THEN
+		
+	UPDATE  student_result
+	SET  Result_Status='REPEAT'
+	WHERE student_id=get_student_id AND course_code =get_course_id;
+
+	END IF;
 END LOOP;
 
 CLOSE cursor01;
  	UPDATE  student_result
 	SET Final_Grade='NOT ENROLL',
-	 Final_Marks =0
+	 Final_Marks =0,Result_Status='REPEAT'
 	WHERE Final_Grade IS NULL;
 	
 END//
@@ -118,5 +124,3 @@ CALL calculateFinalMark();
 
 SELECT *
 FROM student_result;
-
-
