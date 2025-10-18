@@ -40,7 +40,7 @@ CREATE TABLE student_result (
   CA_marks DECIMAL(5,2),
   Final_Marks DECIMAL(5,2),
   Final_Grade CHAR(15),
-  Result_Status ENUM('PASS','FAIL','MC','WH') DEFAULT 'PASS',
+  Result_Status ENUM('PASS','REPEAT','MC','WH') DEFAULT 'PASS',
   SGPA DECIMAL(5,2),
   CGPA DECIMAL(5,2),
 
