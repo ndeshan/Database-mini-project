@@ -2538,3 +2538,29 @@ mysql> CALL attendance_by_stid("tg/2023/0002");
 150 rows in set (0.00 sec)
 
 Query OK, 0 rows affected (0.82 sec)
+
+mysql> CREATE PROCEDURE attendance_by_stid(IN id VARCHAR(20))
+    -> BEGIN
+    -> SELECT Course_code, Session_Type,(SELECT COUNT(Status) FROM attendance WHERE Status = "Present" AND ST_Id = id) AS Present,(SELECT COUNT(Status) FROM attendance WHERE Status = "Absent" AND ST_Id = id) AS Absent FROM attendance WHERE ST_Id = id GROUP BY Course_code,Session_Type;
+    -> END //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> DELIMITER ;
+mysql> CALL attendance_by_stid("tg/2023/0002");
++-------------+--------------+---------+--------+
+| Course_code | Session_Type | Present | Absent |
++-------------+--------------+---------+--------+
+| ENG1222     | Theory       |     150 |      0 |
+| ICT1212     | Theory       |     150 |      0 |
+| ICT1222     | Practical    |     150 |      0 |
+| ICT1233     | Theory       |     150 |      0 |
+| ICT1242     | Practical    |     150 |      0 |
+| ICT1253     | Theory       |     150 |      0 |
+| TCS1212     | Theory       |     150 |      0 |
+| TMS1233     | Theory       |     150 |      0 |
+| ICT1233     | Practical    |     150 |      0 |
+| ICT1253     | Practical    |     150 |      0 |
++-------------+--------------+---------+--------+
+10 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.06 sec)
