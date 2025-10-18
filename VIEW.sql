@@ -1,4 +1,4 @@
-VIEW 1
+VIEW 1 සමරියක් විදියට subjet ඔක්කොගෙම පැය ගානෙන් 
  CREATE VIEW attendance_percentage_by_hours AS
      SELECT
        agg.ST_Id,
@@ -24,7 +24,7 @@ VIEW 1
        GROUP BY ST_Id, Course_code
      ) AS agg;
 
-view 2 
+view 2 සමරියක් විදියට subjet ඔක්කොගෙම දිනවලින් 
 
 CREATE VIEW attendance_summary AS
      SELECT
