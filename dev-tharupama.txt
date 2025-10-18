@@ -3122,3 +3122,52 @@ mysql> SELECT * FROM attendance_percentage_by_hours;
 | tg/2023/0015 | BST1253     |             15 |      15 |      0 |     100.00 | Eligible     |
 +--------------+-------------+----------------+---------+--------+------------+--------------+
 89 rows in set (0.01 sec)
+///////////////////////////////////////////////////////////////////////////////////
+mysql> DELIMITER //
+mysql> CREATE PROCEDURE attendance_summary_by_course_id(IN c_id VARCHAR(15))
+    -> BEGIN
+    ->     SELECT
+    ->         a.ST_Id,
+    ->         a.Course_code,
+    ->         COUNT(*) as Total_Sessions,
+    ->         SUM(CASE WHEN Status = 'Present' THEN 1 ELSE 0 END) as Present,
+    ->         SUM(CASE WHEN Status = 'Absent' THEN 1 ELSE 0 END) as Absent,
+    ->         ROUND((SUM(CASE WHEN Status IN ('Present') THEN 1 ELSE 0 END) / COUNT(*)) * 100, 2) as Percentage,
+    ->         CASE
+    ->             WHEN ROUND((SUM(CASE WHEN Status IN ('Present') THEN 1 ELSE 0 END) / COUNT(*)) * 100, 2) >= 80
+    ->             THEN 'Eligible'
+    ->             ELSE 'Not Eligible'
+    ->         END as Eligibility
+    ->     FROM attendance a
+    ->     WHERE a.Course_code = c_id
+    ->     GROUP BY a.ST_Id, a.Course_code;
+    -> END //
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> DELIMITER ;
+mysql> CALL attendance_summary_by_course_id("ICT1222");
++--------------+-------------+----------------+---------+--------+------------+-------------+
+| ST_Id        | Course_code | Total_Sessions | Present | Absent | Percentage | Eligibility |
++--------------+-------------+----------------+---------+--------+------------+-------------+
+| tg/2024/0001 | ICT1222     |             15 |      15 |      0 |     100.00 | Eligible    |
+| tg/2023/0002 | ICT1222     |             15 |      15 |      0 |     100.00 | Eligible    |
+| tg/2023/0004 | ICT1222     |             15 |      15 |      0 |     100.00 | Eligible    |
+| tg/2023/0005 | ICT1222     |             15 |      15 |      0 |     100.00 | Eligible    |
+| tg/2023/0007 | ICT1222     |             15 |      15 |      0 |     100.00 | Eligible    |
+| tg/2023/0008 | ICT1222     |             15 |      15 |      0 |     100.00 | Eligible    |
++--------------+-------------+----------------+---------+--------+------------+-------------+
+6 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.05 sec)
+
+mysql> CALL attendance_summary_by_course_id("BST1253");
++--------------+-------------+----------------+---------+--------+------------+--------------+
+| ST_Id        | Course_code | Total_Sessions | Present | Absent | Percentage | Eligibility  |
++--------------+-------------+----------------+---------+--------+------------+--------------+
+| tg/2023/0006 | BST1253     |             15 |      15 |      0 |     100.00 | Eligible     |
+| tg/2023/0012 | BST1253     |             15 |      11 |      4 |      73.33 | Not Eligible |
+| tg/2023/0015 | BST1253     |             15 |      15 |      0 |     100.00 | Eligible     |
++--------------+-------------+----------------+---------+--------+------------+--------------+
+3 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.04 sec)

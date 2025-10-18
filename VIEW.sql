@@ -1,4 +1,4 @@
-VIEW
+VIEW 1
  CREATE VIEW attendance_percentage_by_hours AS
      SELECT
        agg.ST_Id,
@@ -23,3 +23,22 @@ VIEW
        FROM attendance
        GROUP BY ST_Id, Course_code
      ) AS agg;
+
+view 2 
+
+CREATE VIEW attendance_summary AS
+     SELECT
+         a.ST_Id,
+         a.Course_code,
+         COUNT(*) as Total_Sessions,
+         SUM(CASE WHEN Status = 'Present' THEN 1 ELSE 0 END) as Present,
+         SUM(CASE WHEN Status = 'Absent' THEN 1 ELSE 0 END) as Absent,
+         SUM(CASE WHEN Status = 'Medical' THEN 1 ELSE 0 END) as Medical,
+         ROUND((SUM(CASE WHEN Status IN ('Present','Medical') THEN 1 ELSE 0 END) / COUNT(*)) * 100, 2) as Percentage,
+         CASE
+             WHEN ROUND((SUM(CASE WHEN Status IN ('Present','Medical') THEN 1 ELSE 0 END) / COUNT(*)) * 100, 2) >= 80
+             THEN 'Eligible'
+             ELSE 'Not Eligible'
+         END as Eligibility
+     FROM attendance a
+     GROUP BY a.ST_Id, a.Course_code;
