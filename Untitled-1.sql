@@ -7,7 +7,6 @@ BEGIN
     Session_Type,
     SUM(CASE WHEN Status = 'Present' THEN 1 ELSE 0 END) AS Present,
     SUM(CASE WHEN Status = 'Absent'  THEN 1 ELSE 0 END) AS Absent,
-    SUM(CASE WHEN Status = 'Late'    THEN 1 ELSE 0 END) AS Late,
     COUNT(*) AS Total
   FROM attendance
   WHERE ST_Id = p_stid
