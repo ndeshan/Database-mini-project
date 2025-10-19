@@ -12,3 +12,9 @@ INSERT INTO medical_record (Medical_Id, ST_Id, Course_code, Date_Submit, Valid_F
 ('M008', 'tg/2023/0003', 'TMS1261', '2025-02-25', '2025-02-17', '2025-02-24', 1, 'ad/2023/004', 'ATT0786'),
 ('M009', 'tg/2023/0012', 'BST1272', '2025-04-09', '2025-03-31', '2025-04-07', 1, 'to/2023/030', 'ATT1257'),
 ('M010', 'tg/2023/0005', 'ICT1253', '2025-01-29', '2025-01-20', '2025-01-27', 1, 'lc/2023/010', 'ATT0437');
+
+
+
+
+ALTER TABLE medical_record DROP FOREIGN KEY FK_attendance_medical;
+ALTER TABLE medical_record DROP COLUMN att_id;
