@@ -77,3 +77,6 @@ CHECK (
 
 ALTER TABLE medical_record
 MODIFY Approved_By VARCHAR(20) NULL;
+
+
+ALTER TABLE student DROP COLUMN status;
