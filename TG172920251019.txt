@@ -61,3 +61,19 @@ BEGIN
 END//
 
 DELIMITER ;
+
+
+
+
+
+ALTER TABLE medical_record
+ADD CONSTRAINT Checking_approve_status_valid_or_not
+CHECK (
+    (Approve = 0 AND Approved_By IS NULL)
+    OR
+    (Approve = 1 AND Approved_By IS NOT NULL)
+);
+
+
+ALTER TABLE medical_record
+MODIFY Approved_By VARCHAR(20) NULL;
