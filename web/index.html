@@ -20,11 +20,11 @@
                     <option value="attendance_eligibility">Attendance Eligibility</option>
                 </select>
             </li>
-            <li><select name="marks" id="marks" class="marks">
+            <li><select name="marks" id="marks" class="marks bg-gray-700 border border-gray-600 rounded p-2">
                 <option value="" disabled selected>Marks Options</option>
                 <option value="marks_view">Marks View</option>
             </select></li>
-        </ul>
+        </ul>       
     </nav>
     <script>
         document.getElementById("attendance").addEventListener("change", function () {
@@ -32,6 +32,12 @@
                 window.location.href = "attendance.php";
             } else if (this.value === "attendance_eligibility") {
                 window.location.href = "attendance_eligibility.php";
+            }
+        });
+
+        document.getElementById("marks").addEventListener("change", function () {
+            if (this.value === "marks_view") {
+                window.location.href = "marks_view.php";
             }
         });
     </script>

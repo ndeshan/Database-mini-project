@@ -15,7 +15,7 @@
     <title>attendance</title>
 </head>
 <body class="bg-gray-100">
-    <div class="max-width mx-auto mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-start p-6">
+    <div class="max-w-6xl mx-auto mt-8 grid grid-cols-1 md:[grid-template-columns:1fr_2fr] gap-6 items-start p-6">
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET" class="flex flex-col max-w-md w-full p-6 border rounded-lg shadow-lg bg-white">
         <label for="reg_no">Registration Number:</label>
         <input type="text" id="reg_no" name="reg_no" required class="mb-4 p-2 border rounded" placeholder="Enter Registration Number">
