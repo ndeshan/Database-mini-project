@@ -7,6 +7,10 @@
     <title>attendance</title>
 </head>
 <body class="bg-gray-100">
+    <?php include 'nav.php' ?>
+
+
+
     <div class="max-w-6xl mx-auto mt-8 grid grid-cols-1 md:grid-cols-2 gap-6 items-start p-6">
     <form action="<?php echo htmlspecialchars($_SERVER['PHP_SELF']); ?>" method="GET" class="flex flex-col max-w-md w-full p-6 border rounded-lg shadow-lg bg-white">
         <label for="reg_no">Registration Number:</label>
