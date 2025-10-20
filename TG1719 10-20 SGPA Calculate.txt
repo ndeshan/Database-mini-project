@@ -1,0 +1,98 @@
+DELIMITER //
+
+CREATE PROCEDURE calculateSGPA()
+
+BEGIN
+
+DECLARE done BOOLEAN DEFAULT FALSE;
+DECLARE get_student_id VARCHAR(20);
+
+DECLARE get_department ENUM('ICT','ET','BST');   
+DECLARE get_semester VARCHAR(20);    
+DECLARE get_point DECIMAL(5,2);
+
+DECLARE get_total_point DECIMAL(5,2);
+DECLARE get_total_credits DECIMAL(5,2);
+DECLARE sgpa DECIMAL(5,2);
+DECLARE cursor3 CURSOR FOR
+SELECT DISTINCT 
+s.student_id,c.Department_Offering,s.Semester 
+FROM student_result s
+INNER JOIN  course_unit c ON c.Course_code =s.course_code;
+
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET done=TRUE;
+
+OPEN cursor3;
+
+read_loop:LOOP
+FETCH   cursor3 INTO get_student_id,get_department,get_semester;
+
+IF done THEN 
+LEAVE read_loop;
+
+END IF;
+ SET get_total_point=0;
+ SET get_total_credits=0;
+SET  sgpa=0;
+SELECT SUM( (
+	CASE
+	WHEN  s.Final_Grade='A+' THEN 
+		4.0
+	WHEN s.Final_Grade='A' THEN 
+		4.0
+	WHEN s.Final_Grade='A-' THEN 
+		3.7
+	WHEN s.Final_Grade='B+' THEN 
+		3.3
+	WHEN s.Final_Grade='B' THEN 
+		3.0
+	WHEN s.Final_Grade='B-' THEN 
+		2.7
+	WHEN s.Final_Grade='C+' THEN 
+		2.3
+	WHEN s.Final_Grade='C' THEN 
+		2.0
+	WHEN s.Final_Grade='C-' THEN 
+		1.7
+	WHEN s.Final_Grade='D' THEN 
+		1.3
+	WHEN s.Final_Grade='E' THEN 
+		0.0
+	ELSE 0.0
+END
+)*c.Credit
+),SUM(c.Credit) INTO 
+get_total_point,get_total_credits
+FROM  student_result s
+INNER JOIN course_unit c ON c.Course_code=s.course_code
+WHERE s.student_id=get_student_id AND c.Department_Offering=get_department
+AND s.Semester=get_semester;
+
+IF get_total_point>0 THEN
+	SET sgpa= get_total_point/get_total_credits;
+ELSE 
+	SET sgpa=0;
+END IF;
+	
+SELECT get_student_id AS id,	
+get_total_point AS total_point,
+get_total_credits AS credits,
+sgpa AS SGPA ;
+
+	UPDATE student_result
+	SET SGPA=sgpa
+	WHERE student_id=get_student_id
+	AND Semester=get_semester;
+
+
+END LOOP;
+
+CLOSE cursor3;
+END//
+
+DELIMITER ;
+
+CALL calculateSGPA();
+
+SELECT *
+FROM student_result;
