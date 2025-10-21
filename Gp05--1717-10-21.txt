@@ -87,3 +87,14 @@ DELIMITER ;
 
 call course_enrollment_new_insert('tg/2023/0020', 'ICT1222', 'Semester 2');
 
+
+
+
+
+
+
+
+
+
+
+
