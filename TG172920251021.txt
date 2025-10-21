@@ -1,0 +1,36 @@
+DELIMITER //
+
+CREATE PROCEDURE ApproveMedical(
+    IN p_Medical_Id VARCHAR(10),
+    IN p_Approved_By VARCHAR(20)
+)
+BEGIN
+    DECLARE v_ST_Id VARCHAR(20);
+    DECLARE v_Course_code VARCHAR(10);
+    DECLARE v_Valid_From DATE;
+    DECLARE v_Valid_To DATE;
+
+    
+    SELECT ST_Id, Course_code, Valid_From, Valid_To
+    INTO v_ST_Id, v_Course_code, v_Valid_From, v_Valid_To
+    FROM medical_record
+    WHERE Medical_Id = p_Medical_Id;
+
+    
+
+ 
+    UPDATE medical_record
+    SET Approve = 1,
+        Approved_By = p_Approved_By
+    WHERE Medical_Id = p_Medical_Id;
+
+    
+    UPDATE attendance
+    SET Status = 'Present'
+    WHERE ST_Id = v_ST_Id
+      AND Course_code = v_Course_code
+      AND Session_Date BETWEEN v_Valid_From AND v_Valid_To
+      AND Status = 'Absent';
+END//
+
+DELIMITER ;
