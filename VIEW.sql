@@ -1,28 +1,39 @@
 VIEW 1 සමරියක් විදියට subjet ඔක්කොගෙම පැය ගානෙන් 
- CREATE VIEW attendance_percentage_by_hours AS
-     SELECT
-       agg.ST_Id,
-       agg.Course_code,
-       agg.total_sessions AS Total_Sessions,
-       agg.present_count AS Present,
-       agg.absent_count  AS Absent,
-       
-       CASE WHEN agg.total_sessions = 0 THEN 0
-            ELSE ROUND(100.0 * (agg.present_count / agg.total_sessions), 2)
-       END AS Percentage,
-       CASE WHEN agg.total_sessions = 0 THEN 'Not Applicable'
-            WHEN ROUND(100.0 * (agg.present_count / agg.total_sessions), 2) >= 80 THEN 'Eligible'
-            ELSE 'Not Eligible' END AS Eligibility
-     FROM (
-       SELECT
-         ST_Id,
-         Course_code,
-         COUNT(*) AS total_sessions,
-         SUM(Status = 'Present') AS present_count,
-         SUM(Status = 'Absent')  AS absent_count
-       FROM attendance
-       GROUP BY ST_Id, Course_code
-     ) AS agg;
+DROP VIEW IF EXISTS attendance_percentage_by_hours;
+CREATE VIEW attendance_percentage_by_hours AS
+SELECT
+  a.ST_Id,
+  a.Course_code,
+  COUNT(*) AS Total_Sessions,
+  SUM(CASE WHEN a.Status = 'Present' THEN 1 ELSE 0 END) AS Present,
+  SUM(CASE WHEN a.Status = 'Absent' THEN 1 ELSE 0 END) AS Absent,
+  CASE 
+    WHEN (cu.Theory_Hours + cu.Practical_Hours) = 0 THEN 0
+    ELSE ROUND(
+      100.0 * (
+        (
+          SUM(CASE WHEN a.Status = 'Present' AND a.Session_Type = 'Theory' THEN 1 ELSE 0 END) * (cu.Theory_Hours / 15.0)
+          + SUM(CASE WHEN a.Status = 'Present' AND a.Session_Type = 'Practical' THEN 1 ELSE 0 END) * (cu.Practical_Hours / 15.0)
+        ) / (cu.Theory_Hours + cu.Practical_Hours)
+      ), 2
+    )
+  END AS Percentage,
+  CASE 
+    WHEN (cu.Theory_Hours + cu.Practical_Hours) = 0 THEN 'Not Applicable'
+    WHEN ROUND(
+      100.0 * (
+        (
+          SUM(CASE WHEN a.Status = 'Present' AND a.Session_Type = 'Theory' THEN 1 ELSE 0 END) * (cu.Theory_Hours / 15.0)
+          + SUM(CASE WHEN a.Status = 'Present' AND a.Session_Type = 'Practical' THEN 1 ELSE 0 END) * (cu.Practical_Hours / 15.0)
+        ) / (cu.Theory_Hours + cu.Practical_Hours)
+      ), 2
+    ) >= 80 THEN 'Eligible'
+    ELSE 'Not Eligible'
+  END AS Eligibility
+FROM attendance a
+JOIN course_unit cu ON cu.Course_code = a.Course_code
+GROUP BY a.ST_Id, a.Course_code;
+
 
 view 2 සමරියක් විදියට subjet ඔක්කොගෙම දිනවලින් 
 
