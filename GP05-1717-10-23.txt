@@ -303,3 +303,12 @@ INSERT INTO student_course (ST_Id, Course_code) VALUES
 ('tg/2023/0011', 'TMS1261');
 
 
+INSERT INTO user_course (U_Id, Course_Id) VALUES
+('lc/2023/003', 'ENG1222'),
+('lc/2024/001', 'ICT1212'),
+('lc/2024/001', 'ICT1222'),
+('lc/2024/001', 'ICT1233'),
+('dean FOT', 'ICT1242'),
+('lc/2023/002', 'ICT1253'),
+('lc/2023/002', 'TCS1212'),
+('lc/2023/003', 'TMS1233');
