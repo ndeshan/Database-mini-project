@@ -177,7 +177,7 @@ UPDATE attendance
      WHERE course_code IN ('ICT1222', 'ICT1242', 'TMS1231', 'TMS1261');
 
 
-ALTER TABLE attendance DROP COLUMN Session_Number;
+
 
 UPDATE attendance SET session_type = "Practical" WHERE session_type = "Lab";
 
