@@ -91,26 +91,7 @@ VALUES
 ('tg/2023/0015', 'Yohan', 'Edirisinghe', 1, 'BST', 2024, 'Repeat'),
 ('tg/2024/0001', 'Nimal', 'Perera', 1, 'ICT', 2024, 'Proper');
 
-ALTER TABLE student DROP COLUMN status;
-ALTER TABLE medical_record
-ADD COLUMN att_id VARCHAR(20);
 
-
-INSERT INTO medical_record (Medical_Id, ST_Id, Course_code, Date_Submit, Valid_From, Valid_To, Approve, Approved_By, att_id) VALUES
-('M001', 'tg/2023/0002', 'ICT1222', '2025-03-20', '2025-03-10', '2025-03-17', 1, 'ad/2023/001', 'ATT0159'),
-('M002', 'tg/2023/0008', 'ICT1222', '2025-04-21', '2025-04-07', '2025-04-14', 1, 'ad/2023/002', 'ATT0643'),
-('M003', 'tg/2023/0010', 'ENT1212', '2025-03-05', '2025-02-24', '2025-03-03', 1, 'to/2023/010', 'ATT1027'),
-('M004', 'tg/2023/0006', 'BST1242', '2025-02-06', '2025-01-27', '2025-02-03', 1, 'lc/2023/001', 'ATT1128'),
-('M005', 'tg/2024/0001', 'ENG1222', '2025-03-26', '2025-03-17', '2025-03-24', 1, 'ad/2023/003', 'ATT0010'),
-('M006', 'tg/2023/0004', 'ICT1242', '2025-03-18', '2025-03-10', '2025-03-17', 1, 'to/2023/020', 'ATT0309'),
-('M007', 'tg/2023/0011', 'TMS1213', '2025-04-15', '2025-04-07', '2025-04-14', 1, 'lc/2023/005', 'ATT1078'),
-('M008', 'tg/2023/0003', 'TMS1261', '2025-02-25', '2025-02-17', '2025-02-24', 1, 'ad/2023/004', 'ATT0786'),
-('M009', 'tg/2023/0012', 'BST1272', '2025-04-09', '2025-03-31', '2025-04-07', 1, 'to/2023/030', 'ATT1257'),
-('M010', 'tg/2023/0005', 'ICT1253', '2025-01-29', '2025-01-20', '2025-01-27', 1, 'lc/2023/010', 'ATT0437');
-
-
-ALTER TABLE medical_record DROP COLUMN Medical_type;
-ALTER TABLE medical_record DROP COLUMN att_id;
 
 INSERT INTO course_unit (
     Course_code,
@@ -146,6 +127,463 @@ INSERT INTO course_unit (
 ('TMS1242', 'Computer Programming Techniques', 'Theory', 3, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ET', 15, 0),
 ('TMS1253', 'Engineering Properties of Matter', 'Theory', 3, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ET', 15, 0),
 ('TMS1261', 'Engineering Properties of Matter Laboratory', 'Practical', 2, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ET', 0, 15);
+
+
+
+
+
+
+
+INSERT INTO student_course (ST_Id, Course_code) VALUES
+('tg/2023/0006', 'BST1212'),
+('tg/2023/0012', 'BST1212'),
+('tg/2023/0013', 'BST1212'),
+('tg/2023/0014', 'BST1212'),
+('tg/2023/0015', 'BST1212'),
+('tg/2023/0006', 'BST1222'),
+('tg/2023/0012', 'BST1222'),
+('tg/2023/0013', 'BST1222'),
+('tg/2023/0014', 'BST1222'),
+('tg/2023/0015', 'BST1222'),
+('tg/2023/0006', 'BST1232'),
+('tg/2023/0012', 'BST1232'),
+('tg/2023/0013', 'BST1232'),
+('tg/2023/0014', 'BST1232'),
+('tg/2023/0015', 'BST1232'),
+('tg/2023/0006', 'BST1242'),
+('tg/2023/0012', 'BST1242'),
+('tg/2023/0013', 'BST1242'),
+('tg/2023/0014', 'BST1242'),
+('tg/2023/0015', 'BST1242'),
+('tg/2023/0006', 'BST1253'),
+('tg/2023/0012', 'BST1253'),
+('tg/2023/0013', 'BST1253'),
+('tg/2023/0014', 'BST1253'),
+('tg/2023/0015', 'BST1253'),
+('tg/2023/0006', 'BST1262'),
+('tg/2023/0012', 'BST1262'),
+('tg/2023/0013', 'BST1262'),
+('tg/2023/0014', 'BST1262'),
+('tg/2023/0015', 'BST1262'),
+('tg/2023/0006', 'BST1272'),
+('tg/2023/0012', 'BST1272'),
+('tg/2023/0013', 'BST1272'),
+('tg/2023/0014', 'BST1272'),
+('tg/2023/0015', 'BST1272'),
+('tg/2023/0002', 'ENG1222'),
+('tg/2023/0004', 'ENG1222'),
+('tg/2023/0005', 'ENG1222'),
+('tg/2023/0007', 'ENG1222'),
+('tg/2023/0008', 'ENG1222'),
+('tg/2024/0001', 'ENG1222'),
+('tg/2023/0003', 'ENT1212'),
+('tg/2023/0009', 'ENT1212'),
+('tg/2023/0010', 'ENT1212'),
+('tg/2023/0011', 'ENT1212'),
+('tg/2023/0002', 'ICT1212'),
+('tg/2023/0004', 'ICT1212'),
+('tg/2023/0005', 'ICT1212'),
+('tg/2023/0007', 'ICT1212'),
+('tg/2023/0008', 'ICT1212'),
+('tg/2024/0001', 'ICT1212'),
+('tg/2023/0002', 'ICT1222'),
+('tg/2023/0004', 'ICT1222'),
+('tg/2023/0005', 'ICT1222'),
+('tg/2023/0007', 'ICT1222'),
+('tg/2023/0008', 'ICT1222'),
+('tg/2024/0001', 'ICT1222'),
+('tg/2023/0002', 'ICT1233'),
+('tg/2023/0004', 'ICT1233'),
+('tg/2023/0005', 'ICT1233'),
+('tg/2023/0007', 'ICT1233'),
+('tg/2023/0008', 'ICT1233'),
+('tg/2024/0001', 'ICT1233'),
+('tg/2023/0002', 'ICT1242'),
+('tg/2023/0004', 'ICT1242'),
+('tg/2023/0005', 'ICT1242'),
+('tg/2023/0007', 'ICT1242'),
+('tg/2023/0008', 'ICT1242'),
+('tg/2024/0001', 'ICT1242'),
+('tg/2023/0002', 'ICT1253'),
+('tg/2023/0004', 'ICT1253'),
+('tg/2023/0005', 'ICT1253'),
+('tg/2023/0007', 'ICT1253'),
+('tg/2023/0008', 'ICT1253'),
+('tg/2024/0001', 'ICT1253'),
+('tg/2023/0002', 'TCS1212'),
+('tg/2023/0004', 'TCS1212'),
+('tg/2023/0005', 'TCS1212'),
+('tg/2023/0007', 'TCS1212'),
+('tg/2023/0008', 'TCS1212'),
+('tg/2024/0001', 'TCS1212'),
+('tg/2023/0003', 'TMS1213'),
+('tg/2023/0009', 'TMS1213'),
+('tg/2023/0010', 'TMS1213'),
+('tg/2023/0011', 'TMS1213'),
+('tg/2023/0003', 'TMS1222'),
+('tg/2023/0009', 'TMS1222'),
+('tg/2023/0010', 'TMS1222'),
+('tg/2023/0011', 'TMS1222'),
+('tg/2023/0003', 'TMS1231'),
+('tg/2023/0009', 'TMS1231'),
+('tg/2023/0010', 'TMS1231'),
+('tg/2023/0011', 'TMS1231'),
+('tg/2023/0002', 'TMS1233'),
+('tg/2023/0004', 'TMS1233'),
+('tg/2023/0005', 'TMS1233'),
+('tg/2023/0007', 'TMS1233'),
+('tg/2023/0008', 'TMS1233'),
+('tg/2024/0001', 'TMS1233'),
+('tg/2023/0003', 'TMS1242'),
+('tg/2023/0009', 'TMS1242'),
+('tg/2023/0010', 'TMS1242'),
+('tg/2023/0011', 'TMS1242'),
+('tg/2023/0003', 'TMS1253'),
+('tg/2023/0009', 'TMS1253'),
+('tg/2023/0010', 'TMS1253'),
+('tg/2023/0011', 'TMS1253'),
+('tg/2023/0003', 'TMS1261'),
+('tg/2023/0009', 'TMS1261'),
+('tg/2023/0010', 'TMS1261'),
+('tg/2023/0011', 'TMS1261');
+
+
+
+
+
+
+INSERT INTO user_course (U_Id, Course_Id) VALUES
+('lc/2023/003', 'ENG1222'),
+('lc/2024/001', 'ICT1212'),
+('lc/2024/001', 'ICT1222'),
+('lc/2024/001', 'ICT1233'),
+('dean FOT', 'ICT1242'),
+('lc/2023/002', 'ICT1253'),
+('lc/2023/002', 'TCS1212'),
+('lc/2023/003', 'TMS1233');
+
+
+INSERT INTO user_role (Role_Name, Description) VALUES
+('Admin', 'Full access with GRANT OPTION'),
+('Dean', 'Full access without GRANT'),
+('Lecturer', 'Full access without user creation'),
+('Student', 'Read-only access to own results'),
+('Technical Officer', 'Read/Write/Update attendance');
+
+
+ALTER TABLE student DROP COLUMN status;
+ALTER TABLE medical_record
+ADD COLUMN att_id VARCHAR(20);
+
+
+INSERT INTO medical_record (Medical_Id, ST_Id, Course_code, Date_Submit, Valid_From, Valid_To, Approve, Approved_By, att_id) VALUES
+('M001', 'tg/2023/0002', 'ICT1222', '2025-03-20', '2025-03-10', '2025-03-17', 1, 'ad/2023/001', 'ATT0159'),
+('M002', 'tg/2023/0008', 'ICT1222', '2025-04-21', '2025-04-07', '2025-04-14', 1, 'ad/2023/002', 'ATT0643'),
+('M003', 'tg/2023/0010', 'ENT1212', '2025-03-05', '2025-02-24', '2025-03-03', 1, 'to/2023/010', 'ATT1027'),
+('M004', 'tg/2023/0006', 'BST1242', '2025-02-06', '2025-01-27', '2025-02-03', 1, 'lc/2023/001', 'ATT1128'),
+('M005', 'tg/2024/0001', 'ENG1222', '2025-03-26', '2025-03-17', '2025-03-24', 1, 'ad/2023/003', 'ATT0010'),
+('M006', 'tg/2023/0004', 'ICT1242', '2025-03-18', '2025-03-10', '2025-03-17', 1, 'to/2023/020', 'ATT0309'),
+('M007', 'tg/2023/0011', 'TMS1213', '2025-04-15', '2025-04-07', '2025-04-14', 1, 'lc/2023/005', 'ATT1078'),
+('M008', 'tg/2023/0003', 'TMS1261', '2025-02-25', '2025-02-17', '2025-02-24', 1, 'ad/2023/004', 'ATT0786'),
+('M009', 'tg/2023/0012', 'BST1272', '2025-04-09', '2025-03-31', '2025-04-07', 1, 'to/2023/030', 'ATT1257'),
+('M010', 'tg/2023/0005', 'ICT1253', '2025-01-29', '2025-01-20', '2025-01-27', 1, 'lc/2023/010', 'ATT0437');
+
+
+ALTER TABLE medical_record DROP COLUMN Medical_type;
+ALTER TABLE medical_record DROP COLUMN att_id;
+
+
+
+
+
+
+DELIMITER //
+CREATE PROCEDURE generate_attendance()
+     BEGIN
+         DECLARE counter INT DEFAULT 1;
+         DECLARE week INT;
+         DECLARE student_id VARCHAR(20);
+         DECLARE course_id VARCHAR(15);
+         DECLARE done INT DEFAULT 0;
+    
+    
+         DECLARE student_cursor CURSOR FOR
+             SELECT ST_Id, Course_code
+             FROM course_enrollment
+             WHERE Official_Confirmation = 'COMFIRMED';
+    
+         DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
+    
+    
+         DELETE FROM attendance;
+    
+         OPEN student_cursor;
+    
+         student_loop: LOOP
+             FETCH student_cursor INTO student_id, course_id;
+    
+             IF done THEN
+                 LEAVE student_loop;
+             END IF;
+    
+    
+             SET week = 1;
+             WHILE week <= 15 DO
+                 INSERT INTO attendance VALUES (
+                     CONCAT('ATT', LPAD(counter, 4, '0')),
+                     student_id,
+                     course_id,
+                     DATE_ADD('2025-01-06', INTERVAL week WEEK),
+                     week,
+                     week,
+                     'Theory',
+                     'Present'
+                 );
+    
+                 SET counter = counter + 1;
+                 SET week = week + 1;
+             END WHILE;
+    
+         END LOOP;
+    
+         CLOSE student_cursor;
+    
+         SELECT CONCAT('Done! Created ', counter - 1, ' records') AS Result;
+     END //
+
+
+DELIMITER ;
+
+
+call generate_attendance();
+
+ALTER TABLE attendance DROP COLUMN Session_Number;
+
+INSERT INTO attendance (
+       Attendance_Id,
+       ST_Id,
+       Course_code,
+       Session_Date,
+       Week_Number,
+       Session_Type,
+       Status
+     ) VALUES
+     ('ATT1336','tg/2024/0001','ICT1233','2025-01-13',1,'Practical','Present'),
+     ('ATT1337','tg/2024/0001','ICT1233','2025-01-20',2,'Practical','Present'),
+     ('ATT1338','tg/2024/0001','ICT1233','2025-01-27',3,'Practical','Present'),
+     ('ATT1339','tg/2024/0001','ICT1233','2025-02-03',4,'Practical','Present'),
+     ('ATT1340','tg/2024/0001','ICT1233','2025-02-10',5,'Practical','Present'),
+     ('ATT1341','tg/2024/0001','ICT1233','2025-02-17',6,'Practical','Present'),
+     ('ATT1342','tg/2024/0001','ICT1233','2025-02-24',7,'Practical','Present'),
+     ('ATT1343','tg/2024/0001','ICT1233','2025-03-03',8,'Practical','Present'),
+     ('ATT1344','tg/2024/0001','ICT1233','2025-03-10',9,'Practical','Present'),
+     ('ATT1345','tg/2024/0001','ICT1233','2025-03-17',10,'Practical','Present'),
+     ('ATT1346','tg/2024/0001','ICT1233','2025-03-24',11,'Practical','Present'),
+     ('ATT1347','tg/2024/0001','ICT1233','2025-03-31',12,'Practical','Present'),
+     ('ATT1348','tg/2024/0001','ICT1233','2025-04-07',13,'Practical','Present'),
+     ('ATT1349','tg/2024/0001','ICT1233','2025-04-14',14,'Practical','Present'),
+     ('ATT1350','tg/2024/0001','ICT1233','2025-04-21',15,'Practical','Present'),
+    
+     ('ATT1351','tg/2023/0002','ICT1233','2025-01-13',1,'Practical','Present'),
+     ('ATT1352','tg/2023/0002','ICT1233','2025-01-20',2,'Practical','Present'),
+     ('ATT1353','tg/2023/0002','ICT1233','2025-01-27',3,'Practical','Present'),
+     ('ATT1354','tg/2023/0002','ICT1233','2025-02-03',4,'Practical','Present'),
+     ('ATT1355','tg/2023/0002','ICT1233','2025-02-10',5,'Practical','Present'),
+     ('ATT1356','tg/2023/0002','ICT1233','2025-02-17',6,'Practical','Present'),
+     ('ATT1357','tg/2023/0002','ICT1233','2025-02-24',7,'Practical','Present'),
+     ('ATT1358','tg/2023/0002','ICT1233','2025-03-03',8,'Practical','Present'),
+     ('ATT1359','tg/2023/0002','ICT1233','2025-03-10',9,'Practical','Present'),
+     ('ATT1360','tg/2023/0002','ICT1233','2025-03-17',10,'Practical','Present'),
+     ('ATT1361','tg/2023/0002','ICT1233','2025-03-24',11,'Practical','Present'),
+     ('ATT1362','tg/2023/0002','ICT1233','2025-03-31',12,'Practical','Present'),
+     ('ATT1363','tg/2023/0002','ICT1233','2025-04-07',13,'Practical','Present'),
+     ('ATT1364','tg/2023/0002','ICT1233','2025-04-14',14,'Practical','Present'),
+     ('ATT1365','tg/2023/0002','ICT1233','2025-04-21',15,'Practical','Present'),
+    
+     ('ATT1366','tg/2023/0004','ICT1233','2025-01-13',1,'Practical','Present'),
+     ('ATT1367','tg/2023/0004','ICT1233','2025-01-20',2,'Practical','Present'),
+     ('ATT1368','tg/2023/0004','ICT1233','2025-01-27',3,'Practical','Present'),
+     ('ATT1369','tg/2023/0004','ICT1233','2025-02-03',4,'Practical','Present'),
+     ('ATT1370','tg/2023/0004','ICT1233','2025-02-10',5,'Practical','Present'),
+     ('ATT1371','tg/2023/0004','ICT1233','2025-02-17',6,'Practical','Present'),
+     ('ATT1372','tg/2023/0004','ICT1233','2025-02-24',7,'Practical','Present'),
+     ('ATT1373','tg/2023/0004','ICT1233','2025-03-03',8,'Practical','Present'),
+     ('ATT1374','tg/2023/0004','ICT1233','2025-03-10',9,'Practical','Present'),
+     ('ATT1375','tg/2023/0004','ICT1233','2025-03-17',10,'Practical','Present'),
+     ('ATT1376','tg/2023/0004','ICT1233','2025-03-24',11,'Practical','Present'),
+     ('ATT1377','tg/2023/0004','ICT1233','2025-03-31',12,'Practical','Present'),
+     ('ATT1378','tg/2023/0004','ICT1233','2025-04-07',13,'Practical','Present'),
+     ('ATT1379','tg/2023/0004','ICT1233','2025-04-14',14,'Practical','Present'),
+     ('ATT1380','tg/2023/0004','ICT1233','2025-04-21',15,'Practical','Present'),
+    
+     ('ATT1381','tg/2023/0005','ICT1233','2025-01-13',1,'Practical','Present'),
+     ('ATT1382','tg/2023/0005','ICT1233','2025-01-20',2,'Practical','Present'),
+     ('ATT1383','tg/2023/0005','ICT1233','2025-01-27',3,'Practical','Present'),
+     ('ATT1384','tg/2023/0005','ICT1233','2025-02-03',4,'Practical','Present'),
+     ('ATT1385','tg/2023/0005','ICT1233','2025-02-10',5,'Practical','Present'),
+     ('ATT1386','tg/2023/0005','ICT1233','2025-02-17',6,'Practical','Present'),
+     ('ATT1387','tg/2023/0005','ICT1233','2025-02-24',7,'Practical','Present'),
+     ('ATT1388','tg/2023/0005','ICT1233','2025-03-03',8,'Practical','Present'),
+     ('ATT1389','tg/2023/0005','ICT1233','2025-03-10',9,'Practical','Present'),
+     ('ATT1390','tg/2023/0005','ICT1233','2025-03-17',10,'Practical','Present'),
+     ('ATT1391','tg/2023/0005','ICT1233','2025-03-24',11,'Practical','Present'),
+     ('ATT1392','tg/2023/0005','ICT1233','2025-03-31',12,'Practical','Present'),
+     ('ATT1393','tg/2023/0005','ICT1233','2025-04-07',13,'Practical','Present'),
+     ('ATT1394','tg/2023/0005','ICT1233','2025-04-14',14,'Practical','Present'),
+     ('ATT1395','tg/2023/0005','ICT1233','2025-04-21',15,'Practical','Present'),
+    
+     ('ATT1396','tg/2023/0007','ICT1233','2025-01-13',1,'Practical','Present'),
+     ('ATT1397','tg/2023/0007','ICT1233','2025-01-20',2,'Practical','Present'),
+     ('ATT1398','tg/2023/0007','ICT1233','2025-01-27',3,'Practical','Present'),
+     ('ATT1399','tg/2023/0007','ICT1233','2025-02-03',4,'Practical','Present'),
+     ('ATT1400','tg/2023/0007','ICT1233','2025-02-10',5,'Practical','Present'),
+     ('ATT1401','tg/2023/0007','ICT1233','2025-02-17',6,'Practical','Present'),
+     ('ATT1402','tg/2023/0007','ICT1233','2025-02-24',7,'Practical','Present'),
+     ('ATT1403','tg/2023/0007','ICT1233','2025-03-03',8,'Practical','Present'),
+     ('ATT1404','tg/2023/0007','ICT1233','2025-03-10',9,'Practical','Present'),
+     ('ATT1405','tg/2023/0007','ICT1233','2025-03-17',10,'Practical','Present'),
+     ('ATT1406','tg/2023/0007','ICT1233','2025-03-24',11,'Practical','Present'),
+     ('ATT1407','tg/2023/0007','ICT1233','2025-03-31',12,'Practical','Present'),
+     ('ATT1408','tg/2023/0007','ICT1233','2025-04-07',13,'Practical','Present'),
+     ('ATT1409','tg/2023/0007','ICT1233','2025-04-14',14,'Practical','Present'),
+     ('ATT1410','tg/2023/0007','ICT1233','2025-04-21',15,'Practical','Present'),
+    
+     ('ATT1411','tg/2023/0008','ICT1233','2025-01-13',1,'Practical','Present'),
+     ('ATT1412','tg/2023/0008','ICT1233','2025-01-20',2,'Practical','Present'),
+     ('ATT1413','tg/2023/0008','ICT1233','2025-01-27',3,'Practical','Present'),
+     ('ATT1414','tg/2023/0008','ICT1233','2025-02-03',4,'Practical','Present'),
+     ('ATT1415','tg/2023/0008','ICT1233','2025-02-10',5,'Practical','Present'),
+     ('ATT1416','tg/2023/0008','ICT1233','2025-02-17',6,'Practical','Present'),
+     ('ATT1417','tg/2023/0008','ICT1233','2025-02-24',7,'Practical','Present'),
+     ('ATT1418','tg/2023/0008','ICT1233','2025-03-03',8,'Practical','Present'),
+     ('ATT1419','tg/2023/0008','ICT1233','2025-03-10',9,'Practical','Present'),
+     ('ATT1420','tg/2023/0008','ICT1233','2025-03-17',10,'Practical','Present'),
+     ('ATT1421','tg/2023/0008','ICT1233','2025-03-24',11,'Practical','Present'),
+     ('ATT1422','tg/2023/0008','ICT1233','2025-03-31',12,'Practical','Present'),
+     ('ATT1423','tg/2023/0008','ICT1233','2025-04-07',13,'Practical','Present'),
+     ('ATT1424','tg/2023/0008','ICT1233','2025-04-14',14,'Practical','Present'),
+     ('ATT1425','tg/2023/0008','ICT1233','2025-04-21',15,'Practical','Present');
+
+ INSERT INTO attendance (
+       Attendance_Id, ST_Id, Course_code, Session_Date, Week_Number, Session_Type, Status
+     ) VALUES
+     ('ATT1426','tg/2024/0001','ICT1253','2025-01-13',1,'Practical','Present'),
+     ('ATT1427','tg/2024/0001','ICT1253','2025-01-20',2,'Practical','Present'),
+     ('ATT1428','tg/2024/0001','ICT1253','2025-01-27',3,'Practical','Present'),
+     ('ATT1429','tg/2024/0001','ICT1253','2025-02-03',4,'Practical','Present'),
+     ('ATT1430','tg/2024/0001','ICT1253','2025-02-10',5,'Practical','Present'),
+     ('ATT1431','tg/2024/0001','ICT1253','2025-02-17',6,'Practical','Present'),
+     ('ATT1432','tg/2024/0001','ICT1253','2025-02-24',7,'Practical','Present'),
+     ('ATT1433','tg/2024/0001','ICT1253','2025-03-03',8,'Practical','Present'),
+     ('ATT1434','tg/2024/0001','ICT1253','2025-03-10',9,'Practical','Present'),
+     ('ATT1435','tg/2024/0001','ICT1253','2025-03-17',10,'Practical','Present'),
+     ('ATT1436','tg/2024/0001','ICT1253','2025-03-24',11,'Practical','Present'),
+     ('ATT1437','tg/2024/0001','ICT1253','2025-03-31',12,'Practical','Present'),
+     ('ATT1438','tg/2024/0001','ICT1253','2025-04-07',13,'Practical','Present'),
+     ('ATT1439','tg/2024/0001','ICT1253','2025-04-14',14,'Practical','Present'),
+     ('ATT1440','tg/2024/0001','ICT1253','2025-04-21',15,'Practical','Present'),
+    
+     ('ATT1441','tg/2023/0002','ICT1253','2025-01-13',1,'Practical','Present'),
+     ('ATT1442','tg/2023/0002','ICT1253','2025-01-20',2,'Practical','Present'),
+     ('ATT1443','tg/2023/0002','ICT1253','2025-01-27',3,'Practical','Present'),
+     ('ATT1444','tg/2023/0002','ICT1253','2025-02-03',4,'Practical','Present'),
+     ('ATT1445','tg/2023/0002','ICT1253','2025-02-10',5,'Practical','Present'),
+     ('ATT1446','tg/2023/0002','ICT1253','2025-02-17',6,'Practical','Present'),
+     ('ATT1447','tg/2023/0002','ICT1253','2025-02-24',7,'Practical','Present'),
+     ('ATT1448','tg/2023/0002','ICT1253','2025-03-03',8,'Practical','Present'),
+     ('ATT1449','tg/2023/0002','ICT1253','2025-03-10',9,'Practical','Present'),
+     ('ATT1450','tg/2023/0002','ICT1253','2025-03-17',10,'Practical','Present'),
+     ('ATT1451','tg/2023/0002','ICT1253','2025-03-24',11,'Practical','Present'),
+     ('ATT1452','tg/2023/0002','ICT1253','2025-03-31',12,'Practical','Present'),
+     ('ATT1453','tg/2023/0002','ICT1253','2025-04-07',13,'Practical','Present'),
+     ('ATT1454','tg/2023/0002','ICT1253','2025-04-14',14,'Practical','Present'),
+     ('ATT1455','tg/2023/0002','ICT1253','2025-04-21',15,'Practical','Present'),
+    
+     ('ATT1456','tg/2023/0004','ICT1253','2025-01-13',1,'Practical','Present'),
+     ('ATT1457','tg/2023/0004','ICT1253','2025-01-20',2,'Practical','Present'),
+     ('ATT1458','tg/2023/0004','ICT1253','2025-01-27',3,'Practical','Present'),
+     ('ATT1459','tg/2023/0004','ICT1253','2025-02-03',4,'Practical','Present'),
+     ('ATT1460','tg/2023/0004','ICT1253','2025-02-10',5,'Practical','Present'),
+     ('ATT1461','tg/2023/0004','ICT1253','2025-02-17',6,'Practical','Present'),
+     ('ATT1462','tg/2023/0004','ICT1253','2025-02-24',7,'Practical','Present'),
+     ('ATT1463','tg/2023/0004','ICT1253','2025-03-03',8,'Practical','Present'),
+     ('ATT1464','tg/2023/0004','ICT1253','2025-03-10',9,'Practical','Present'),
+     ('ATT1465','tg/2023/0004','ICT1253','2025-03-17',10,'Practical','Present'),
+     ('ATT1466','tg/2023/0004','ICT1253','2025-03-24',11,'Practical','Present'),
+     ('ATT1467','tg/2023/0004','ICT1253','2025-03-31',12,'Practical','Present'),
+     ('ATT1468','tg/2023/0004','ICT1253','2025-04-07',13,'Practical','Present'),
+     ('ATT1469','tg/2023/0004','ICT1253','2025-04-14',14,'Practical','Present'),
+     ('ATT1470','tg/2023/0004','ICT1253','2025-04-21',15,'Practical','Present'),
+    
+     ('ATT1471','tg/2023/0005','ICT1253','2025-01-13',1,'Practical','Present'),
+     ('ATT1472','tg/2023/0005','ICT1253','2025-01-20',2,'Practical','Present'),
+     ('ATT1473','tg/2023/0005','ICT1253','2025-01-27',3,'Practical','Present'),
+     ('ATT1474','tg/2023/0005','ICT1253','2025-02-03',4,'Practical','Present'),
+     ('ATT1475','tg/2023/0005','ICT1253','2025-02-10',5,'Practical','Present'),
+     ('ATT1476','tg/2023/0005','ICT1253','2025-02-17',6,'Practical','Present'),
+     ('ATT1477','tg/2023/0005','ICT1253','2025-02-24',7,'Practical','Present'),
+     ('ATT1478','tg/2023/0005','ICT1253','2025-03-03',8,'Practical','Present'),
+     ('ATT1479','tg/2023/0005','ICT1253','2025-03-10',9,'Practical','Present'),
+     ('ATT1480','tg/2023/0005','ICT1253','2025-03-17',10,'Practical','Present'),
+     ('ATT1481','tg/2023/0005','ICT1253','2025-03-24',11,'Practical','Present'),
+     ('ATT1482','tg/2023/0005','ICT1253','2025-03-31',12,'Practical','Present'),
+     ('ATT1483','tg/2023/0005','ICT1253','2025-04-07',13,'Practical','Present'),
+     ('ATT1484','tg/2023/0005','ICT1253','2025-04-14',14,'Practical','Present'),
+     ('ATT1485','tg/2023/0005','ICT1253','2025-04-21',15,'Practical','Present'),
+    
+     ('ATT1486','tg/2023/0007','ICT1253','2025-01-13',1,'Practical','Present'),
+     ('ATT1487','tg/2023/0007','ICT1253','2025-01-20',2,'Practical','Present'),
+     ('ATT1488','tg/2023/0007','ICT1253','2025-01-27',3,'Practical','Present'),
+     ('ATT1489','tg/2023/0007','ICT1253','2025-02-03',4,'Practical','Present'),
+     ('ATT1490','tg/2023/0007','ICT1253','2025-02-10',5,'Practical','Present'),
+     ('ATT1491','tg/2023/0007','ICT1253','2025-02-17',6,'Practical','Present'),
+     ('ATT1492','tg/2023/0007','ICT1253','2025-02-24',7,'Practical','Present'),
+     ('ATT1493','tg/2023/0007','ICT1253','2025-03-03',8,'Practical','Present'),
+     ('ATT1494','tg/2023/0007','ICT1253','2025-03-10',9,'Practical','Present'),
+     ('ATT1495','tg/2023/0007','ICT1253','2025-03-17',10,'Practical','Present'),
+     ('ATT1496','tg/2023/0007','ICT1253','2025-03-24',11,'Practical','Present'),
+     ('ATT1497','tg/2023/0007','ICT1253','2025-03-31',12,'Practical','Present'),
+     ('ATT1498','tg/2023/0007','ICT1253','2025-04-07',13,'Practical','Present'),
+     ('ATT1499','tg/2023/0007','ICT1253','2025-04-14',14,'Practical','Present'),
+     ('ATT1500','tg/2023/0007','ICT1253','2025-04-21',15,'Practical','Present'),
+    
+     ('ATT1501','tg/2023/0008','ICT1253','2025-01-13',1,'Practical','Present'),
+     ('ATT1502','tg/2023/0008','ICT1253','2025-01-20',2,'Practical','Present'),
+     ('ATT1503','tg/2023/0008','ICT1253','2025-01-27',3,'Practical','Present'),
+     ('ATT1504','tg/2023/0008','ICT1253','2025-02-03',4,'Practical','Present'),
+     ('ATT1505','tg/2023/0008','ICT1253','2025-02-10',5,'Practical','Present'),
+     ('ATT1506','tg/2023/0008','ICT1253','2025-02-17',6,'Practical','Present'),
+     ('ATT1507','tg/2023/0008','ICT1253','2025-02-24',7,'Practical','Present'),
+     ('ATT1508','tg/2023/0008','ICT1253','2025-03-03',8,'Practical','Present'),
+     ('ATT1509','tg/2023/0008','ICT1253','2025-03-10',9,'Practical','Present'),
+     ('ATT1510','tg/2023/0008','ICT1253','2025-03-17',10,'Practical','Present'),
+     ('ATT1511','tg/2023/0008','ICT1253','2025-03-24',11,'Practical','Present'),
+     ('ATT1512','tg/2023/0008','ICT1253','2025-03-31',12,'Practical','Present'),
+     ('ATT1513','tg/2023/0008','ICT1253','2025-04-07',13,'Practical','Present'),
+     ('ATT1514','tg/2023/0008','ICT1253','2025-04-14',14,'Practical','Present'),
+     ('ATT1515','tg/2023/0008','ICT1253','2025-04-21',15,'Practical','Present');
+
+
+
+
+INSERT INTO grade_scale (Min_Marks, Max_Marks, Grade, Grade_Point) VALUES
+(40.00, 44.99, 'D',  1.00),
+(45.00, 49.99, 'D+', 1.30),
+(50.00, 54.99, 'C-', 1.70),
+(55.00, 59.99, 'C',  2.00),
+(60.00, 64.99, 'C+', 2.30),
+(65.00, 69.99, 'B-', 2.70),
+(70.00, 74.99, 'B',  3.00),
+(75.00, 79.99, 'B+', 3.30),
+(80.00, 84.99, 'A-', 3.70),
+(85.00, 89.99, 'A',  4.00),
+(90.00, 100.00, 'A+', 4.00);
+
+
+
+
+
+
 
 
 INSERT INTO exam (Exam_Id, ST_Id, Course_code, Is_Eligible, Status, Exam_Type, Semester) VALUES
@@ -927,6 +1365,14 @@ INSERT INTO exam (Exam_Id, ST_Id, Course_code, Is_Eligible, Status, Exam_Type, S
     (776, 'tg/2024/0001', 'TMS1233', 1, 'Completed', 'Quiz_02', 'Semester 2'),
     (777, 'tg/2024/0001', 'TMS1233', 1, 'Completed', 'Quiz_03', 'Semester 2');
 
+
+
+
+
+
+
+
+
      alter table exam drop column Is_Eligible;
 
 
@@ -936,485 +1382,6 @@ INSERT INTO exam (Exam_Id, ST_Id, Course_code, Is_Eligible, Status, Exam_Type, S
 
 
 
-
-
-
-
-
-DELIMITER //
-
-CREATE PROCEDURE exam_enrollment_all()
-BEGIN
-
-    UPDATE exam_enrollment e
-    INNER JOIN attendance_summary a 
-        ON e.ST_Id = a.ST_Id 
-        AND e.Course_code = a.Course_code
-    SET e.Attendance_Eligible = 1
-    WHERE a.Eligibility = 'Eligible';
-
-        UPDATE exam_enrollment e
-    LEFT JOIN attendance_summary a 
-        ON e.ST_Id = a.ST_Id 
-        AND e.Course_code = a.Course_code
-    SET e.Attendance_Eligible = 0
-    WHERE a.Eligibility IS NULL OR a.Eligibility != 'Eligible';
-
-
-    UPDATE exam_enrollment e
-    INNER JOIN student_result r 
-        ON e.ST_Id = r.student_id 
-        AND e.Course_code = r.course_code
-    SET e.CA_Eligible = 
-        CASE 
-            WHEN r.CA_Marks > 20 THEN 1            
-            ELSE 0                        
-        END;
-
-    UPDATE exam_enrollment e
-    LEFT JOIN student_result r 
-        ON e.ST_Id = r.student_id 
-        AND e.Course_code = r.course_code
-    SET e.CA_Eligible = 0
-    WHERE r.student_id IS NULL;
-
-
-   
-    UPDATE exam_enrollment e
-    SET e.Final_Eligible = 
-        CASE 
-            WHEN e.Attendance_Eligible = 1 AND e.CA_Eligible = 1 THEN 1
-            ELSE 0
-        END;
-END//
-
-DELIMITER ;
-
-call exam_enrollment_all();
-
-
-
-
-
-
-DELIMITER //
-CREATE PROCEDURE generate_attendance()
-     BEGIN
-         DECLARE counter INT DEFAULT 1;
-         DECLARE week INT;
-         DECLARE student_id VARCHAR(20);
-         DECLARE course_id VARCHAR(15);
-         DECLARE done INT DEFAULT 0;
-    
-    
-         DECLARE student_cursor CURSOR FOR
-             SELECT ST_Id, Course_code
-             FROM course_enrollment
-             WHERE Official_Confirmation = 'COMFIRMED';
-    
-         DECLARE CONTINUE HANDLER FOR NOT FOUND SET done = 1;
-    
-    
-         DELETE FROM attendance;
-    
-         OPEN student_cursor;
-    
-         student_loop: LOOP
-             FETCH student_cursor INTO student_id, course_id;
-    
-             IF done THEN
-                 LEAVE student_loop;
-             END IF;
-    
-    
-             SET week = 1;
-             WHILE week <= 15 DO
-                 INSERT INTO attendance VALUES (
-                     CONCAT('ATT', LPAD(counter, 4, '0')),
-                     student_id,
-                     course_id,
-                     DATE_ADD('2025-01-06', INTERVAL week WEEK),
-                     week,
-                     week,
-                     'Theory',
-                     'Present'
-                 );
-    
-                 SET counter = counter + 1;
-                 SET week = week + 1;
-             END WHILE;
-    
-         END LOOP;
-    
-         CLOSE student_cursor;
-    
-         SELECT CONCAT('Done! Created ', counter - 1, ' records') AS Result;
-     END //
-
-
-DELIMITER ;
-
-
-call generate_attendance();
-
-ALTER TABLE attendance DROP COLUMN Session_Number;
-
-INSERT INTO attendance (
-       Attendance_Id,
-       ST_Id,
-       Course_code,
-       Session_Date,
-       Week_Number,
-       Session_Type,
-       Status
-     ) VALUES
-     ('ATT1336','tg/2024/0001','ICT1233','2025-01-13',1,'Practical','Present'),
-     ('ATT1337','tg/2024/0001','ICT1233','2025-01-20',2,'Practical','Present'),
-     ('ATT1338','tg/2024/0001','ICT1233','2025-01-27',3,'Practical','Present'),
-     ('ATT1339','tg/2024/0001','ICT1233','2025-02-03',4,'Practical','Present'),
-     ('ATT1340','tg/2024/0001','ICT1233','2025-02-10',5,'Practical','Present'),
-     ('ATT1341','tg/2024/0001','ICT1233','2025-02-17',6,'Practical','Present'),
-     ('ATT1342','tg/2024/0001','ICT1233','2025-02-24',7,'Practical','Present'),
-     ('ATT1343','tg/2024/0001','ICT1233','2025-03-03',8,'Practical','Present'),
-     ('ATT1344','tg/2024/0001','ICT1233','2025-03-10',9,'Practical','Present'),
-     ('ATT1345','tg/2024/0001','ICT1233','2025-03-17',10,'Practical','Present'),
-     ('ATT1346','tg/2024/0001','ICT1233','2025-03-24',11,'Practical','Present'),
-     ('ATT1347','tg/2024/0001','ICT1233','2025-03-31',12,'Practical','Present'),
-     ('ATT1348','tg/2024/0001','ICT1233','2025-04-07',13,'Practical','Present'),
-     ('ATT1349','tg/2024/0001','ICT1233','2025-04-14',14,'Practical','Present'),
-     ('ATT1350','tg/2024/0001','ICT1233','2025-04-21',15,'Practical','Present'),
-    
-     ('ATT1351','tg/2023/0002','ICT1233','2025-01-13',1,'Practical','Present'),
-     ('ATT1352','tg/2023/0002','ICT1233','2025-01-20',2,'Practical','Present'),
-     ('ATT1353','tg/2023/0002','ICT1233','2025-01-27',3,'Practical','Present'),
-     ('ATT1354','tg/2023/0002','ICT1233','2025-02-03',4,'Practical','Present'),
-     ('ATT1355','tg/2023/0002','ICT1233','2025-02-10',5,'Practical','Present'),
-     ('ATT1356','tg/2023/0002','ICT1233','2025-02-17',6,'Practical','Present'),
-     ('ATT1357','tg/2023/0002','ICT1233','2025-02-24',7,'Practical','Present'),
-     ('ATT1358','tg/2023/0002','ICT1233','2025-03-03',8,'Practical','Present'),
-     ('ATT1359','tg/2023/0002','ICT1233','2025-03-10',9,'Practical','Present'),
-     ('ATT1360','tg/2023/0002','ICT1233','2025-03-17',10,'Practical','Present'),
-     ('ATT1361','tg/2023/0002','ICT1233','2025-03-24',11,'Practical','Present'),
-     ('ATT1362','tg/2023/0002','ICT1233','2025-03-31',12,'Practical','Present'),
-     ('ATT1363','tg/2023/0002','ICT1233','2025-04-07',13,'Practical','Present'),
-     ('ATT1364','tg/2023/0002','ICT1233','2025-04-14',14,'Practical','Present'),
-     ('ATT1365','tg/2023/0002','ICT1233','2025-04-21',15,'Practical','Present'),
-    
-     ('ATT1366','tg/2023/0004','ICT1233','2025-01-13',1,'Practical','Present'),
-     ('ATT1367','tg/2023/0004','ICT1233','2025-01-20',2,'Practical','Present'),
-     ('ATT1368','tg/2023/0004','ICT1233','2025-01-27',3,'Practical','Present'),
-     ('ATT1369','tg/2023/0004','ICT1233','2025-02-03',4,'Practical','Present'),
-     ('ATT1370','tg/2023/0004','ICT1233','2025-02-10',5,'Practical','Present'),
-     ('ATT1371','tg/2023/0004','ICT1233','2025-02-17',6,'Practical','Present'),
-     ('ATT1372','tg/2023/0004','ICT1233','2025-02-24',7,'Practical','Present'),
-     ('ATT1373','tg/2023/0004','ICT1233','2025-03-03',8,'Practical','Present'),
-     ('ATT1374','tg/2023/0004','ICT1233','2025-03-10',9,'Practical','Present'),
-     ('ATT1375','tg/2023/0004','ICT1233','2025-03-17',10,'Practical','Present'),
-     ('ATT1376','tg/2023/0004','ICT1233','2025-03-24',11,'Practical','Present'),
-     ('ATT1377','tg/2023/0004','ICT1233','2025-03-31',12,'Practical','Present'),
-     ('ATT1378','tg/2023/0004','ICT1233','2025-04-07',13,'Practical','Present'),
-     ('ATT1379','tg/2023/0004','ICT1233','2025-04-14',14,'Practical','Present'),
-     ('ATT1380','tg/2023/0004','ICT1233','2025-04-21',15,'Practical','Present'),
-    
-     ('ATT1381','tg/2023/0005','ICT1233','2025-01-13',1,'Practical','Present'),
-     ('ATT1382','tg/2023/0005','ICT1233','2025-01-20',2,'Practical','Present'),
-     ('ATT1383','tg/2023/0005','ICT1233','2025-01-27',3,'Practical','Present'),
-     ('ATT1384','tg/2023/0005','ICT1233','2025-02-03',4,'Practical','Present'),
-     ('ATT1385','tg/2023/0005','ICT1233','2025-02-10',5,'Practical','Present'),
-     ('ATT1386','tg/2023/0005','ICT1233','2025-02-17',6,'Practical','Present'),
-     ('ATT1387','tg/2023/0005','ICT1233','2025-02-24',7,'Practical','Present'),
-     ('ATT1388','tg/2023/0005','ICT1233','2025-03-03',8,'Practical','Present'),
-     ('ATT1389','tg/2023/0005','ICT1233','2025-03-10',9,'Practical','Present'),
-     ('ATT1390','tg/2023/0005','ICT1233','2025-03-17',10,'Practical','Present'),
-     ('ATT1391','tg/2023/0005','ICT1233','2025-03-24',11,'Practical','Present'),
-     ('ATT1392','tg/2023/0005','ICT1233','2025-03-31',12,'Practical','Present'),
-     ('ATT1393','tg/2023/0005','ICT1233','2025-04-07',13,'Practical','Present'),
-     ('ATT1394','tg/2023/0005','ICT1233','2025-04-14',14,'Practical','Present'),
-     ('ATT1395','tg/2023/0005','ICT1233','2025-04-21',15,'Practical','Present'),
-    
-     ('ATT1396','tg/2023/0007','ICT1233','2025-01-13',1,'Practical','Present'),
-     ('ATT1397','tg/2023/0007','ICT1233','2025-01-20',2,'Practical','Present'),
-     ('ATT1398','tg/2023/0007','ICT1233','2025-01-27',3,'Practical','Present'),
-     ('ATT1399','tg/2023/0007','ICT1233','2025-02-03',4,'Practical','Present'),
-     ('ATT1400','tg/2023/0007','ICT1233','2025-02-10',5,'Practical','Present'),
-     ('ATT1401','tg/2023/0007','ICT1233','2025-02-17',6,'Practical','Present'),
-     ('ATT1402','tg/2023/0007','ICT1233','2025-02-24',7,'Practical','Present'),
-     ('ATT1403','tg/2023/0007','ICT1233','2025-03-03',8,'Practical','Present'),
-     ('ATT1404','tg/2023/0007','ICT1233','2025-03-10',9,'Practical','Present'),
-     ('ATT1405','tg/2023/0007','ICT1233','2025-03-17',10,'Practical','Present'),
-     ('ATT1406','tg/2023/0007','ICT1233','2025-03-24',11,'Practical','Present'),
-     ('ATT1407','tg/2023/0007','ICT1233','2025-03-31',12,'Practical','Present'),
-     ('ATT1408','tg/2023/0007','ICT1233','2025-04-07',13,'Practical','Present'),
-     ('ATT1409','tg/2023/0007','ICT1233','2025-04-14',14,'Practical','Present'),
-     ('ATT1410','tg/2023/0007','ICT1233','2025-04-21',15,'Practical','Present'),
-    
-     ('ATT1411','tg/2023/0008','ICT1233','2025-01-13',1,'Practical','Present'),
-     ('ATT1412','tg/2023/0008','ICT1233','2025-01-20',2,'Practical','Present'),
-     ('ATT1413','tg/2023/0008','ICT1233','2025-01-27',3,'Practical','Present'),
-     ('ATT1414','tg/2023/0008','ICT1233','2025-02-03',4,'Practical','Present'),
-     ('ATT1415','tg/2023/0008','ICT1233','2025-02-10',5,'Practical','Present'),
-     ('ATT1416','tg/2023/0008','ICT1233','2025-02-17',6,'Practical','Present'),
-     ('ATT1417','tg/2023/0008','ICT1233','2025-02-24',7,'Practical','Present'),
-     ('ATT1418','tg/2023/0008','ICT1233','2025-03-03',8,'Practical','Present'),
-     ('ATT1419','tg/2023/0008','ICT1233','2025-03-10',9,'Practical','Present'),
-     ('ATT1420','tg/2023/0008','ICT1233','2025-03-17',10,'Practical','Present'),
-     ('ATT1421','tg/2023/0008','ICT1233','2025-03-24',11,'Practical','Present'),
-     ('ATT1422','tg/2023/0008','ICT1233','2025-03-31',12,'Practical','Present'),
-     ('ATT1423','tg/2023/0008','ICT1233','2025-04-07',13,'Practical','Present'),
-     ('ATT1424','tg/2023/0008','ICT1233','2025-04-14',14,'Practical','Present'),
-     ('ATT1425','tg/2023/0008','ICT1233','2025-04-21',15,'Practical','Present');
-
- INSERT INTO attendance (
-       Attendance_Id, ST_Id, Course_code, Session_Date, Week_Number, Session_Type, Status
-     ) VALUES
-     ('ATT1426','tg/2024/0001','ICT1253','2025-01-13',1,'Practical','Present'),
-     ('ATT1427','tg/2024/0001','ICT1253','2025-01-20',2,'Practical','Present'),
-     ('ATT1428','tg/2024/0001','ICT1253','2025-01-27',3,'Practical','Present'),
-     ('ATT1429','tg/2024/0001','ICT1253','2025-02-03',4,'Practical','Present'),
-     ('ATT1430','tg/2024/0001','ICT1253','2025-02-10',5,'Practical','Present'),
-     ('ATT1431','tg/2024/0001','ICT1253','2025-02-17',6,'Practical','Present'),
-     ('ATT1432','tg/2024/0001','ICT1253','2025-02-24',7,'Practical','Present'),
-     ('ATT1433','tg/2024/0001','ICT1253','2025-03-03',8,'Practical','Present'),
-     ('ATT1434','tg/2024/0001','ICT1253','2025-03-10',9,'Practical','Present'),
-     ('ATT1435','tg/2024/0001','ICT1253','2025-03-17',10,'Practical','Present'),
-     ('ATT1436','tg/2024/0001','ICT1253','2025-03-24',11,'Practical','Present'),
-     ('ATT1437','tg/2024/0001','ICT1253','2025-03-31',12,'Practical','Present'),
-     ('ATT1438','tg/2024/0001','ICT1253','2025-04-07',13,'Practical','Present'),
-     ('ATT1439','tg/2024/0001','ICT1253','2025-04-14',14,'Practical','Present'),
-     ('ATT1440','tg/2024/0001','ICT1253','2025-04-21',15,'Practical','Present'),
-    
-     ('ATT1441','tg/2023/0002','ICT1253','2025-01-13',1,'Practical','Present'),
-     ('ATT1442','tg/2023/0002','ICT1253','2025-01-20',2,'Practical','Present'),
-     ('ATT1443','tg/2023/0002','ICT1253','2025-01-27',3,'Practical','Present'),
-     ('ATT1444','tg/2023/0002','ICT1253','2025-02-03',4,'Practical','Present'),
-     ('ATT1445','tg/2023/0002','ICT1253','2025-02-10',5,'Practical','Present'),
-     ('ATT1446','tg/2023/0002','ICT1253','2025-02-17',6,'Practical','Present'),
-     ('ATT1447','tg/2023/0002','ICT1253','2025-02-24',7,'Practical','Present'),
-     ('ATT1448','tg/2023/0002','ICT1253','2025-03-03',8,'Practical','Present'),
-     ('ATT1449','tg/2023/0002','ICT1253','2025-03-10',9,'Practical','Present'),
-     ('ATT1450','tg/2023/0002','ICT1253','2025-03-17',10,'Practical','Present'),
-     ('ATT1451','tg/2023/0002','ICT1253','2025-03-24',11,'Practical','Present'),
-     ('ATT1452','tg/2023/0002','ICT1253','2025-03-31',12,'Practical','Present'),
-     ('ATT1453','tg/2023/0002','ICT1253','2025-04-07',13,'Practical','Present'),
-     ('ATT1454','tg/2023/0002','ICT1253','2025-04-14',14,'Practical','Present'),
-     ('ATT1455','tg/2023/0002','ICT1253','2025-04-21',15,'Practical','Present'),
-    
-     ('ATT1456','tg/2023/0004','ICT1253','2025-01-13',1,'Practical','Present'),
-     ('ATT1457','tg/2023/0004','ICT1253','2025-01-20',2,'Practical','Present'),
-     ('ATT1458','tg/2023/0004','ICT1253','2025-01-27',3,'Practical','Present'),
-     ('ATT1459','tg/2023/0004','ICT1253','2025-02-03',4,'Practical','Present'),
-     ('ATT1460','tg/2023/0004','ICT1253','2025-02-10',5,'Practical','Present'),
-     ('ATT1461','tg/2023/0004','ICT1253','2025-02-17',6,'Practical','Present'),
-     ('ATT1462','tg/2023/0004','ICT1253','2025-02-24',7,'Practical','Present'),
-     ('ATT1463','tg/2023/0004','ICT1253','2025-03-03',8,'Practical','Present'),
-     ('ATT1464','tg/2023/0004','ICT1253','2025-03-10',9,'Practical','Present'),
-     ('ATT1465','tg/2023/0004','ICT1253','2025-03-17',10,'Practical','Present'),
-     ('ATT1466','tg/2023/0004','ICT1253','2025-03-24',11,'Practical','Present'),
-     ('ATT1467','tg/2023/0004','ICT1253','2025-03-31',12,'Practical','Present'),
-     ('ATT1468','tg/2023/0004','ICT1253','2025-04-07',13,'Practical','Present'),
-     ('ATT1469','tg/2023/0004','ICT1253','2025-04-14',14,'Practical','Present'),
-     ('ATT1470','tg/2023/0004','ICT1253','2025-04-21',15,'Practical','Present'),
-    
-     ('ATT1471','tg/2023/0005','ICT1253','2025-01-13',1,'Practical','Present'),
-     ('ATT1472','tg/2023/0005','ICT1253','2025-01-20',2,'Practical','Present'),
-     ('ATT1473','tg/2023/0005','ICT1253','2025-01-27',3,'Practical','Present'),
-     ('ATT1474','tg/2023/0005','ICT1253','2025-02-03',4,'Practical','Present'),
-     ('ATT1475','tg/2023/0005','ICT1253','2025-02-10',5,'Practical','Present'),
-     ('ATT1476','tg/2023/0005','ICT1253','2025-02-17',6,'Practical','Present'),
-     ('ATT1477','tg/2023/0005','ICT1253','2025-02-24',7,'Practical','Present'),
-     ('ATT1478','tg/2023/0005','ICT1253','2025-03-03',8,'Practical','Present'),
-     ('ATT1479','tg/2023/0005','ICT1253','2025-03-10',9,'Practical','Present'),
-     ('ATT1480','tg/2023/0005','ICT1253','2025-03-17',10,'Practical','Present'),
-     ('ATT1481','tg/2023/0005','ICT1253','2025-03-24',11,'Practical','Present'),
-     ('ATT1482','tg/2023/0005','ICT1253','2025-03-31',12,'Practical','Present'),
-     ('ATT1483','tg/2023/0005','ICT1253','2025-04-07',13,'Practical','Present'),
-     ('ATT1484','tg/2023/0005','ICT1253','2025-04-14',14,'Practical','Present'),
-     ('ATT1485','tg/2023/0005','ICT1253','2025-04-21',15,'Practical','Present'),
-    
-     ('ATT1486','tg/2023/0007','ICT1253','2025-01-13',1,'Practical','Present'),
-     ('ATT1487','tg/2023/0007','ICT1253','2025-01-20',2,'Practical','Present'),
-     ('ATT1488','tg/2023/0007','ICT1253','2025-01-27',3,'Practical','Present'),
-     ('ATT1489','tg/2023/0007','ICT1253','2025-02-03',4,'Practical','Present'),
-     ('ATT1490','tg/2023/0007','ICT1253','2025-02-10',5,'Practical','Present'),
-     ('ATT1491','tg/2023/0007','ICT1253','2025-02-17',6,'Practical','Present'),
-     ('ATT1492','tg/2023/0007','ICT1253','2025-02-24',7,'Practical','Present'),
-     ('ATT1493','tg/2023/0007','ICT1253','2025-03-03',8,'Practical','Present'),
-     ('ATT1494','tg/2023/0007','ICT1253','2025-03-10',9,'Practical','Present'),
-     ('ATT1495','tg/2023/0007','ICT1253','2025-03-17',10,'Practical','Present'),
-     ('ATT1496','tg/2023/0007','ICT1253','2025-03-24',11,'Practical','Present'),
-     ('ATT1497','tg/2023/0007','ICT1253','2025-03-31',12,'Practical','Present'),
-     ('ATT1498','tg/2023/0007','ICT1253','2025-04-07',13,'Practical','Present'),
-     ('ATT1499','tg/2023/0007','ICT1253','2025-04-14',14,'Practical','Present'),
-     ('ATT1500','tg/2023/0007','ICT1253','2025-04-21',15,'Practical','Present'),
-    
-     ('ATT1501','tg/2023/0008','ICT1253','2025-01-13',1,'Practical','Present'),
-     ('ATT1502','tg/2023/0008','ICT1253','2025-01-20',2,'Practical','Present'),
-     ('ATT1503','tg/2023/0008','ICT1253','2025-01-27',3,'Practical','Present'),
-     ('ATT1504','tg/2023/0008','ICT1253','2025-02-03',4,'Practical','Present'),
-     ('ATT1505','tg/2023/0008','ICT1253','2025-02-10',5,'Practical','Present'),
-     ('ATT1506','tg/2023/0008','ICT1253','2025-02-17',6,'Practical','Present'),
-     ('ATT1507','tg/2023/0008','ICT1253','2025-02-24',7,'Practical','Present'),
-     ('ATT1508','tg/2023/0008','ICT1253','2025-03-03',8,'Practical','Present'),
-     ('ATT1509','tg/2023/0008','ICT1253','2025-03-10',9,'Practical','Present'),
-     ('ATT1510','tg/2023/0008','ICT1253','2025-03-17',10,'Practical','Present'),
-     ('ATT1511','tg/2023/0008','ICT1253','2025-03-24',11,'Practical','Present'),
-     ('ATT1512','tg/2023/0008','ICT1253','2025-03-31',12,'Practical','Present'),
-     ('ATT1513','tg/2023/0008','ICT1253','2025-04-07',13,'Practical','Present'),
-     ('ATT1514','tg/2023/0008','ICT1253','2025-04-14',14,'Practical','Present'),
-     ('ATT1515','tg/2023/0008','ICT1253','2025-04-21',15,'Practical','Present');
-
-
-
-
-INSERT INTO grade_scale (Min_Marks, Max_Marks, Grade, Grade_Point) VALUES
-(40.00, 44.99, 'D',  1.00),
-(45.00, 49.99, 'D+', 1.30),
-(50.00, 54.99, 'C-', 1.70),
-(55.00, 59.99, 'C',  2.00),
-(60.00, 64.99, 'C+', 2.30),
-(65.00, 69.99, 'B-', 2.70),
-(70.00, 74.99, 'B',  3.00),
-(75.00, 79.99, 'B+', 3.30),
-(80.00, 84.99, 'A-', 3.70),
-(85.00, 89.99, 'A',  4.00),
-(90.00, 100.00, 'A+', 4.00);
-
-
-INSERT INTO student_course (ST_Id, Course_code) VALUES
-('tg/2023/0006', 'BST1212'),
-('tg/2023/0012', 'BST1212'),
-('tg/2023/0013', 'BST1212'),
-('tg/2023/0014', 'BST1212'),
-('tg/2023/0015', 'BST1212'),
-('tg/2023/0006', 'BST1222'),
-('tg/2023/0012', 'BST1222'),
-('tg/2023/0013', 'BST1222'),
-('tg/2023/0014', 'BST1222'),
-('tg/2023/0015', 'BST1222'),
-('tg/2023/0006', 'BST1232'),
-('tg/2023/0012', 'BST1232'),
-('tg/2023/0013', 'BST1232'),
-('tg/2023/0014', 'BST1232'),
-('tg/2023/0015', 'BST1232'),
-('tg/2023/0006', 'BST1242'),
-('tg/2023/0012', 'BST1242'),
-('tg/2023/0013', 'BST1242'),
-('tg/2023/0014', 'BST1242'),
-('tg/2023/0015', 'BST1242'),
-('tg/2023/0006', 'BST1253'),
-('tg/2023/0012', 'BST1253'),
-('tg/2023/0013', 'BST1253'),
-('tg/2023/0014', 'BST1253'),
-('tg/2023/0015', 'BST1253'),
-('tg/2023/0006', 'BST1262'),
-('tg/2023/0012', 'BST1262'),
-('tg/2023/0013', 'BST1262'),
-('tg/2023/0014', 'BST1262'),
-('tg/2023/0015', 'BST1262'),
-('tg/2023/0006', 'BST1272'),
-('tg/2023/0012', 'BST1272'),
-('tg/2023/0013', 'BST1272'),
-('tg/2023/0014', 'BST1272'),
-('tg/2023/0015', 'BST1272'),
-('tg/2023/0002', 'ENG1222'),
-('tg/2023/0004', 'ENG1222'),
-('tg/2023/0005', 'ENG1222'),
-('tg/2023/0007', 'ENG1222'),
-('tg/2023/0008', 'ENG1222'),
-('tg/2024/0001', 'ENG1222'),
-('tg/2023/0003', 'ENT1212'),
-('tg/2023/0009', 'ENT1212'),
-('tg/2023/0010', 'ENT1212'),
-('tg/2023/0011', 'ENT1212'),
-('tg/2023/0002', 'ICT1212'),
-('tg/2023/0004', 'ICT1212'),
-('tg/2023/0005', 'ICT1212'),
-('tg/2023/0007', 'ICT1212'),
-('tg/2023/0008', 'ICT1212'),
-('tg/2024/0001', 'ICT1212'),
-('tg/2023/0002', 'ICT1222'),
-('tg/2023/0004', 'ICT1222'),
-('tg/2023/0005', 'ICT1222'),
-('tg/2023/0007', 'ICT1222'),
-('tg/2023/0008', 'ICT1222'),
-('tg/2024/0001', 'ICT1222'),
-('tg/2023/0002', 'ICT1233'),
-('tg/2023/0004', 'ICT1233'),
-('tg/2023/0005', 'ICT1233'),
-('tg/2023/0007', 'ICT1233'),
-('tg/2023/0008', 'ICT1233'),
-('tg/2024/0001', 'ICT1233'),
-('tg/2023/0002', 'ICT1242'),
-('tg/2023/0004', 'ICT1242'),
-('tg/2023/0005', 'ICT1242'),
-('tg/2023/0007', 'ICT1242'),
-('tg/2023/0008', 'ICT1242'),
-('tg/2024/0001', 'ICT1242'),
-('tg/2023/0002', 'ICT1253'),
-('tg/2023/0004', 'ICT1253'),
-('tg/2023/0005', 'ICT1253'),
-('tg/2023/0007', 'ICT1253'),
-('tg/2023/0008', 'ICT1253'),
-('tg/2024/0001', 'ICT1253'),
-('tg/2023/0002', 'TCS1212'),
-('tg/2023/0004', 'TCS1212'),
-('tg/2023/0005', 'TCS1212'),
-('tg/2023/0007', 'TCS1212'),
-('tg/2023/0008', 'TCS1212'),
-('tg/2024/0001', 'TCS1212'),
-('tg/2023/0003', 'TMS1213'),
-('tg/2023/0009', 'TMS1213'),
-('tg/2023/0010', 'TMS1213'),
-('tg/2023/0011', 'TMS1213'),
-('tg/2023/0003', 'TMS1222'),
-('tg/2023/0009', 'TMS1222'),
-('tg/2023/0010', 'TMS1222'),
-('tg/2023/0011', 'TMS1222'),
-('tg/2023/0003', 'TMS1231'),
-('tg/2023/0009', 'TMS1231'),
-('tg/2023/0010', 'TMS1231'),
-('tg/2023/0011', 'TMS1231'),
-('tg/2023/0002', 'TMS1233'),
-('tg/2023/0004', 'TMS1233'),
-('tg/2023/0005', 'TMS1233'),
-('tg/2023/0007', 'TMS1233'),
-('tg/2023/0008', 'TMS1233'),
-('tg/2024/0001', 'TMS1233'),
-('tg/2023/0003', 'TMS1242'),
-('tg/2023/0009', 'TMS1242'),
-('tg/2023/0010', 'TMS1242'),
-('tg/2023/0011', 'TMS1242'),
-('tg/2023/0003', 'TMS1253'),
-('tg/2023/0009', 'TMS1253'),
-('tg/2023/0010', 'TMS1253'),
-('tg/2023/0011', 'TMS1253'),
-('tg/2023/0003', 'TMS1261'),
-('tg/2023/0009', 'TMS1261'),
-('tg/2023/0010', 'TMS1261'),
-('tg/2023/0011', 'TMS1261');
-
-
-
-
-
-
-INSERT INTO user_course (U_Id, Course_Id) VALUES
-('lc/2023/003', 'ENG1222'),
-('lc/2024/001', 'ICT1212'),
-('lc/2024/001', 'ICT1222'),
-('lc/2024/001', 'ICT1233'),
-('dean FOT', 'ICT1242'),
-('lc/2023/002', 'ICT1253'),
-('lc/2023/002', 'TCS1212'),
-('lc/2023/003', 'TMS1233');
-
-
-INSERT INTO user_role (Role_Name, Description) VALUES
-('Admin', 'Full access with GRANT OPTION'),
-('Dean', 'Full access without GRANT'),
-('Lecturer', 'Full access without user creation'),
-('Student', 'Read-only access to own results'),
-('Technical Officer', 'Read/Write/Update attendance');
 
 
 INSERT INTO mark 
@@ -1545,6 +1512,8 @@ JOIN course_unit c
 ON m.Course_code =c.Course_code
 SET m.Type=c.Type;
 
+
+
 INSERT INTO student_result
 VALUES
 (1, 'tg/2023/0002', 'ENG1222', 'Semester 2', 84.49, NULL, 'A-', 'PASS', NULL, NULL),
@@ -1669,12 +1638,170 @@ VALUES
 
 
 
+INSERT INTO exam_enrollment (
+    Enrollment_Id,
+    ST_Id,
+    Semester,
+    Course_code,
+    Attendance_Eligible,
+    CA_Eligible,
+    Final_Eligible
+) VALUES
+('EEXM_tg/20_ENG122', 'tg/2024/0001', 'Semester 2', 'ENG1222', 1, 1, 1),
+('EEXM_tg/20_ICT121', 'tg/2024/0001', 'Semester 2', 'ICT1212', 1, 1, 1),
+('EEXM_tg/20_ICT122', 'tg/2024/0001', 'Semester 2', 'ICT1222', 1, 1, 1),
+('EEXM_tg/20_ICT123', 'tg/2024/0001', 'Semester 2', 'ICT1233', 1, 1, 1),
+('EEXM_tg/20_ICT124', 'tg/2024/0001', 'Semester 2', 'ICT1242', 1, 1, 1),
+('EEXM_tg/20_ICT125', 'tg/2024/0001', 'Semester 2', 'ICT1253', 1, 1, 1),
+('EEXM_tg/20_TCS121', 'tg/2024/0001', 'Semester 2', 'TCS1212', 1, 1, 1),
+('EEXM_tg/20_TMS123', 'tg/2024/0001', 'Semester 2', 'TMS1233', 1, 1, 1),
+('EEXM_tg/20_ENG122', 'tg/2023/0002', 'Semester 2', 'ENG1222', 1, 1, 1),
+('EEXM_tg/20_ICT121', 'tg/2023/0002', 'Semester 2', 'ICT1212', 1, 1, 1),
+('EEXM_tg/20_ICT122', 'tg/2023/0002', 'Semester 2', 'ICT1222', 1, 1, 1),
+('EEXM_tg/20_ICT123', 'tg/2023/0002', 'Semester 2', 'ICT1233', 1, 1, 1),
+('EEXM_tg/20_ICT124', 'tg/2023/0002', 'Semester 2', 'ICT1242', 1, 1, 1),
+('EEXM_tg/20_ICT125', 'tg/2023/0002', 'Semester 2', 'ICT1253', 1, 1, 1),
+('EEXM_tg/20_TCS121', 'tg/2023/0002', 'Semester 2', 'TCS1212', 1, 1, 1),
+('EEXM_tg/20_TMS123', 'tg/2023/0002', 'Semester 2', 'TMS1233', 1, 1, 1),
+('EEXM_tg/20_ENG122', 'tg/2023/0004', 'Semester 2', 'ENG1222', 1, 1, 1),
+('EEXM_tg/20_ICT121', 'tg/2023/0004', 'Semester 2', 'ICT1212', 1, 1, 1),
+('EEXM_tg/20_ICT122', 'tg/2023/0004', 'Semester 2', 'ICT1222', 1, 1, 1),
+('EEXM_tg/20_ICT123', 'tg/2023/0004', 'Semester 2', 'ICT1233', 1, 1, 1),
+('EEXM_tg/20_ICT124', 'tg/2023/0004', 'Semester 2', 'ICT1242', 1, 1, 1),
+('EEXM_tg/20_ICT125', 'tg/2023/0004', 'Semester 2', 'ICT1253', 1, 1, 1),
+('EEXM_tg/20_TCS121', 'tg/2023/0004', 'Semester 2', 'TCS1212', 1, 1, 1),
+('EEXM_tg/20_TMS123', 'tg/2023/0004', 'Semester 2', 'TMS1233', 1, 1, 1),
+('EEXM_tg/20_ENG122', 'tg/2023/0005', 'Semester 2', 'ENG1222', 1, 1, 1),
+('EEXM_tg/20_ICT121', 'tg/2023/0005', 'Semester 2', 'ICT1212', 1, 1, 1),
+('EEXM_tg/20_ICT122', 'tg/2023/0005', 'Semester 2', 'ICT1222', 1, 1, 1),
+('EEXM_tg/20_ICT123', 'tg/2023/0005', 'Semester 2', 'ICT1233', 1, 1, 1),
+('EEXM_tg/20_ICT124', 'tg/2023/0005', 'Semester 2', 'ICT1242', 1, 1, 1),
+('EEXM_tg/20_ICT125', 'tg/2023/0005', 'Semester 2', 'ICT1253', 1, 1, 1),
+('EEXM_tg/20_TCS121', 'tg/2023/0005', 'Semester 2', 'TCS1212', 1, 1, 1),
+('EEXM_tg/20_TMS123', 'tg/2023/0005', 'Semester 2', 'TMS1233', 1, 1, 1),
+('EEXM_tg/20_ENG122', 'tg/2023/0007', 'Semester 2', 'ENG1222', 1, 1, 1),
+('EEXM_tg/20_ICT121', 'tg/2023/0007', 'Semester 2', 'ICT1212', 1, 1, 1),
+('EEXM_tg/20_ICT122', 'tg/2023/0007', 'Semester 2', 'ICT1222', 1, 1, 1),
+('EEXM_tg/20_ICT123', 'tg/2023/0007', 'Semester 2', 'ICT1233', 1, 1, 1),
+('EEXM_tg/20_ICT124', 'tg/2023/0007', 'Semester 2', 'ICT1242', 1, 1, 1),
+('EEXM_tg/20_ICT125', 'tg/2023/0007', 'Semester 2', 'ICT1253', 1, 1, 1),
+('EEXM_tg/20_TCS121', 'tg/2023/0007', 'Semester 2', 'TCS1212', 1, 1, 1),
+('EEXM_tg/20_TMS123', 'tg/2023/0007', 'Semester 2', 'TMS1233', 1, 1, 1),
+('EEXM_tg/20_ENG122', 'tg/2023/0008', 'Semester 2', 'ENG1222', 1, 1, 1),
+('EEXM_tg/20_ICT121', 'tg/2023/0008', 'Semester 2', 'ICT1212', 1, 1, 1),
+('EEXM_tg/20_ICT122', 'tg/2023/0008', 'Semester 2', 'ICT1222', 1, 1, 1),
+('EEXM_tg/20_ICT123', 'tg/2023/0008', 'Semester 2', 'ICT1233', 1, 1, 1),
+('EEXM_tg/20_ICT124', 'tg/2023/0008', 'Semester 2', 'ICT1242', 1, 1, 1),
+('EEXM_tg/20_ICT125', 'tg/2023/0008', 'Semester 2', 'ICT1253', 1, 1, 1),
+('EEXM_tg/20_TCS121', 'tg/2023/0008', 'Semester 2', 'TCS1212', 1, 1, 1),
+('EEXM_tg/20_TMS123', 'tg/2023/0008', 'Semester 2', 'TMS1233', 1, 1, 1),
+('EEXM_tg/20_TMS124', 'tg/2023/0003', 'Semester 2', 'TMS1242', 1, 1, 1),
+('EEXM_tg/20_TMS121', 'tg/2023/0003', 'Semester 2', 'TMS1213', 1, 1, 1),
+('EEXM_tg/20_TMS125', 'tg/2023/0003', 'Semester 2', 'TMS1253', 1, 1, 1),
+('EEXM_tg/20_TMS122', 'tg/2023/0003', 'Semester 2', 'TMS1222', 1, 1, 1),
+('EEXM_tg/20_TMS126', 'tg/2023/0003', 'Semester 2', 'TMS1261', 1, 1, 1),
+('EEXM_tg/20_TMS123', 'tg/2023/0003', 'Semester 2', 'TMS1231', 1, 1, 1),
+('EEXM_tg/20_ENT121', 'tg/2023/0003', 'Semester 2', 'ENT1212', 1, 1, 1),
+('EEXM_tg/20_TMS124', 'tg/2023/0009', 'Semester 2', 'TMS1242', 1, 1, 1),
+('EEXM_tg/20_TMS121', 'tg/2023/0009', 'Semester 2', 'TMS1213', 1, 1, 1),
+('EEXM_tg/20_TMS125', 'tg/2023/0009', 'Semester 2', 'TMS1253', 1, 1, 1),
+('EEXM_tg/20_TMS122', 'tg/2023/0009', 'Semester 2', 'TMS1222', 1, 1, 1),
+('EEXM_tg/20_TMS126', 'tg/2023/0009', 'Semester 2', 'TMS1261', 1, 1, 1),
+('EEXM_tg/20_TMS123', 'tg/2023/0009', 'Semester 2', 'TMS1231', 1, 1, 1),
+('EEXM_tg/20_ENT121', 'tg/2023/0009', 'Semester 2', 'ENT1212', 1, 1, 1),
+('EEXM_tg/20_TMS124', 'tg/2023/0010', 'Semester 2', 'TMS1242', 1, 1, 1),
+('EEXM_tg/20_TMS121', 'tg/2023/0010', 'Semester 2', 'TMS1213', 1, 1, 1),
+('EEXM_tg/20_TMS125', 'tg/2023/0010', 'Semester 2', 'TMS1253', 1, 1, 1),
+('EEXM_tg/20_TMS122', 'tg/2023/0010', 'Semester 2', 'TMS1222', 1, 1, 1),
+('EEXM_tg/20_TMS126', 'tg/2023/0010', 'Semester 2', 'TMS1261', 1, 1, 1),
+('EEXM_tg/20_TMS123', 'tg/2023/0010', 'Semester 2', 'TMS1231', 1, 1, 1),
+('EEXM_tg/20_ENT121', 'tg/2023/0010', 'Semester 2', 'ENT1212', 1, 1, 1),
+('EEXM_tg/20_TMS124', 'tg/2023/0011', 'Semester 2', 'TMS1242', 1, 1, 1),
+('EEXM_tg/20_TMS122', 'tg/2023/0011', 'Semester 2', 'TMS1222', 1, 1, 1),
+('EEXM_tg/20_ENT121', 'tg/2023/0011', 'Semester 2', 'ENT1212', 1, 1, 1),
+('EEXM_tg/20_BST121', 'tg/2023/0006', 'Semester 2', 'BST1212', 1, 1, 1),
+('EEXM_tg/20_BST122', 'tg/2023/0006', 'Semester 2', 'BST1222', 1, 1, 1),
+('EEXM_tg/20_BST123', 'tg/2023/0006', 'Semester 2', 'BST1232', 1, 1, 1),
+('EEXM_tg/20_BST124', 'tg/2023/0006', 'Semester 2', 'BST1242', 1, 1, 1),
+('EEXM_tg/20_BST125', 'tg/2023/0006', 'Semester 2', 'BST1253', 1, 1, 1),
+('EEXM_tg/20_BST126', 'tg/2023/0006', 'Semester 2', 'BST1262', 1, 1, 1),
+('EEXM_tg/20_BST127', 'tg/2023/0006', 'Semester 2', 'BST1272', 1, 1, 1),
+('EEXM_tg/20_BST121', 'tg/2023/0012', 'Semester 2', 'BST1212', 1, 1, 1),
+('EEXM_tg/20_BST122', 'tg/2023/0012', 'Semester 2', 'BST1222', 1, 1, 1),
+('EEXM_tg/20_BST123', 'tg/2023/0012', 'Semester 2', 'BST1232', 1, 1, 1),
+('EEXM_tg/20_BST124', 'tg/2023/0012', 'Semester 2', 'BST1242', 1, 1, 1),
+('EEXM_tg/20_BST125', 'tg/2023/0012', 'Semester 2', 'BST1253', 1, 1, 1),
+('EEXM_tg/20_BST126', 'tg/2023/0012', 'Semester 2', 'BST1262', 1, 1, 1),
+('EEXM_tg/20_BST127', 'tg/2023/0012', 'Semester 2', 'BST1272', 1, 1, 1),
+('EEXM_tg/20_BST123', 'tg/2023/0014', 'Semester 2', 'BST1232', 1, 1, 1),
+('EEXM_tg/20_BST126', 'tg/2023/0014', 'Semester 2', 'BST1262', 1, 1, 1),
+('EEXM_tg/20_BST121', 'tg/2023/0015', 'Semester 2', 'BST1212', 1, 1, 1),
+('EEXM_tg/20_BST123', 'tg/2023/0015', 'Semester 2', 'BST1232', 1, 1, 1),
+('EEXM_tg/20_BST125', 'tg/2023/0015', 'Semester 2', 'BST1253', 1, 1, 1);
 
 
 
 
 
 
+
+
+
+
+DELIMITER //
+
+CREATE PROCEDURE exam_enrollment_all()
+BEGIN
+
+    UPDATE exam_enrollment e
+    INNER JOIN attendance_summary a 
+        ON e.ST_Id = a.ST_Id 
+        AND e.Course_code = a.Course_code
+    SET e.Attendance_Eligible = 1
+    WHERE a.Eligibility = 'Eligible';
+
+        UPDATE exam_enrollment e
+    LEFT JOIN attendance_summary a 
+        ON e.ST_Id = a.ST_Id 
+        AND e.Course_code = a.Course_code
+    SET e.Attendance_Eligible = 0
+    WHERE a.Eligibility IS NULL OR a.Eligibility != 'Eligible';
+
+
+    UPDATE exam_enrollment e
+    INNER JOIN student_result r 
+        ON e.ST_Id = r.student_id 
+        AND e.Course_code = r.course_code
+    SET e.CA_Eligible = 
+        CASE 
+            WHEN r.CA_Marks > 20 THEN 1            
+            ELSE 0                        
+        END;
+
+    UPDATE exam_enrollment e
+    LEFT JOIN student_result r 
+        ON e.ST_Id = r.student_id 
+        AND e.Course_code = r.course_code
+    SET e.CA_Eligible = 0
+    WHERE r.student_id IS NULL;
+
+
+   
+    UPDATE exam_enrollment e
+    SET e.Final_Eligible = 
+        CASE 
+            WHEN e.Attendance_Eligible = 1 AND e.CA_Eligible = 1 THEN 1
+            ELSE 0
+        END;
+END//
+
+DELIMITER ;
+
+
+
+
+
+call exam_enrollment_all();
 
 
 
