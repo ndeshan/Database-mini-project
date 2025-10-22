@@ -1,3 +1,76 @@
+CREATE TABLE user (
+  U_Id VARCHAR(15) NOT NULL PRIMARY KEY,
+  Fname VARCHAR(45),
+  Lname VARCHAR(45),
+  Email VARCHAR(45),
+  Address VARCHAR(45),
+  Gender VARCHAR(45),
+  Dob DATE,
+  Role VARCHAR(50),
+  Department VARCHAR(100)
+);
+
+CREATE TABLE user_contact (
+  U_Id VARCHAR(15) NOT NULL,
+  Contact_No VARCHAR(15) NOT NULL,
+  PRIMARY KEY (U_Id, Contact_No),
+  FOREIGN KEY (U_Id) REFERENCES user(U_Id)
+);
+
+
+CREATE TABLE student (
+  Registration_No VARCHAR(20) NOT NULL PRIMARY KEY,
+  Fname VARCHAR(45),
+  Lname VARCHAR(45),
+  Year INT,
+  Department VARCHAR(45),
+  Batch INT DEFAULT 2024,
+  Status ENUM('Proper','Repeat','Suspended') NOT NULL DEFAULT 'Proper'
+);
+
+CREATE TABLE medical_record (
+  Medical_Id VARCHAR(10) NOT NULL PRIMARY KEY,
+  ST_Id VARCHAR(20) NOT NULL,
+  Course_code VARCHAR(15) NOT NULL,
+  Date_Submit DATE NOT NULL,
+  Valid_From DATE NOT NULL,
+  Valid_To DATE NOT NULL,
+  Medical_Type ENUM('Attendance','CA','Final_Exam','Quiz') NOT NULL,
+  Approve TINYINT(1) DEFAULT 1,
+  Approved_By VARCHAR(20) NOT NULL,
+  FOREIGN KEY (ST_Id) REFERENCES student(Registration_No),
+  FOREIGN KEY (Course_code) REFERENCES course_unit(Course_code)
+);
+
+
+ALTER TABLE medical_record DROP COLUMN Medical_type;
+
+ALTER TABLE medical_record
+ADD CONSTRAINT Checking_approve_status_valid_or_not
+CHECK (
+    (Approve = 0 AND Approved_By IS NULL)
+    OR
+    (Approve = 1 AND Approved_By IS NOT NULL)
+);
+
+
+ALTER TABLE medical_record
+MODIFY Approved_By VARCHAR(20) NULL;
+
+
+ALTER TABLE student DROP COLUMN status;
+
+
+
+
+
+
+
+
+
+
+
+
 CREATE TABLE course_unit (
     Course_code VARCHAR(15) NOT NULL PRIMARY KEY,
     Name VARCHAR(100) DEFAULT NULL,
