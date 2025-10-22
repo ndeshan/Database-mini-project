@@ -120,3 +120,8 @@ VALUES
 UPDATE mark 
 SET   Mid_Theory =0,Final_Theory=0
 WHERE Type='Practical';
+
+UPDATE mark m
+JOIN course_unit c
+ON m.Course_code =c.Course_code
+SET m.Type=c.Type;
