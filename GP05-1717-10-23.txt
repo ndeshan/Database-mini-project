@@ -56,3 +56,11 @@ CREATE TABLE user_course (
     Course_Id   VARCHAR(15) NOT NULL,
     PRIMARY KEY (U_Id, Course_Id)
 );
+
+
+
+CREATE TABLE user_role (
+    Role_Name   VARCHAR(50) NOT NULL,
+    Description TEXT        NULL,
+    PRIMARY KEY (Role_Name)
+);
