@@ -1,0 +1,23 @@
+CREATE TABLE exam_enrollment (
+    id                  INT          NOT NULL AUTO_INCREMENT,
+    Enrollment_Id       VARCHAR(20)  NULL,
+    ST_Id               VARCHAR(20)  NOT NULL,
+    Semester            VARCHAR(20)  NULL DEFAULT 'Semester 2',
+    Course_code         VARCHAR(15)  NOT NULL,
+    Attendance_Eligible TINYINT(1)   NULL DEFAULT 0,
+    CA_Eligible         TINYINT(1)   NULL DEFAULT 0,
+    Final_Eligible      TINYINT(1)   NULL DEFAULT 0,
+    PRIMARY KEY (id)
+  
+);
+
+ALTER TABLE exam_enrollment
+    ADD CONSTRAINT fk_exam_enroll_student 
+        FOREIGN KEY (ST_Id) REFERENCES student(Registration_No)
+        ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE exam_enrollment
+    ADD CONSTRAINT fk_exam_enroll_course 
+        FOREIGN KEY (Course_code) REFERENCES course_unit(Course_code)
+        ON UPDATE CASCADE ON DELETE RESTRICT;
+
+        
