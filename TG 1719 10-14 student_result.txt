@@ -95,7 +95,7 @@ VALUES
 (89, 'tg/2023/0013', 'BST1272', 'Semester 2', 74.82, NULL, 'B+', 'PASS', NULL, NULL),
 (90, 'tg/2023/0014', 'BST1212', 'Semester 2', 98.27, NULL, 'A+', 'PASS', NULL, NULL),
 
-(91, 'tg/2023/0014', 'BST1222', 'Semester 2', 40.17, NULL, 'F', 'FAIL', NULL, NULL),
+(91, 'tg/2023/0014', 'BST1222', 'Semester 2', 40.17, NULL, 'F', 'REPEAT', NULL, NULL),
 (92, 'tg/2023/0014', 'BST1232', 'Semester 2', 72.10, NULL, 'B', 'PASS', NULL, NULL),
 (93, 'tg/2023/0014', 'BST1242', 'Semester 2', 73.06, NULL, 'B', 'PASS', NULL, NULL),
 (94, 'tg/2023/0014', 'BST1253', 'Semester 2', 72.32, NULL, 'B', 'PASS', NULL, NULL),
