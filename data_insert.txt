@@ -112,8 +112,40 @@ INSERT INTO medical_record (Medical_Id, ST_Id, Course_code, Date_Submit, Valid_F
 ALTER TABLE medical_record DROP COLUMN Medical_type;
 ALTER TABLE medical_record DROP COLUMN att_id;
 
-
-///////////////////////////////////////////////////////////////////////////
+INSERT INTO course_unit (
+    Course_code,
+    Name,
+    Type,
+    Credit,
+    Lec_Name,
+    Year,
+    Semester,
+    Department_Offering,
+    Theory_Hours,
+    Practical_Hours
+) VALUES
+('BST1212', 'Information Technology II', 'Theory', 3, 'Ms. Dilini Wickramasinghe', 2024, 'Semester 2', 'BST', 15, 0),
+('BST1222', 'Electronics for Biosystems Technology', 'Theory', 3, 'Nirmala Herath', 2024, 'Semester 2', 'BST', 15, 0),
+('BST1232', 'Organic Chemistry', 'Theory', 3, 'Seelawathi Ganga', 2024, 'Semester 2', 'BST', 15, 0),
+('BST1242', 'Introduction to Environmental Science', 'Theory', 3, 'Seelawathi Ganga', 2024, 'Semester 2', 'BST', 15, 0),
+('BST1253', 'Biology II', 'Theory', 3, 'Yasodha Gunaratne', 2024, 'Semester 2', 'BST', 15, 0),
+('BST1262', 'Introduction to Fisheries Biology', 'Theory', 2, 'Yasodha Gunaratne', 2024, 'Semester 2', 'BST', 15, 0),
+('BST1272', 'Fundamentals in Agriculture', 'Theory', 2, 'Mahesh Ranasinghe', 2024, 'Semester 2', 'BST', 15, 0),
+('ENG1222', 'English II', 'Theory', 2, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ICT', 30, 0),
+('ENT1212', 'Advance Manufacturing Technology', 'Theory', 3, 'Mahesh Ranasinghe', 2024, 'Semester 2', 'ET', 15, 0),
+('ICT1212', 'Database Management Systems', 'Theory', 2, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ICT', 30, 0),
+('ICT1222', 'Database Management Systems Practicum', 'Practical', 2, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ICT', 0, 60),
+('ICT1233', 'Server Side Web Development', 'Both', 3, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ICT', 30, 30),
+('ICT1242', 'Computer Architecture', 'Theory', 2, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ICT', 30, 0),
+('ICT1253', 'Computer Networks', 'Both', 3, 'Ms. Dilini Wickramasinghe', 2024, 'Semester 2', 'ICT', 30, 30),
+('TCS1212', 'Fundamentals of Management', 'Theory', 2, 'Ms. Dilini Wickramasinghe', 2024, 'Semester 2', 'ICT', 30, 0),
+('TMS1213', 'Applied Calculus II', 'Theory', 3, 'Dr. Yasodha Gunaratne', 2024, 'Semester 2', 'ET', 15, 0),
+('TMS1222', 'Electromagnetics', 'Theory', 3, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ET', 15, 0),
+('TMS1231', 'Electromagnetics Laboratory', 'Practical', 2, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ET', 0, 15),
+('TMS1233', 'Discrete Mathematics', 'Theory', 3, 'Dr. Yasodha Gunaratne', 2024, 'Semester 2', 'ICT', 45, 0),
+('TMS1242', 'Computer Programming Techniques', 'Theory', 3, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ET', 15, 0),
+('TMS1253', 'Engineering Properties of Matter', 'Theory', 3, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ET', 15, 0),
+('TMS1261', 'Engineering Properties of Matter Laboratory', 'Practical', 2, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ET', 0, 15);
 
 
 INSERT INTO exam (Exam_Id, ST_Id, Course_code, Is_Eligible, Status, Exam_Type, Semester) VALUES
@@ -898,47 +930,13 @@ INSERT INTO exam (Exam_Id, ST_Id, Course_code, Is_Eligible, Status, Exam_Type, S
      alter table exam drop column Is_Eligible;
 
 
-/////////////////////////////////////////////////////////////////////////////
-
-
-INSERT INTO course_unit (
-    Course_code,
-    Name,
-    Type,
-    Credit,
-    Lec_Name,
-    Year,
-    Semester,
-    Department_Offering,
-    Theory_Hours,
-    Practical_Hours
-) VALUES
-('BST1212', 'Information Technology II', 'Theory', 3, 'Ms. Dilini Wickramasinghe', 2024, 'Semester 2', 'BST', 15, 0),
-('BST1222', 'Electronics for Biosystems Technology', 'Theory', 3, 'Nirmala Herath', 2024, 'Semester 2', 'BST', 15, 0),
-('BST1232', 'Organic Chemistry', 'Theory', 3, 'Seelawathi Ganga', 2024, 'Semester 2', 'BST', 15, 0),
-('BST1242', 'Introduction to Environmental Science', 'Theory', 3, 'Seelawathi Ganga', 2024, 'Semester 2', 'BST', 15, 0),
-('BST1253', 'Biology II', 'Theory', 3, 'Yasodha Gunaratne', 2024, 'Semester 2', 'BST', 15, 0),
-('BST1262', 'Introduction to Fisheries Biology', 'Theory', 2, 'Yasodha Gunaratne', 2024, 'Semester 2', 'BST', 15, 0),
-('BST1272', 'Fundamentals in Agriculture', 'Theory', 2, 'Mahesh Ranasinghe', 2024, 'Semester 2', 'BST', 15, 0),
-('ENG1222', 'English II', 'Theory', 2, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ICT', 30, 0),
-('ENT1212', 'Advance Manufacturing Technology', 'Theory', 3, 'Mahesh Ranasinghe', 2024, 'Semester 2', 'ET', 15, 0),
-('ICT1212', 'Database Management Systems', 'Theory', 2, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ICT', 30, 0),
-('ICT1222', 'Database Management Systems Practicum', 'Practical', 2, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ICT', 0, 60),
-('ICT1233', 'Server Side Web Development', 'Both', 3, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ICT', 30, 30),
-('ICT1242', 'Computer Architecture', 'Theory', 2, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ICT', 30, 0),
-('ICT1253', 'Computer Networks', 'Both', 3, 'Ms. Dilini Wickramasinghe', 2024, 'Semester 2', 'ICT', 30, 30),
-('TCS1212', 'Fundamentals of Management', 'Theory', 2, 'Ms. Dilini Wickramasinghe', 2024, 'Semester 2', 'ICT', 30, 0),
-('TMS1213', 'Applied Calculus II', 'Theory', 3, 'Dr. Yasodha Gunaratne', 2024, 'Semester 2', 'ET', 15, 0),
-('TMS1222', 'Electromagnetics', 'Theory', 3, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ET', 15, 0),
-('TMS1231', 'Electromagnetics Laboratory', 'Practical', 2, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ET', 0, 15),
-('TMS1233', 'Discrete Mathematics', 'Theory', 3, 'Dr. Yasodha Gunaratne', 2024, 'Semester 2', 'ICT', 45, 0),
-('TMS1242', 'Computer Programming Techniques', 'Theory', 3, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ET', 15, 0),
-('TMS1253', 'Engineering Properties of Matter', 'Theory', 3, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ET', 15, 0),
-('TMS1261', 'Engineering Properties of Matter Laboratory', 'Practical', 2, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ET', 0, 15);
 
 
 
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+
+
+
 
 
 
@@ -997,7 +995,7 @@ call exam_enrollment_all();
 
 
 
-///////////////////////////////////////////////////////////////////////////////////
+
 
 DELIMITER //
 CREATE PROCEDURE generate_attendance()
@@ -1265,7 +1263,7 @@ INSERT INTO attendance (
      ('ATT1514','tg/2023/0008','ICT1253','2025-04-14',14,'Practical','Present'),
      ('ATT1515','tg/2023/0008','ICT1253','2025-04-21',15,'Practical','Present');
 
-/////////////////////////////////////////////////////////////////////////////////////////
+
 
 
 INSERT INTO grade_scale (Min_Marks, Max_Marks, Grade, Grade_Point) VALUES
@@ -1398,43 +1396,6 @@ INSERT INTO student_course (ST_Id, Course_code) VALUES
 
 
 
-INSERT INTO user_contact (U_Id, Contact_No) VALUES
-('admin/2023/001', '0112223333'),
-('admin/2023/001', '0718888888'),
-('dean FOT', '0112345678'),
-('dean FOT', '0710000000'),
-('dean FOT', '0779999999'),
-('lc/2023/002', '0764567892'),
-('lc/2023/003', '0764567893'),
-('lc/2023/004', '0764567894'),
-('lc/2023/005', '0725678901'),
-('lc/2023/006', '0725678902'),
-('lc/2024/001', '0721112222'),
-('lc/2024/001', '0764567891'),
-('tg/2023/0002', '0771234562'),
-('tg/2023/0003', '0709876543'),
-('tg/2023/0003', '0771234563'),
-('tg/2023/0004', '0771234564'),
-('tg/2023/0005', '0771234565'),
-('tg/2023/0006', '0771234566'),
-('tg/2023/0007', '0712345671'),
-('tg/2023/0008', '0712345672'),
-('tg/2023/0009', '0712345673'),
-('tg/2023/0010', '0712345674'),
-('tg/2023/0011', '0753456781'),
-('tg/2023/0012', '0753456782'),
-('tg/2023/0013', '0753456783'),
-('tg/2023/0014', '0753456784'),
-('tg/2023/0015', '0753456785'),
-('tg/2024/0001', '0712345678'),
-('tg/2024/0001', '0771234561'),
-('to/2023/001', '0773334444'),
-('to/2023/001', '0786789012'),
-('to/2023/002', '0786789013'),
-('to/2023/003', '0786789014'),
-('to/2023/004', '0707890123'),
-('to/2023/005', '0707890124'),
-('to/2023/006', '0707890125');
 
 
 INSERT INTO user_course (U_Id, Course_Id) VALUES
@@ -1457,5 +1418,3 @@ INSERT INTO user_role (Role_Name, Description) VALUES
 
 
 
-
-/////////////////////////////////////////////////////////////////////////////////////////////////////////////////
