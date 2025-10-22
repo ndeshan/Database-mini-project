@@ -20,4 +20,22 @@ ALTER TABLE exam_enrollment
         FOREIGN KEY (Course_code) REFERENCES course_unit(Course_code)
         ON UPDATE CASCADE ON DELETE RESTRICT;
 
-        
+
+
+
+        CREATE TABLE course_enrollment (
+    Enrollment_Id VARCHAR(15) NOT NULL PRIMARY KEY,
+    ST_Id VARCHAR(20) NOT NULL,
+    Course_code VARCHAR(15) NOT NULL,
+    Enrolled_Date DATE DEFAULT '2025-09-23',
+    Official_Confirmation VARCHAR(20) DEFAULT 'COMFIRMED',
+    Semester VARCHAR(20) DEFAULT 'Semester 2'
+);
+ALTER TABLE course_enrollment
+    ADD CONSTRAINT fk_enroll_student 
+        FOREIGN KEY (ST_Id) REFERENCES student(Registration_No)
+        ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE course_enrollment
+    ADD CONSTRAINT fk_enroll_course_c 
+        FOREIGN KEY (Course_code) REFERENCES course_unit(Course_code)
+        ON UPDATE CASCADE ON DELETE RESTRICT;
