@@ -150,3 +150,37 @@ CREATE TABLE student_result (
   FOREIGN KEY (student_id) REFERENCES student(Registration_No) ON DELETE CASCADE,
   FOREIGN KEY (course_code) REFERENCES course_unit(Course_code)ON DELETE CASCADE);
 
+CREATE TABLE attendance (
+     Attendance_Id VARCHAR(20) NOT NULL PRIMARY KEY,
+     ST_Id VARCHAR(20) NOT NULL,
+     Course_code VARCHAR(15) NOT NULL,
+     Session_Date DATE NOT NULL,
+     Week_Number INT NOT NULL,
+     Session_Number INT NOT NULL,
+     Session_Type ENUM('Theory','Practical','Lab') NOT NULL,
+     Status ENUM('Present','Absent','Medical') DEFAULT 'Present'
+ );
+
+ ALTER TABLE attendance
+         ADD CONSTRAINT fk_attendance_student
+             FOREIGN KEY (ST_Id) REFERENCES student(Registration_No)
+             ON UPDATE CASCADE ON DELETE CASCADE,
+         ADD CONSTRAINT fk_attendance_course
+             FOREIGN KEY (Course_code) REFERENCES course_unit(Course_code)
+             ON UPDATE CASCADE ON DELETE RESTRICT;
+
+
+
+
+UPDATE attendance
+     SET session_type = 'Lab'
+     WHERE course_code IN ('ICT1222', 'ICT1242', 'TMS1231', 'TMS1261');
+
+
+ALTER TABLE attendance DROP COLUMN Session_Number;
+
+UPDATE attendance SET session_type = "Practical" WHERE session_type = "Lab";
+
+
+     
+
