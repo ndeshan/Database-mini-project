@@ -902,7 +902,16 @@ INSERT INTO exam (Exam_Id, ST_Id, Course_code, Is_Eligible, Status, Exam_Type, S
 
 
 INSERT INTO course_unit (
-    Course_code, Name, Type, Credit, Lec_Name, Year, Semester, Department_Offering, Theory_Hours, Practical_Hours
+    Course_code,
+    Name,
+    Type,
+    Credit,
+    Lec_Name,
+    Year,
+    Semester,
+    Department_Offering,
+    Theory_Hours,
+    Practical_Hours
 ) VALUES
 ('BST1212', 'Information Technology II', 'Theory', 3, 'Ms. Dilini Wickramasinghe', 2024, 'Semester 2', 'BST', 15, 0),
 ('BST1222', 'Electronics for Biosystems Technology', 'Theory', 3, 'Nirmala Herath', 2024, 'Semester 2', 'BST', 15, 0),
@@ -911,21 +920,21 @@ INSERT INTO course_unit (
 ('BST1253', 'Biology II', 'Theory', 3, 'Yasodha Gunaratne', 2024, 'Semester 2', 'BST', 15, 0),
 ('BST1262', 'Introduction to Fisheries Biology', 'Theory', 2, 'Yasodha Gunaratne', 2024, 'Semester 2', 'BST', 15, 0),
 ('BST1272', 'Fundamentals in Agriculture', 'Theory', 2, 'Mahesh Ranasinghe', 2024, 'Semester 2', 'BST', 15, 0),
-('ENG1222', 'English II', 'Theory', 3, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ICT', 15, 0),
+('ENG1222', 'English II', 'Theory', 2, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ICT', 30, 0),
 ('ENT1212', 'Advance Manufacturing Technology', 'Theory', 3, 'Mahesh Ranasinghe', 2024, 'Semester 2', 'ET', 15, 0),
-('ICT1212', 'Database Management Systems', 'Theory', 3, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ICT', 15, 0),
-('ICT1222', 'Database Management Systems Practicum', 'Lab', 2, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ICT', 0, 15),
-('ICT1233', 'Server Side Web Development', 'Theory', 3, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ICT', 15, 0),
-('ICT1242', 'Computer Architecture', 'Lab', 2, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ICT', 0, 15),
-('ICT1253', 'Computer Networks', 'Theory', 2, 'Ms. Dilini Wickramasinghe', 2024, 'Semester 2', 'ICT', 15, 0),
-('TCS1212', 'Fundamentals of Management', 'Theory', 3, 'Ms. Dilini Wickramasinghe', 2024, 'Semester 2', 'BST', 15, 0),
+('ICT1212', 'Database Management Systems', 'Theory', 2, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ICT', 30, 0),
+('ICT1222', 'Database Management Systems Practicum', 'Practical', 2, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ICT', 0, 60),
+('ICT1233', 'Server Side Web Development', 'Both', 3, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ICT', 30, 30),
+('ICT1242', 'Computer Architecture', 'Theory', 2, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ICT', 30, 0),
+('ICT1253', 'Computer Networks', 'Both', 3, 'Ms. Dilini Wickramasinghe', 2024, 'Semester 2', 'ICT', 30, 30),
+('TCS1212', 'Fundamentals of Management', 'Theory', 2, 'Ms. Dilini Wickramasinghe', 2024, 'Semester 2', 'ICT', 30, 0),
 ('TMS1213', 'Applied Calculus II', 'Theory', 3, 'Dr. Yasodha Gunaratne', 2024, 'Semester 2', 'ET', 15, 0),
 ('TMS1222', 'Electromagnetics', 'Theory', 3, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ET', 15, 0),
-('TMS1231', 'Electromagnetics Laboratory', 'Lab', 2, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ET', 0, 15),
-('TMS1233', 'Discrete Mathematics', 'Theory', 4, 'Dr. Yasodha Gunaratne', 2024, 'Semester 2', 'ICT', 15, 0),
+('TMS1231', 'Electromagnetics Laboratory', 'Practical', 2, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ET', 0, 15),
+('TMS1233', 'Discrete Mathematics', 'Theory', 3, 'Dr. Yasodha Gunaratne', 2024, 'Semester 2', 'ICT', 45, 0),
 ('TMS1242', 'Computer Programming Techniques', 'Theory', 3, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ET', 15, 0),
 ('TMS1253', 'Engineering Properties of Matter', 'Theory', 3, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ET', 15, 0),
-('TMS1261', 'Engineering Properties of Matter Laboratory', 'Lab', 2, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ET', 0, 15);
+('TMS1261', 'Engineering Properties of Matter Laboratory', 'Practical', 2, 'Prof. Anura Bandara', 2024, 'Semester 2', 'ET', 0, 15);
 
 
 
