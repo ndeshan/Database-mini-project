@@ -1,3 +1,76 @@
+CREATE TABLE user (
+  U_Id VARCHAR(15) NOT NULL PRIMARY KEY,
+  Fname VARCHAR(45),
+  Lname VARCHAR(45),
+  Email VARCHAR(45),
+  Address VARCHAR(45),
+  Gender VARCHAR(45),
+  Dob DATE,
+  Role VARCHAR(50),
+  Department VARCHAR(100)
+);
+
+CREATE TABLE user_contact (
+  U_Id VARCHAR(15) NOT NULL,
+  Contact_No VARCHAR(15) NOT NULL,
+  PRIMARY KEY (U_Id, Contact_No),
+  FOREIGN KEY (U_Id) REFERENCES user(U_Id)
+);
+
+
+CREATE TABLE student (
+  Registration_No VARCHAR(20) NOT NULL PRIMARY KEY,
+  Fname VARCHAR(45),
+  Lname VARCHAR(45),
+  Year INT,
+  Department VARCHAR(45),
+  Batch INT DEFAULT 2024,
+  Status ENUM('Proper','Repeat','Suspended') NOT NULL DEFAULT 'Proper'
+);
+
+CREATE TABLE medical_record (
+  Medical_Id VARCHAR(10) NOT NULL PRIMARY KEY,
+  ST_Id VARCHAR(20) NOT NULL,
+  Course_code VARCHAR(15) NOT NULL,
+  Date_Submit DATE NOT NULL,
+  Valid_From DATE NOT NULL,
+  Valid_To DATE NOT NULL,
+  Medical_Type ENUM('Attendance','CA','Final_Exam','Quiz') NOT NULL,
+  Approve TINYINT(1) DEFAULT 1,
+  Approved_By VARCHAR(20) NOT NULL,
+  FOREIGN KEY (ST_Id) REFERENCES student(Registration_No),
+  FOREIGN KEY (Course_code) REFERENCES course_unit(Course_code)
+);
+
+
+ALTER TABLE medical_record DROP COLUMN Medical_type;
+
+ALTER TABLE medical_record
+ADD CONSTRAINT Checking_approve_status_valid_or_not
+CHECK (
+    (Approve = 0 AND Approved_By IS NULL)
+    OR
+    (Approve = 1 AND Approved_By IS NOT NULL)
+);
+
+
+ALTER TABLE medical_record
+MODIFY Approved_By VARCHAR(20) NULL;
+
+
+ALTER TABLE student DROP COLUMN status;
+
+
+
+
+
+
+
+
+
+
+
+
 CREATE TABLE course_unit (
     Course_code VARCHAR(15) NOT NULL PRIMARY KEY,
     Name VARCHAR(100) DEFAULT NULL,
@@ -35,4 +108,45 @@ CREATE TABLE course_enrollment (
 
 
 
+CREATE TABLE mark (
+  Mark_id VARCHAR(15) NOT NULL,
+  student_id VARCHAR(20) NOT NULL,
+  course_code VARCHAR(15) NOT NULL,
+  exam_id INT NOT NULL,
+  Quiz_01 DECIMAL(5,2),
+  Quiz_02 DECIMAL(5,2),
+  Quiz_03 DECIMAL(5,2),
+  Assessment_01 DECIMAL(5,2),
+  Mid_Practical DECIMAL(5,2),
+  Mid_Theory DECIMAL(5,2),
+  Final_Theory DECIMAL(5,2),
+  Final_Practical DECIMAL(5,2),
+  Type ENUM('Theory', 'Practical', 'Both') NOT NULL,
+
+  PRIMARY KEY( Mark_id),		
+  FOREIGN KEY (student_id) REFERENCES student(Registration_No) ON DELETE CASCADE,
+  FOREIGN KEY (course_code) REFERENCES course_unit(Course_code) ON DELETE CASCADE,
+  FOREIGN KEY (exam_id) REFERENCES exam(Exam_Id) ON DELETE CASCADE
+);
+UPDATE mark m
+JOIN course_unit c
+ON m.Course_code =c.Course_code
+SET m.Type=c.Type;
+
+
+CREATE TABLE student_result (
+  Result_Id INT NOT NULL AUTO_INCREMENT,
+  student_id VARCHAR(20) NOT NULL,
+  course_code VARCHAR(15) NOT NULL,
+  Semester VARCHAR(20) DEFAULT 'Semester 2',
+  CA_marks DECIMAL(5,2),
+  Final_Marks DECIMAL(5,2),
+  Final_Grade CHAR(15),
+  Result_Status ENUM('PASS','REPEAT','MC','WH') DEFAULT 'PASS',
+  SGPA DECIMAL(5,2),
+  CGPA DECIMAL(5,2),
+
+  PRIMARY KEY(Result_Id),
+  FOREIGN KEY (student_id) REFERENCES student(Registration_No) ON DELETE CASCADE,
+  FOREIGN KEY (course_code) REFERENCES course_unit(Course_code)ON DELETE CASCADE);
 
