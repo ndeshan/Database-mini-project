@@ -1,0 +1,443 @@
+mysql> CREATE DATABASE Student_Management;
+Query OK, 1 row affected (0.447 sec)
+
+mysql> use Student_Management;
+Database changed
+mysql> SHOW DATABASES;
++--------------------+
+| Database           |
++--------------------+
+| information_schema |
+| mydb               |
+| mysql              |
+| performance_schema |
+| sakila             |
+| student_management |
+| sys                |
+| world              |
++--------------------+
+8 rows in set (0.040 sec)
+
+
+///////////////////////////////////////////////////////////////////////////////
+
+
+
+mysql> SHOW TABLES;
+Empty set (0.058 sec)
+
+mysql> CREATE USER 'admin'@'localhost' IDENTIFIED BY 'admin1234';
+Query OK, 0 rows affected (0.431 sec)
+
+mysql> CREATE USER 'dean'@'localhost' IDENTIFIED BY 'dean1234';
+Query OK, 0 rows affected (0.241 sec)
+
+mysql> CREATE USER 'lecturer'@'localhost' IDENTIFIED BY 'lecturer1234';
+Query OK, 0 rows affected (0.270 sec)
+
+mysql> CREATE USER 'student'@'localhost' IDENTIFIED BY 'student1234';
+Query OK, 0 rows affected (0.133 sec)
+
+mysql> CREATE USER 'to'@'localhost' IDENTIFIED BY 'to1234';
+Query OK, 0 rows affected (0.301 sec)
+
+mysql> GRANT ALL PRIVILEGES ON *.* TO 'admin'@'localhost' WITH GRANT OPTION;
+Query OK, 0 rows affected (0.260 sec)
+
+mysql> GRANT ALL PRIVILEGES ON Student_Management.* TO 'dean'@'localhost';
+Query OK, 0 rows affected (0.202 sec)
+
+mysql> GRANT ALL PRIVILEGES ON Student_Management.* TO 'lecturer'@'localhost';
+Query OK, 0 rows affected (0.108 sec)
+
+mysql> GRANT SELECT, INSERT, UPDATE ON Student_Management.ATTENDENCE TO 'to'@'localhost';
+ERROR 1146 (42S02): Table 'student_management.ATTENDENCE' doesn't exist
+mysql> FLUSH PRIVILEGES;
+Query OK, 0 rows affected, 1 warning (0.172 sec)
+
+
+///////////////////////////////////////////////////////////////////////////////////////
+
+
+mysql> CREATE TABLE USER_ROLE (
+    ->     Role_Name VARCHAR(50) PRIMARY KEY,
+    ->     Description TEXT
+    -> );
+Query OK, 0 rows affected (0.329 sec)
+
+mysql> CREATE TABLE USER (U_Id VARCHAR(15) PRIMARY KEY, Fname VARCHAR(45), Lname VARCHAR(45), Email VARCHAR(45), Address VARCHAR(45), Gender VARCHAR(45), Dob DATE, Role VARCHAR(50), FOREIGN KEY (Role) REFERENCES USER_ROLE(Role_Name));
+Query OK, 0 rows affected (0.945 sec)
+
+mysql> CREATE TABLE STUDENT ( ST_Id VARCHAR(15) PRIMARY KEY, Registration_No VARCHAR(15) UNIQUE NOT NULL,Status ENUM('Proper', 'Repeat', 'Suspended') NOT NULL DEFAULT 'Proper', Year INT, Department VARCHAR(45), Batch INT DEFAULT 2024);
+Query OK, 0 rows affected (0.655 sec)
+
+mysql> CREATE TABLE COURSE_UNIT (Course_code INT PRIMARY KEY, Name VARCHAR(100),Type ENUM('Theory', 'Practical', 'Lab') NOT NULL, Credit INT NOT NULL, Lec_Name VARCHAR(45), Year INT, Semester VARCHAR(20), Department_Offering VARCHAR(50) DEFAULT 'ICT', Theory_Hours INT DEFAULT 15, Practical_Hours INT DEFAULT 15);
+Query OK, 0 rows affected (0.637 sec)
+
+mysql> CREATE TABLE ATTENDENCE ( Attend_Id VARCHAR(15) PRIMARY KEY, ST_Id VARCHAR(15) NOT NULL, Course_code INT NOT NULL, Date DATE NOT NULL, Time TIME, Session_Type ENUM('Theory', 'Practical') NOT NULL, Status ENUM('Present', 'Absent', 'Late') DEFAULT 'Present', Is_Medical_Day BOOLEAN DEFAULT FALSE, FOREIGN KEY (ST_Id) REFERENCES STUDENT(ST_Id), FOREIGN KEY (Course_code) REFERENCES COURSE_UNIT(Course_code));
+Query OK, 0 rows affected (0.791 sec)
+
+
+
+//////////////////////////////////////////////////////////////////////////////////////////////
+
+
+mysql> SHOW TABLES;
++------------------------------+
+| Tables_in_student_management |
++------------------------------+
+| attendence                   |
+| course_unit                  |
+| student                      |
+| user                         |
+| user_role                    |
++------------------------------+
+5 rows in set (0.109 sec)
+
+
+mysql> INSERT INTO USER_ROLE VALUES
+    -> ('Admin', 'Full access with GRANT OPTION'),
+    -> ('Dean', 'Full access without GRANT'),
+    -> ('Lecturer', 'Full access without user creation'),
+    -> ('Technical Officer', 'Read/Write/Update attendance'),
+    -> ('Student', 'Read-only access to own results');
+Query OK, 5 rows affected (0.265 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql> INSERT INTO USER (U_Id, Fname, Lname, Email, Address, Gender, Dob, Role) VALUES ('U001', 'Nimal', 'Perera', 'nimal.perera@ruhuna.lk', 'Galle Road, Colombo', 'M', '2001-03-12', 'Student'),('U002', 'Kamani', 'Fernando', 'kamani.fernando@ruhuna.lk', 'Kandy Road, Kadawatha', 'F', '2000-07-25', 'Student'),('U003', 'Ravi', 'Silva', 'ravi.silva@ruhuna.lk', 'Temple Road, Moratuwa', 'M', '1985-05-18', 'Lecturer'),('U004', 'Dilini', 'Wickramasinghe', 'dilini.w@ruhuna.lk', 'Rajagiriya, Colombo', 'F', '1982-11-30', 'Lecturer'),('U005', 'Tharindu', 'Jayasinghe', 'tharindu.j@ruhuna.lk', 'Nugegoda, Colombo', 'M', '2002-01-15', 'Student'),('U006', 'Anjali', 'Rajapaksa', 'anjali.r@ruhuna.lk', 'Matara Road, Galle', 'F', '2001-08-22', 'Student'),('U007', 'Chaminda', 'Weerasinghe', 'chaminda.w@ruhuna.lk', 'Kurunegala', 'M', '2000-04-10', 'Student'),('U008', 'Yasodha', 'Gunaratne', 'yasodha.g@ruhuna.lk', 'Jaffna', 'F', '1987-09-05', 'Lecturer'),('U009', 'Sahan', 'Bandara', 'sahan.b@ruhuna.lk', 'Galle Face, Colombo', 'M', '1980-02-14', 'Dean'),('U010', 'Nadeesha', 'Herath', 'nadeesha.h@ruhuna.lk', 'Nuwara Eliya', 'F', '2001-06-30', 'Student'),('U011', 'Amila', 'Rathnayake', 'amila.r@ruhuna.lk', 'Badulla', 'M', '1990-07-20', 'Technical Officer'),('U012', 'Lahiru', 'De Silva', 'lahiru.d@ruhuna.lk', 'Panadura', 'M', '1992-03-11', 'Technical Officer'),('U013', 'nipuna', 'deshan', 'nipuna@ruhuna.lk', 'Galle', 'M', '1975-01-01', 'Admin'),('U014', 'seelawathi', 'ganga', 'seelawathi.g@ruhuna.lk', 'galle', 'F', '1987-09-07', 'Lecturer');
+Query OK, 14 rows affected (0.164 sec)
+Records: 14  Duplicates: 0  Warnings: 0
+
+mysql>
+
+mysql>
+mysql> INSERT INTO USER_CONTACT VALUES('U001', '0771234567'),('U001','0112345678'),('U002','0769876543'),('U003','0712345678'),('U004','0723456789'),('U005', '0701122334'),('U006', '0755667788'),('U007', '0766778899'),('U008', '0744556677'),('U009', '0733445566'),('U010', '0788990011'),('U011', '0702233445'),('U012', '0713344556'),('U013', '0724455667'),('U014', '0771232143');
+Query OK, 15 rows affected (0.224 sec)
+Records: 15  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql>
+mysql> INSERT INTO STUDENT (ST_Id, Registration_No, Status, Year, Department, Batch) VALUES ('S001', 'ICT2024001', 'Proper', 2024, 'ICT', 2024),('S002', 'ICT2024002', 'Proper', 2024, 'ICT', 2024),('S003', 'ICT2024003', 'Proper', 2024, 'ICT', 2024),('S004', 'ICT2024004', 'Proper',  2024, 'ICT', 2024),('S005', 'ICT2024005', 'Proper', 2024, 'ICT', 2024),('S006', 'ICT2024006', 'Proper',  2024, 'ICT', 2024),('S007', 'ICT2024007', 'Proper',  2024, 'ICT', 2024),('S008', 'ICT2024008', 'Proper',  2024, 'ICT', 2024),('S009', 'ICT2024009', 'Proper', 2024, 'ICT', 2024),('S010', 'ICT2024010', 'Proper',  2024, 'ICT', 2024),('S011', 'ICT2024011', 'Repeat',  2024, 'ICT', 2024),('S012', 'ICT2024012', 'Repeat',  2024, 'ICT', 2024),('S013', 'ICT2024013', 'Repeat',  2024, 'ICT', 2024),('S014', 'ICT2024014', 'Repeat',  2024, 'ICT', 2024),('S015', 'ICT2024015', 'Repeat',  2024, 'ICT', 2024),('S016', 'ICT2024016', 'Suspended',  2024, 'ICT', 2024),('S017', 'ICT2024017', 'Suspended',  2024, 'ICT', 2024),('S018', 'ICT2024018', 'Suspended',  2024, 'ICT', 2024),('S019', 'ICT2024019', 'Suspended',  2024, 'ICT', 2024),('S020', 'ICT2024020', 'Suspended',  2024, 'ICT', 2024);
+Query OK, 20 rows affected (0.253 sec)
+Records: 20  Duplicates: 0  Warnings: 0
+
+
+mysql>
+mysql>
+mysql> INSERT INTO COURSE_UNIT VALUES('ENG1222', 'English II', 'Theory', 3, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ICT', 15, 0),('ICT1212', 'Database Management Systems', 'Theory', 3, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ICT', 15, 0),('ICT1222', 'Database Management Systems Practicum', 'Lab', 2, 'Dr. Ravi Silva', 2024, 'Semester 2', 'ICT', 0, 15),('ICT1233', 'Server Side Web Development', 'Theory', 3, 'Prof. Anura Bandara', 2024, 'Semester 2', 'Engineering', 15, 0),('ICT1242', 'Computer Archutecture', 'Lab', 2, 'Prof. Anura Bandara', 2024, 'Semester 2', 'Engineering', 0, 15),('ICT1253', 'Computer Networks', 'Theory', 2, 'Ms. Dilini Wickramasinghe', 2024, 'Semester 2', 'Business', 15, 0),('TCS1212', 'Fundamentals of Management', 'Theory', 3, 'Ms. Dilini Wickramasinghe', 2024, 'Semester 2', 'Business', 15, 0),('TMS1233', 'Discrete Mathematics', 'Theory', 4, 'Dr. Yasodha Gunaratne', 2024, 'Semester 2', 'Medicine', 15, 0);
+Query OK, 8 rows affected (0.134 sec)
+Records: 8  Duplicates: 0  Warnings: 0
+
+
+////////////////////////////////////////////////////////////////////
+
+mysql> drop table attendence;
+Query OK, 0 rows affected (0.549 sec)
+
+
+mysql> CREATE TABLE ATTENDENCE_ICT (
+    ->     Attend_Id VARCHAR(10) PRIMARY KEY,
+    ->     ST_Id VARCHAR(20) NOT NULL,
+    ->     Course_code VARCHAR(15) NOT NULL,
+    ->     Date DATE NOT NULL,
+    ->     Time TIME NOT NULL,
+    ->     Session_Type ENUM('Theory', 'Practical', 'Lab') NOT NULL,
+    ->     Status ENUM('Present', 'Absent', 'Late', 'Medical') NOT NULL,
+    ->     Is_Medical_Day BOOLEAN DEFAULT FALSE
+    ->
+    -> );
+Query OK, 0 rows affected (0.601 sec)
+
+
+mysql> CREATE TABLE ATTENDENCE_ET (
+    ->     Attend_Id VARCHAR(10) PRIMARY KEY,
+    ->     ST_Id VARCHAR(20) NOT NULL,
+    ->     Course_code VARCHAR(15) NOT NULL,
+    ->     Date DATE NOT NULL,
+    ->     Time TIME NOT NULL,
+    ->     Session_Type ENUM('Theory', 'Practical', 'Lab') NOT NULL,
+    ->     Status ENUM('Present', 'Absent', 'Late', 'Medical') NOT NULL,
+    ->     Is_Medical_Day BOOLEAN DEFAULT FALSE
+    ->
+    -> );
+Query OK, 0 rows affected (0.546 sec)
+
+mysql>
+mysql>
+mysql> CREATE TABLE ATTENDENCE_BST (
+    ->     Attend_Id VARCHAR(10) PRIMARY KEY,
+    ->     ST_Id VARCHAR(20) NOT NULL,
+    ->     Course_code VARCHAR(15) NOT NULL,
+    ->     Date DATE NOT NULL,
+    ->     Time TIME NOT NULL,
+    ->     Session_Type ENUM('Theory', 'Practical', 'Lab') NOT NULL,
+    ->     Status ENUM('Present', 'Absent', 'Late', 'Medical') NOT NULL,
+    ->     Is_Medical_Day BOOLEAN DEFAULT FALSE
+    -> );
+Query OK, 0 rows affected (0.493 sec)
+
+mysql>
+
+
+mysql> INSERT INTO ATTENDENCE_ICT (Attend_Id, ST_Id, Course_code, Date, Time, Session_Type, Status, Is_Medical_Day) VALUES
+    -> ('A001', 'tg/2023/0001', 'ICT1212', '2025-01-10', '08:30:00', 'Theory', 'Present', FALSE),
+    -> ('A002', 'tg/2023/0001', 'ICT1212', '2025-01-17', '08:30:00', 'Theory', 'Present', FALSE),
+    -> ('A003', 'tg/2023/0001', 'ICT1212', '2025-01-24', '08:30:00', 'Theory', 'Present', FALSE),
+    -> ('A004', 'tg/2023/0001', 'ICT1212', '2025-01-31', '08:30:00', 'Theory', 'Present', FALSE),
+    -> ('A005', 'tg/2023/0001', 'ICT1212', '2025-02-07', '08:30:00', 'Theory', 'Present', FALSE),
+    -> ('A006', 'tg/2023/0001', 'ICT1212', '2025-02-14', '08:30:00', 'Theory', 'Present', FALSE),
+    -> ('A007', 'tg/2023/0001', 'ICT1212', '2025-02-21', '08:30:00', 'Theory', 'Present', FALSE),
+    -> ('A008', 'tg/2023/0001', 'ICT1212', '2025-02-28', '08:30:00', 'Theory', 'Present', FALSE),
+    -> ('A009', 'tg/2023/0001', 'ICT1212', '2025-03-07', '08:30:00', 'Theory', 'Present', FALSE),
+    -> ('A010', 'tg/2023/0001', 'ICT1212', '2025-03-14', '08:30:00', 'Theory', 'Present', FALSE),
+    -> ('A011', 'tg/2023/0001', 'ICT1212', '2025-03-21', '08:30:00', 'Theory', 'Present', FALSE),
+    -> ('A012', 'tg/2023/0001', 'ICT1212', '2025-03-28', '08:30:00', 'Theory', 'Present', FALSE),
+    -> ('A013', 'tg/2023/0001', 'ICT1212', '2025-04-04', '08:30:00', 'Theory', 'Absent', FALSE),
+    -> ('A014', 'tg/2023/0001', 'ICT1212', '2025-04-11', '08:30:00', 'Theory', 'Absent', FALSE),
+    -> ('A015', 'tg/2023/0001', 'ICT1212', '2025-04-18', '08:30:00', 'Theory', 'Absent', FALSE),
+    ->
+    -> ('A016', 'tg/2023/0002', 'ICT1222', '2025-01-10', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A017', 'tg/2023/0002', 'ICT1222', '2025-01-17', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A018', 'tg/2023/0002', 'ICT1222', '2025-01-24', '10:00:00', 'Practical', 'Medical', TRUE),
+    -> ('A019', 'tg/2023/0002', 'ICT1222', '2025-01-31', '10:00:00', 'Practical', 'Medical', TRUE),
+    -> ('A020', 'tg/2023/0002', 'ICT1222', '2025-02-07', '10:00:00', 'Practical', 'Medical', TRUE),
+    -> ('A021', 'tg/2023/0002', 'ICT1222', '2025-02-14', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A022', 'tg/2023/0002', 'ICT1222', '2025-02-21', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A023', 'tg/2023/0002', 'ICT1222', '2025-02-28', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A024', 'tg/2023/0002', 'ICT1222', '2025-03-07', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A025', 'tg/2023/0002', 'ICT1222', '2025-03-14', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A026', 'tg/2023/0002', 'ICT1222', '2025-03-21', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A027', 'tg/2023/0002', 'ICT1222', '2025-03-28', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A028', 'tg/2023/0002', 'ICT1222', '2025-04-04', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A029', 'tg/2023/0002', 'ICT1222', '2025-04-11', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A030', 'tg/2023/0002', 'ICT1222', '2025-04-18', '10:00:00', 'Practical', 'Present', FALSE),
+    ->
+    -> ('A031', 'tg/2023/0003', 'ICT1233', '2025-01-10', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A032', 'tg/2023/0003', 'ICT1233', '2025-01-17', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A033', 'tg/2023/0003', 'ICT1233', '2025-01-24', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A034', 'tg/2023/0003', 'ICT1233', '2025-01-31', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A035', 'tg/2023/0003', 'ICT1233', '2025-02-07', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A036', 'tg/2023/0003', 'ICT1233', '2025-02-14', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A037', 'tg/2023/0003', 'ICT1233', '2025-02-21', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A038', 'tg/2023/0003', 'ICT1233', '2025-02-28', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A039', 'tg/2023/0003', 'ICT1233', '2025-03-07', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A040', 'tg/2023/0003', 'ICT1233', '2025-03-14', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A041', 'tg/2023/0003', 'ICT1233', '2025-03-21', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A042', 'tg/2023/0003', 'ICT1233', '2025-03-28', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A043', 'tg/2023/0003', 'ICT1233', '2025-04-04', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A044', 'tg/2023/0003', 'ICT1233', '2025-04-11', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A045', 'tg/2023/0003', 'ICT1233', '2025-04-18', '09:00:00', 'Theory', 'Late', FALSE),
+    ->
+    -> ('A046', 'tg/2023/0004', 'ICT1242', '2025-01-10', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A047', 'tg/2023/0004', 'ICT1242', '2025-01-17', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A048', 'tg/2023/0004', 'ICT1242', '2025-01-24', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A049', 'tg/2023/0004', 'ICT1242', '2025-01-31', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A050', 'tg/2023/0004', 'ICT1242', '2025-02-07', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A051', 'tg/2023/0004', 'ICT1242', '2025-02-14', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A052', 'tg/2023/0004', 'ICT1242', '2025-02-21', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A053', 'tg/2023/0004', 'ICT1242', '2025-02-28', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A054', 'tg/2023/0004', 'ICT1242', '2025-03-07', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A055', 'tg/2023/0004', 'ICT1242', '2025-03-14', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A056', 'tg/2023/0004', 'ICT1242', '2025-03-21', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A057', 'tg/2023/0004', 'ICT1242', '2025-03-28', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A058', 'tg/2023/0004', 'ICT1242', '2025-04-04', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A059', 'tg/2023/0004', 'ICT1242', '2025-04-11', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A060', 'tg/2023/0004', 'ICT1242', '2025-04-18', '13:00:00', 'Practical', 'Present', FALSE),
+    ->
+    -> ('A061', 'tg/2023/0005', 'ICT1253', '2025-01-10', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A062', 'tg/2023/0005', 'ICT1253', '2025-01-17', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A063', 'tg/2023/0005', 'ICT1253', '2025-01-24', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A064', 'tg/2023/0005', 'ICT1253', '2025-01-31', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A065', 'tg/2023/0005', 'ICT1253', '2025-02-07', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A066', 'tg/2023/0005', 'ICT1253', '2025-02-14', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A067', 'tg/2023/0005', 'ICT1253', '2025-02-21', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A068', 'tg/2023/0005', 'ICT1253', '2025-02-28', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A069', 'tg/2023/0005', 'ICT1253', '2025-03-07', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A070', 'tg/2023/0005', 'ICT1253', '2025-03-14', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A071', 'tg/2023/0005', 'ICT1253', '2025-03-21', '11:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A072', 'tg/2023/0005', 'ICT1253', '2025-03-28', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A073', 'tg/2023/0005', 'ICT1253', '2025-04-04', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A074', 'tg/2023/0005', 'ICT1253', '2025-04-11', '11:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A075', 'tg/2023/0005', 'ICT1253', '2025-04-18', '11:00:00', 'Theory', 'Present', FALSE),
+    ->
+    -> ('A076', 'tg/2023/0006', 'TCS1212', '2025-01-10', '14:00:00', 'Theory', 'Present', FALSE),
+    -> ('A077', 'tg/2023/0006', 'TCS1212', '2025-01-17', '14:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A078', 'tg/2023/0006', 'TCS1212', '2025-01-24', '14:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A079', 'tg/2023/0006', 'TCS1212', '2025-01-31', '14:00:00', 'Theory', 'Present', FALSE),
+    -> ('A080', 'tg/2023/0006', 'TCS1212', '2025-02-07', '14:00:00', 'Theory', 'Present', FALSE),
+    -> ('A081', 'tg/2023/0006', 'TCS1212', '2025-02-14', '14:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A082', 'tg/2023/0006', 'TCS1212', '2025-02-21', '14:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A083', 'tg/2023/0006', 'TCS1212', '2025-02-28', '14:00:00', 'Theory', 'Present', FALSE),
+    -> ('A084', 'tg/2023/0006', 'TCS1212', '2025-03-07', '14:00:00', 'Theory', 'Present', FALSE),
+    -> ('A085', 'tg/2023/0006', 'TCS1212', '2025-03-14', '14:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A086', 'tg/2023/0006', 'TCS1212', '2025-03-21', '14:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A087', 'tg/2023/0006', 'TCS1212', '2025-03-28', '14:00:00', 'Theory', 'Present', FALSE),
+    -> ('A088', 'tg/2023/0006', 'TCS1212', '2025-04-04', '14:00:00', 'Theory', 'Present', FALSE),
+    -> ('A089', 'tg/2023/0006', 'TCS1212', '2025-04-11', '14:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A090', 'tg/2023/0006', 'TCS1212', '2025-04-18', '14:00:00', 'Theory', 'Present', FALSE);
+Query OK, 90 rows affected (0.159 sec)
+Records: 90  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql>
+mysql>
+mysql>
+mysql> INSERT INTO ATTENDENCE_ET (Attend_Id, ST_Id, Course_code, Date, Time, Session_Type, Status, Is_Medical_Day) VALUES
+    ->
+    -> ('A091', 'tg/2023/0007', 'TMS1233', '2025-01-10', '15:00:00', 'Theory', 'Present', FALSE),
+    -> ('A092', 'tg/2023/0007', 'TMS1233', '2025-01-17', '15:00:00', 'Theory', 'Present', FALSE),
+    -> ('A093', 'tg/2023/0007', 'TMS1233', '2025-01-24', '15:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A094', 'tg/2023/0007', 'TMS1233', '2025-01-31', '15:00:00', 'Theory', 'Present', FALSE),
+    -> ('A095', 'tg/2023/0007', 'TMS1233', '2025-02-07', '15:00:00', 'Theory', 'Present', FALSE),
+    -> ('A096', 'tg/2023/0007', 'TMS1233', '2025-02-14', '15:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A097', 'tg/2023/0007', 'TMS1233', '2025-02-21', '15:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A098', 'tg/2023/0007', 'TMS1233', '2025-02-28', '15:00:00', 'Theory', 'Present', FALSE),
+    -> ('A099', 'tg/2023/0007', 'TMS1233', '2025-03-07', '15:00:00', 'Theory', 'Present', FALSE),
+    -> ('A100', 'tg/2023/0007', 'TMS1233', '2025-03-14', '15:00:00', 'Theory', 'Present', FALSE),
+    -> ('A101', 'tg/2023/0007', 'TMS1233', '2025-03-21', '15:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A102', 'tg/2023/0007', 'TMS1233', '2025-03-28', '15:00:00', 'Theory', 'Present', FALSE),
+    -> ('A103', 'tg/2023/0007', 'TMS1233', '2025-04-04', '15:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A104', 'tg/2023/0007', 'TMS1233', '2025-04-11', '15:00:00', 'Theory', 'Present', FALSE),
+    -> ('A105', 'tg/2023/0007', 'TMS1233', '2025-04-18', '15:00:00', 'Theory', 'Absent', FALSE),
+    ->
+    -> ('A106', 'tg/2023/0008', 'ENG1222', '2025-01-10', '08:00:00', 'Theory', 'Present', FALSE),
+    -> ('A107', 'tg/2023/0008', 'ENG1222', '2025-01-17', '08:00:00', 'Theory', 'Present', FALSE),
+    -> ('A108', 'tg/2023/0008', 'ENG1222', '2025-01-24', '08:00:00', 'Theory', 'Present', FALSE),
+    -> ('A109', 'tg/2023/0008', 'ENG1222', '2025-01-31', '08:00:00', 'Theory', 'Present', FALSE),
+    -> ('A110', 'tg/2023/0008', 'ENG1222', '2025-02-07', '08:00:00', 'Theory', 'Present', FALSE),
+    -> ('A111', 'tg/2023/0008', 'ENG1222', '2025-02-14', '08:00:00', 'Theory', 'Present', FALSE),
+    -> ('A112', 'tg/2023/0008', 'ENG1222', '2025-02-21', '08:00:00', 'Theory', 'Present', FALSE),
+    -> ('A113', 'tg/2023/0008', 'ENG1222', '2025-02-28', '08:00:00', 'Theory', 'Present', FALSE),
+    -> ('A114', 'tg/2023/0008', 'ENG1222', '2025-03-07', '08:00:00', 'Theory', 'Present', FALSE),
+    -> ('A115', 'tg/2023/0008', 'ENG1222', '2025-03-14', '08:00:00', 'Theory', 'Present', FALSE),
+    -> ('A116', 'tg/2023/0008', 'ENG1222', '2025-03-21', '08:00:00', 'Theory', 'Present', FALSE),
+    -> ('A117', 'tg/2023/0008', 'ENG1222', '2025-03-28', '08:00:00', 'Theory', 'Present', FALSE),
+    -> ('A118', 'tg/2023/0008', 'ENG1222', '2025-04-04', '08:00:00', 'Theory', 'Present', FALSE),
+    -> ('A119', 'tg/2023/0008', 'ENG1222', '2025-04-11', '08:00:00', 'Theory', 'Present', FALSE),
+    -> ('A120', 'tg/2023/0008', 'ENG1222', '2025-04-18', '08:00:00', 'Theory', 'Present', FALSE),
+    ->
+    -> ('A121', 'tg/2023/0009', 'ICT1212', '2025-01-10', '08:30:00', 'Theory', 'Present', FALSE),
+    -> ('A122', 'tg/2023/0009', 'ICT1212', '2025-01-17', '08:30:00', 'Theory', 'Present', FALSE),
+    -> ('A123', 'tg/2023/0009', 'ICT1212', '2025-01-24', '08:30:00', 'Theory', 'Absent', FALSE),
+    -> ('A124', 'tg/2023/0009', 'ICT1212', '2025-01-31', '08:30:00', 'Theory', 'Absent', FALSE),
+    -> ('A125', 'tg/2023/0009', 'ICT1212', '2025-02-07', '08:30:00', 'Theory', 'Present', FALSE),
+    -> ('A126', 'tg/2023/0009', 'ICT1212', '2025-02-14', '08:30:00', 'Theory', 'Present', FALSE),
+    -> ('A127', 'tg/2023/0009', 'ICT1212', '2025-02-21', '08:30:00', 'Theory', 'Absent', FALSE),
+    -> ('A128', 'tg/2023/0009', 'ICT1212', '2025-02-28', '08:30:00', 'Theory', 'Absent', FALSE),
+    -> ('A129', 'tg/2023/0009', 'ICT1212', '2025-03-07', '08:30:00', 'Theory', 'Present', FALSE),
+    -> ('A130', 'tg/2023/0009', 'ICT1212', '2025-03-14', '08:30:00', 'Theory', 'Present', FALSE),
+    -> ('A131', 'tg/2023/0009', 'ICT1212', '2025-03-21', '08:30:00', 'Theory', 'Absent', FALSE),
+    -> ('A132', 'tg/2023/0009', 'ICT1212', '2025-03-28', '08:30:00', 'Theory', 'Absent', FALSE),
+    -> ('A133', 'tg/2023/0009', 'ICT1212', '2025-04-04', '08:30:00', 'Theory', 'Present', FALSE),
+    -> ('A134', 'tg/2023/0009', 'ICT1212', '2025-04-11', '08:30:00', 'Theory', 'Present', FALSE),
+    -> ('A135', 'tg/2023/0009', 'ICT1212', '2025-04-18', '08:30:00', 'Theory', 'Absent', FALSE),
+    ->
+    -> ('A136', 'tg/2023/0010', 'ICT1222', '2025-01-10', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A137', 'tg/2023/0010', 'ICT1222', '2025-01-17', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A138', 'tg/2023/0010', 'ICT1222', '2025-01-24', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A139', 'tg/2023/0010', 'ICT1222', '2025-01-31', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A140', 'tg/2023/0010', 'ICT1222', '2025-02-07', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A141', 'tg/2023/0010', 'ICT1222', '2025-02-14', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A142', 'tg/2023/0010', 'ICT1222', '2025-02-21', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A143', 'tg/2023/0010', 'ICT1222', '2025-02-28', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A144', 'tg/2023/0010', 'ICT1222', '2025-03-07', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A145', 'tg/2023/0010', 'ICT1222', '2025-03-14', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A146', 'tg/2023/0010', 'ICT1222', '2025-03-21', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A147', 'tg/2023/0010', 'ICT1222', '2025-03-28', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A148', 'tg/2023/0010', 'ICT1222', '2025-04-04', '10:00:00', 'Practical', 'Present', FALSE),
+    -> ('A149', 'tg/2023/0010', 'ICT1222', '2025-04-11', '10:00:00', 'Practical', 'Late', FALSE),
+    -> ('A150', 'tg/2023/0010', 'ICT1222', '2025-04-18', '10:00:00', 'Practical', 'Present', FALSE),
+    ->
+    -> ('A151', 'tg/2023/0011', 'ICT1233', '2025-01-10', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A152', 'tg/2023/0011', 'ICT1233', '2025-01-17', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A153', 'tg/2023/0011', 'ICT1233', '2025-01-24', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A154', 'tg/2023/0011', 'ICT1233', '2025-01-31', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A155', 'tg/2023/0011', 'ICT1233', '2025-02-07', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A156', 'tg/2023/0011', 'ICT1233', '2025-02-14', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A157', 'tg/2023/0011', 'ICT1233', '2025-02-21', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A158', 'tg/2023/0011', 'ICT1233', '2025-02-28', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A159', 'tg/2023/0011', 'ICT1233', '2025-03-07', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A160', 'tg/2023/0011', 'ICT1233', '2025-03-14', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A161', 'tg/2023/0011', 'ICT1233', '2025-03-21', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A162', 'tg/2023/0011', 'ICT1233', '2025-03-28', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A163', 'tg/2023/0011', 'ICT1233', '2025-04-04', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A164', 'tg/2023/0011', 'ICT1233', '2025-04-11', '09:00:00', 'Theory', 'Present', FALSE),
+    -> ('A165', 'tg/2023/0011', 'ICT1233', '2025-04-18', '09:00:00', 'Theory', 'Present', FALSE);
+Query OK, 75 rows affected (0.126 sec)
+Records: 75  Duplicates: 0  Warnings: 0
+
+mysql>
+mysql>
+mysql>
+mysql>
+mysql> INSERT INTO ATTENDENCE_BST (Attend_Id, ST_Id, Course_code, Date, Time, Session_Type, Status, Is_Medical_Day) VALUES
+    ->
+    ->
+    -> ('A166', 'tg/2023/0012', 'ICT1242', '2025-01-10', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A167', 'tg/2023/0012', 'ICT1242', '2025-01-17', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A168', 'tg/2023/0012', 'ICT1242', '2025-01-24', '13:00:00', 'Practical', 'Medical', TRUE),
+    -> ('A169', 'tg/2023/0012', 'ICT1242', '2025-01-31', '13:00:00', 'Practical', 'Medical', TRUE),
+    -> ('A170', 'tg/2023/0012', 'ICT1242', '2025-02-07', '13:00:00', 'Practical', 'Medical', TRUE),
+    -> ('A171', 'tg/2023/0012', 'ICT1242', '2025-02-14', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A172', 'tg/2023/0012', 'ICT1242', '2025-02-21', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A173', 'tg/2023/0012', 'ICT1242', '2025-02-28', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A174', 'tg/2023/0012', 'ICT1242', '2025-03-07', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A175', 'tg/2023/0012', 'ICT1242', '2025-03-14', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A176', 'tg/2023/0012', 'ICT1242', '2025-03-21', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A177', 'tg/2023/0012', 'ICT1242', '2025-03-28', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A178', 'tg/2023/0012', 'ICT1242', '2025-04-04', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A179', 'tg/2023/0012', 'ICT1242', '2025-04-11', '13:00:00', 'Practical', 'Present', FALSE),
+    -> ('A180', 'tg/2023/0012', 'ICT1242', '2025-04-18', '13:00:00', 'Practical', 'Present', FALSE),
+    ->
+    -> ('A181', 'tg/2023/0013', 'ICT1253', '2025-01-10', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A182', 'tg/2023/0013', 'ICT1253', '2025-01-17', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A183', 'tg/2023/0013', 'ICT1253', '2025-01-24', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A184', 'tg/2023/0013', 'ICT1253', '2025-01-31', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A185', 'tg/2023/0013', 'ICT1253', '2025-02-07', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A186', 'tg/2023/0013', 'ICT1253', '2025-02-14', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A187', 'tg/2023/0013', 'ICT1253', '2025-02-21', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A188', 'tg/2023/0013', 'ICT1253', '2025-02-28', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A189', 'tg/2023/0013', 'ICT1253', '2025-03-07', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A190', 'tg/2023/0013', 'ICT1253', '2025-03-14', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A191', 'tg/2023/0013', 'ICT1253', '2025-03-21', '11:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A192', 'tg/2023/0013', 'ICT1253', '2025-03-28', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A193', 'tg/2023/0013', 'ICT1253', '2025-04-04', '11:00:00', 'Theory', 'Present', FALSE),
+    -> ('A194', 'tg/2023/0013', 'ICT1253', '2025-04-11', '11:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A195', 'tg/2023/0013', 'ICT1253', '2025-04-18', '11:00:00', 'Theory', 'Present', FALSE),
+    ->
+    -> ('A196', 'tg/2023/0014', 'TCS1212', '2025-01-10', '14:00:00', 'Theory', 'Present', FALSE),
+    -> ('A197', 'tg/2023/0014', 'TCS1212', '2025-01-17', '14:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A198', 'tg/2023/0014', 'TCS1212', '2025-01-24', '14:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A199', 'tg/2023/0014', 'TCS1212', '2025-01-31', '14:00:00', 'Theory', 'Present', FALSE),
+    -> ('A200', 'tg/2023/0014', 'TCS1212', '2025-02-07', '14:00:00', 'Theory', 'Present', FALSE),
+    -> ('A201', 'tg/2023/0014', 'TCS1212', '2025-02-14', '14:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A202', 'tg/2023/0014', 'TCS1212', '2025-02-21', '14:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A203', 'tg/2023/0014', 'TCS1212', '2025-02-28', '14:00:00', 'Theory', 'Present', FALSE),
+    -> ('A204', 'tg/2023/0014', 'TCS1212', '2025-03-07', '14:00:00', 'Theory', 'Present', FALSE),
+    -> ('A205', 'tg/2023/0014', 'TCS1212', '2025-03-14', '14:00:00', 'Theory', 'Present', FALSE),
+    -> ('A206', 'tg/2023/0014', 'TCS1212', '2025-03-21', '14:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A207', 'tg/2023/0014', 'TCS1212', '2025-03-28', '14:00:00', 'Theory', 'Present', FALSE),
+    -> ('A208', 'tg/2023/0014', 'TCS1212', '2025-04-04', '14:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A209', 'tg/2023/0014', 'TCS1212', '2025-04-11', '14:00:00', 'Theory', 'Present', FALSE),
+    -> ('A210', 'tg/2023/0014', 'TCS1212', '2025-04-18', '14:00:00', 'Theory', 'Absent', FALSE),
+    ->
+    -> ('A211', 'tg/2023/0015', 'TMS1233', '2025-01-10', '15:00:00', 'Theory', 'Present', FALSE),
+    -> ('A212', 'tg/2023/0015', 'TMS1233', '2025-01-17', '15:00:00', 'Theory', 'Present', FALSE),
+    -> ('A213', 'tg/2023/0015', 'TMS1233', '2025-01-24', '15:00:00', 'Theory', 'Present', FALSE),
+    -> ('A214', 'tg/2023/0015', 'TMS1233', '2025-01-31', '15:00:00', 'Theory', 'Present', FALSE),
+    -> ('A215', 'tg/2023/0015', 'TMS1233', '2025-02-07', '15:00:00', 'Theory', 'Present', FALSE),
+    -> ('A216', 'tg/2023/0015', 'TMS1233', '2025-02-14', '15:00:00', 'Theory', 'Present', FALSE),
+    -> ('A217', 'tg/2023/0015', 'TMS1233', '2025-02-21', '15:00:00', 'Theory', 'Present', FALSE),
+    -> ('A218', 'tg/2023/0015', 'TMS1233', '2025-02-28', '15:00:00', 'Theory', 'Present', FALSE),
+    -> ('A219', 'tg/2023/0015', 'TMS1233', '2025-03-07', '15:00:00', 'Theory', 'Present', FALSE),
+    -> ('A220', 'tg/2023/0015', 'TMS1233', '2025-03-14', '15:00:00', 'Theory', 'Present', FALSE),
+    -> ('A221', 'tg/2023/0015', 'TMS1233', '2025-03-21', '15:00:00', 'Theory', 'Absent', FALSE),
+    -> ('A222', 'tg/2023/0015', 'TMS1233', '2025-03-28', '15:00:00', 'Theory', 'Present', FALSE),
+    -> ('A223', 'tg/2023/0015', 'TMS1233', '2025-04-04', '15:00:00', 'Theory', 'Present', FALSE),
+    -> ('A224', 'tg/2023/0015', 'TMS1233', '2025-04-11', '15:00:00', 'Theory', 'Present', FALSE),
+    -> ('A225', 'tg/2023/0015', 'TMS1233', '2025-04-18', '15:00:00', 'Theory', 'Present', FALSE);
+Query OK, 60 rows affected (0.152 sec)
+Records: 60  Duplicates: 0  Warnings: 0
+
+mysql>
