@@ -11,9 +11,9 @@ CREATE TABLE user (
 );
 
 CREATE TABLE user_contact (
-  U_Id VARCHAR(15) NOT NULL,
-  Contact_No VARCHAR(15) NOT NULL,
-  PRIMARY KEY (U_Id, Contact_No)  
+  U_Id VARCHAR(15),
+  Contact_No VARCHAR(15),
+  PRIMARY KEY (U_Id)  
 );
 ALTER TABLE user_contact
     ADD CONSTRAINT fk_usercontact_user 
@@ -227,12 +227,6 @@ CREATE TABLE student_course (
     PRIMARY KEY (ST_Id, Course_code)
 );
 
-
-CREATE TABLE user_contact (
-    U_Id        VARCHAR(15) NOT NULL,
-    Contact_No  VARCHAR(15) NOT NULL,
-    PRIMARY KEY (U_Id, Contact_No)
-);
 
 
 CREATE TABLE user_course (
