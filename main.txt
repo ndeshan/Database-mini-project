@@ -13,9 +13,12 @@ CREATE TABLE user (
 CREATE TABLE user_contact (
   U_Id VARCHAR(15) NOT NULL,
   Contact_No VARCHAR(15) NOT NULL,
-  PRIMARY KEY (U_Id, Contact_No),
-  FOREIGN KEY (U_Id) REFERENCES user(U_Id)
+  PRIMARY KEY (U_Id, Contact_No)  
 );
+ALTER TABLE user_contact
+    ADD CONSTRAINT fk_usercontact_user 
+        FOREIGN KEY (U_Id) REFERENCES user(U_Id)
+        ON UPDATE CASCADE ON DELETE CASCADE;
 
 
 CREATE TABLE student (
@@ -37,10 +40,16 @@ CREATE TABLE medical_record (
   Valid_To DATE NOT NULL,
   Medical_Type ENUM('Attendance','CA','Final_Exam','Quiz') NOT NULL,
   Approve TINYINT(1) DEFAULT 1,
-  Approved_By VARCHAR(20) NOT NULL,
-  FOREIGN KEY (ST_Id) REFERENCES student(Registration_No),
-  FOREIGN KEY (Course_code) REFERENCES course_unit(Course_code)
+  Approved_By VARCHAR(20) NOT NULL  
 );
+ALTER TABLE medical_record
+    ADD CONSTRAINT fk_medical_student 
+        FOREIGN KEY (ST_Id) REFERENCES student(Registration_No)
+        ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE medical_record
+    ADD CONSTRAINT fk_medical_course 
+        FOREIGN KEY (Course_code) REFERENCES course_unit(Course_code)
+        ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 ALTER TABLE medical_record DROP COLUMN Medical_type;
@@ -93,7 +102,14 @@ CREATE TABLE exam (
     Exam_Type ENUM('Quiz_01', 'Quiz_02', 'Quiz_03', 'Assessment_01', 'Assessment_02', 'Mid_Semester', 'Final') NOT NULL,
     Semester VARCHAR(20) DEFAULT 'Semester 2'   
 );
-
+ALTER TABLE exam
+    ADD CONSTRAINT fk_exam_student 
+        FOREIGN KEY (ST_Id) REFERENCES student(Registration_No)
+        ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE exam
+    ADD CONSTRAINT fk_exam_course 
+        FOREIGN KEY (Course_code) REFERENCES course_unit(Course_code)
+        ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 
@@ -105,7 +121,14 @@ CREATE TABLE course_enrollment (
     Official_Confirmation VARCHAR(20) DEFAULT 'COMFIRMED',
     Semester VARCHAR(20) DEFAULT 'Semester 2'
 );
-
+ALTER TABLE course_enrollment
+    ADD CONSTRAINT fk_enroll_student 
+        FOREIGN KEY (ST_Id) REFERENCES student(Registration_No)
+        ON UPDATE CASCADE ON DELETE CASCADE,
+ALTER TABLE course_enrollment
+    ADD CONSTRAINT fk_enroll_course 
+        FOREIGN KEY (Course_code) REFERENCES course_unit(Course_code)
+        ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 CREATE TABLE mark (
@@ -123,11 +146,22 @@ CREATE TABLE mark (
   Final_Practical DECIMAL(5,2),
   Type ENUM('Theory', 'Practical', 'Both') NOT NULL,
 
-  PRIMARY KEY( Mark_id),		
-  FOREIGN KEY (student_id) REFERENCES student(Registration_No) ON DELETE CASCADE,
-  FOREIGN KEY (course_code) REFERENCES course_unit(Course_code) ON DELETE CASCADE,
-  FOREIGN KEY (exam_id) REFERENCES exam(Exam_Id) ON DELETE CASCADE
+  PRIMARY KEY( Mark_id)	 
 );
+ALTER TABLE mark
+    ADD CONSTRAINT fk_mark_student 
+        FOREIGN KEY (ST_Id) REFERENCES student(Registration_No)
+        ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE mark
+    ADD CONSTRAINT fk_mark_course 
+        FOREIGN KEY (Course_code) REFERENCES course_unit(Course_code)
+        ON UPDATE CASCADE ON DELETE RESTRICT;
+ALTER TABLE mark
+    ADD CONSTRAINT fk_mark_exam 
+        FOREIGN KEY (Exam_Id) REFERENCES exam(Exam_Id)
+        ON UPDATE CASCADE ON DELETE CASCADE;
+
+
 UPDATE mark m
 JOIN course_unit c
 ON m.Course_code =c.Course_code
@@ -177,9 +211,50 @@ UPDATE attendance
      WHERE course_code IN ('ICT1222', 'ICT1242', 'TMS1231', 'TMS1261');
 
 
-
+ALTER TABLE attendance DROP COLUMN Session_Number;
 
 UPDATE attendance SET session_type = "Practical" WHERE session_type = "Lab";
+
+
+
+
+
+
+CREATE TABLE grade_scale (
+    Min_Marks   DECIMAL(5,2) NOT NULL,
+    Max_Marks   DECIMAL(5,2) NOT NULL,
+    Grade       CHAR(2)      NOT NULL,
+    Grade_Point DECIMAL(3,2) NOT NULL,
+    PRIMARY KEY (Min_Marks, Max_Marks)
+);
+
+
+CREATE TABLE student_course (
+    ST_Id         VARCHAR(20) NOT NULL,
+    Course_code   VARCHAR(15) NOT NULL,
+    PRIMARY KEY (ST_Id, Course_code)
+);
+
+
+CREATE TABLE user_contact (
+    U_Id        VARCHAR(15) NOT NULL,
+    Contact_No  VARCHAR(15) NOT NULL,
+    PRIMARY KEY (U_Id, Contact_No)
+);
+
+
+CREATE TABLE user_course (
+    U_Id        VARCHAR(15) NOT NULL,
+    Course_Id   VARCHAR(15) NOT NULL,
+    PRIMARY KEY (U_Id, Course_Id)
+);
+
+
+CREATE TABLE user_role (
+    Role_Name   VARCHAR(50) NOT NULL,
+    Description TEXT        NULL,
+    PRIMARY KEY (Role_Name)
+);
 
 
      
