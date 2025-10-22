@@ -246,6 +246,12 @@ CREATE TABLE grade_scale (
     PRIMARY KEY (Min_Marks, Max_Marks)
 );
 
+CREATE TABLE AcademicGrades (
+         Reference VARCHAR(10) PRIMARY KEY,
+         GradePoint DECIMAL(3,1),
+         Description TEXT
+    )
+
 
 CREATE TABLE student_course (
     ST_Id         VARCHAR(20) NOT NULL,
