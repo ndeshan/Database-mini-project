@@ -33,7 +33,7 @@ LEAVE read_loop;
 END IF;
  SET get_total_point=0;
  SET get_total_credits=0;
-SET  sgpa=0;
+ SET  sgpa=0;
 SELECT SUM( (
 	CASE
 	WHEN  s.Final_Grade='A+' THEN 
