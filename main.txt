@@ -11,10 +11,12 @@ CREATE TABLE user (
 );
 
 CREATE TABLE user_contact (
-  U_Id VARCHAR(15),
-  Contact_No VARCHAR(15),
-  PRIMARY KEY (U_Id)  
+  U_Id VARCHAR(15) NOT NULL,
+  Contact_No VARCHAR(15) NOT NULL,
+  PRIMARY KEY (U_Id, Contact_No)
+ 
 );
+
 ALTER TABLE user_contact
     ADD CONSTRAINT fk_usercontact_user 
         FOREIGN KEY (U_Id) REFERENCES user(U_Id)
