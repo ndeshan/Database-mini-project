@@ -90,7 +90,22 @@ CREATE TABLE course_unit (
     Theory_Hours INT DEFAULT 15,
     Practical_Hours INT DEFAULT 15
 );
-
+CREATE TABLE course_enrollment (
+    Enrollment_Id VARCHAR(15) NOT NULL PRIMARY KEY,
+    ST_Id VARCHAR(20) NOT NULL,
+    Course_code VARCHAR(15) NOT NULL,
+    Enrolled_Date DATE DEFAULT '2025-09-23',
+    Official_Confirmation VARCHAR(20) DEFAULT 'COMFIRMED',
+    Semester VARCHAR(20) DEFAULT 'Semester 2'
+);
+ALTER TABLE course_enrollment
+    ADD CONSTRAINT fk_enroll_student 
+        FOREIGN KEY (ST_Id) REFERENCES student(Registration_No)
+        ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE course_enrollment
+    ADD CONSTRAINT fk_enroll_course_c 
+        FOREIGN KEY (Course_code) REFERENCES course_unit(Course_code)
+        ON UPDATE CASCADE ON DELETE RESTRICT;
 
 CREATE TABLE exam (
     Exam_Id INT NOT NULL AUTO_INCREMENT PRIMARY KEY,
@@ -112,23 +127,32 @@ ALTER TABLE exam
 
 
 
-CREATE TABLE course_enrollment (
-    Enrollment_Id VARCHAR(15) NOT NULL PRIMARY KEY,
-    ST_Id VARCHAR(20) NOT NULL,
-    Course_code VARCHAR(15) NOT NULL,
-    Enrolled_Date DATE DEFAULT '2025-09-23',
-    Official_Confirmation VARCHAR(20) DEFAULT 'COMFIRMED',
-    Semester VARCHAR(20) DEFAULT 'Semester 2'
+
+
+
+
+
+CREATE TABLE exam_enrollment (
+    id                  INT          NOT NULL AUTO_INCREMENT,
+    Enrollment_Id       VARCHAR(20)  NULL,
+    ST_Id               VARCHAR(20)  NOT NULL,
+    Semester            VARCHAR(20)  NULL DEFAULT 'Semester 2',
+    Course_code         VARCHAR(15)  NOT NULL,
+    Attendance_Eligible TINYINT(1)   NULL DEFAULT 0,
+    CA_Eligible         TINYINT(1)   NULL DEFAULT 0,
+    Final_Eligible      TINYINT(1)   NULL DEFAULT 0,
+    PRIMARY KEY (id)
+  
 );
-ALTER TABLE course_enrollment
-    ADD CONSTRAINT fk_enroll_student 
+
+ALTER TABLE exam_enrollment
+    ADD CONSTRAINT fk_exam_enroll_student 
         FOREIGN KEY (ST_Id) REFERENCES student(Registration_No)
         ON UPDATE CASCADE ON DELETE CASCADE;
-ALTER TABLE course_enrollment
-    ADD CONSTRAINT fk_enroll_course_c 
+ALTER TABLE exam_enrollment
+    ADD CONSTRAINT fk_exam_enroll_course 
         FOREIGN KEY (Course_code) REFERENCES course_unit(Course_code)
         ON UPDATE CASCADE ON DELETE RESTRICT;
-
 
 
 CREATE TABLE mark (
