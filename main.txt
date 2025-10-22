@@ -132,23 +132,7 @@ ALTER TABLE course_enrollment
         ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
-CREATE TABLE mark (
-  Mark_id VARCHAR(15) NOT NULL,
-  student_id VARCHAR(20) NOT NULL,
-  course_code VARCHAR(15) NOT NULL,
-  exam_id INT NOT NULL,
-  Quiz_01 DECIMAL(5,2),
-  Quiz_02 DECIMAL(5,2),
-  Quiz_03 DECIMAL(5,2),
-  Assessment_01 DECIMAL(5,2),
-  Mid_Practical DECIMAL(5,2),
-  Mid_Theory DECIMAL(5,2),
-  Final_Theory DECIMAL(5,2),
-  Final_Practical DECIMAL(5,2),
-  Type ENUM('Theory', 'Practical', 'Both') NOT NULL,
 
-  PRIMARY KEY( Mark_id)	 
-);
 CREATE TABLE mark (
   Mark_id VARCHAR(15) NOT NULL,
   student_id VARCHAR(20) NOT NULL,
