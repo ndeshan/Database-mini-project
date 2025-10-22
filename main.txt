@@ -52,7 +52,7 @@ ALTER TABLE medical_record
         ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
-ALTER TABLE medical_record DROP COLUMN Medical_type;
+
 
 ALTER TABLE medical_record
 ADD CONSTRAINT Checking_approve_status_valid_or_not
@@ -67,7 +67,7 @@ ALTER TABLE medical_record
 MODIFY Approved_By VARCHAR(20) NULL;
 
 
-ALTER TABLE student DROP COLUMN status;
+
 
 
 
