@@ -312,3 +312,14 @@ INSERT INTO user_course (U_Id, Course_Id) VALUES
 ('lc/2023/002', 'ICT1253'),
 ('lc/2023/002', 'TCS1212'),
 ('lc/2023/003', 'TMS1233');
+
+
+
+
+
+INSERT INTO user_role (Role_Name, Description) VALUES
+('Admin', 'Full access with GRANT OPTION'),
+('Dean', 'Full access without GRANT'),
+('Lecturer', 'Full access without user creation'),
+('Student', 'Read-only access to own results'),
+('Technical Officer', 'Read/Write/Update attendance');
