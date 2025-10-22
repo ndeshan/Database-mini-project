@@ -699,6 +699,28 @@ INSERT INTO grade_scale (Min_Marks, Max_Marks, Grade, Grade_Point) VALUES
 (85.00, 89.99, 'A',  4.00),
 (90.00, 100.00, 'A+', 4.00);
 
+delete from grade_scale;
+INSERT INTO grade_scale (Min_Marks, Max_Marks, Grade, Grade_Point)
+     VALUES
+     (85.00, 100.00, 'A+', 4.00),
+     (75.00, 84.99, 'A', 4.00),
+     (70.00, 74.99, 'A-', 3.70),
+     (65.00, 69.99, 'B+', 3.30),
+     (60.00, 64.99, 'B', 3.00),
+     (55.00, 59.99, 'B-', 2.70),
+     (50.00, 54.99, 'C+', 2.30),
+     (45.00, 49.99, 'C', 2.00),
+     (40.00, 44.99, 'C-', 1.70),
+     (35.00, 39.99, 'D', 1.30),
+     (0.00, 34.99, 'E', 0.00);
+
+INSERT INTO AcademicGrades (Reference, GradePoint, Description) VALUES
+     ('E(CA & ESA)', 0.0, 'Both CA and ESA marks are below the prescribed minimum. Incomplete CA and ESA'),
+     ('E(CA)',       0.0, 'CA mark is below the prescribed minimum. Incomplete CA'),
+     ('E(ESA)',      0.0, 'ESA mark is below the prescribed minimum. Incomplete ESA'),
+     ('N',           NULL, 'Academic concession'),
+     ('W',           NULL, 'Withdrawn');
+
 
 
 
