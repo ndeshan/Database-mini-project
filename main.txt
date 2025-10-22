@@ -1,3 +1,7 @@
+DROP database student_management;
+Create database student_management;
+
+Use student_management;
 CREATE TABLE user (
   U_Id VARCHAR(15) NOT NULL PRIMARY KEY,
   Fname VARCHAR(45),
@@ -225,7 +229,7 @@ UPDATE attendance
      WHERE course_code IN ('ICT1222', 'ICT1242', 'TMS1231', 'TMS1261');
 
 
-ALTER TABLE attendance DROP COLUMN Session_Number;
+
 
 UPDATE attendance SET session_type = "Practical" WHERE session_type = "Lab";
 
@@ -266,4 +270,3 @@ CREATE TABLE user_role (
 
 
      
-
