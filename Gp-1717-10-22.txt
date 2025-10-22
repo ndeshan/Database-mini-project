@@ -1,0 +1,3 @@
+mysql> alter table exam drop column Is_Eligible;
+Query OK, 0 rows affected (0.676 sec)
+Records: 0  Duplicates: 0  Warnings: 0
