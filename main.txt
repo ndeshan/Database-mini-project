@@ -125,9 +125,9 @@ CREATE TABLE course_enrollment (
 ALTER TABLE course_enrollment
     ADD CONSTRAINT fk_enroll_student 
         FOREIGN KEY (ST_Id) REFERENCES student(Registration_No)
-        ON UPDATE CASCADE ON DELETE CASCADE,
+        ON UPDATE CASCADE ON DELETE CASCADE;
 ALTER TABLE course_enrollment
-    ADD CONSTRAINT fk_enroll_course 
+    ADD CONSTRAINT fk_enroll_course_c 
         FOREIGN KEY (Course_code) REFERENCES course_unit(Course_code)
         ON UPDATE CASCADE ON DELETE RESTRICT;
 
