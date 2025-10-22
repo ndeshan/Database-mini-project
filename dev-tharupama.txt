@@ -3373,3 +3373,33 @@ mysql> SELECT * FROM grade_scale;
 |     85.00 |    100.00 | A+    |        4.00 |
 +-----------+-----------+-------+-------------+
 11 rows in set (0.00 sec)
+
+//////////////////////////////////////////
+mysql> CREATE TABLE AcademicGrades (
+    ->     Reference VARCHAR(15) PRIMARY KEY,
+    ->     GradePoint DECIMAL(3,1),
+    ->     Description TEXT
+    -> );
+Query OK, 0 rows affected (0.03 sec)
+
+mysql>
+mysql> INSERT INTO AcademicGrades (Reference, GradePoint, Description) VALUES
+    -> ('E(CA & ESA)', 0.0, 'Both CA and ESA marks are below the prescribed minimum. Incomplete CA and ESA'),
+    -> ('E(CA)',       0.0, 'CA mark is below the prescribed minimum. Incomplete CA'),
+    -> ('E(ESA)',      0.0, 'ESA mark is below the prescribed minimum. Incomplete ESA'),
+    -> ('N',           NULL, 'Academic concession'),
+    -> ('W',           NULL, 'Withdrawn');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+
+mysql> SELECT * FROM AcademicGrades;
++-------------+------------+-------------------------------------------------------------------------------+
+| Reference   | GradePoint | Description                                                                   |
++-------------+------------+-------------------------------------------------------------------------------+
+| E(CA & ESA) |        0.0 | Both CA and ESA marks are below the prescribed minimum. Incomplete CA and ESA |
+| E(CA)       |        0.0 | CA mark is below the prescribed minimum. Incomplete CA                        |
+| E(ESA)      |        0.0 | ESA mark is below the prescribed minimum. Incomplete ESA                      |
+| N           |       NULL | Academic concession                                                           |
+| W           |       NULL | Withdrawn                                                                     |
++-------------+------------+-------------------------------------------------------------------------------+
+5 rows in set (0.00 sec)
