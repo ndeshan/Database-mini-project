@@ -48,3 +48,11 @@ ALTER TABLE course_enrollment
     Course_code   VARCHAR(15) NOT NULL,
     PRIMARY KEY (ST_Id, Course_code)
 );
+
+
+
+CREATE TABLE user_course (
+    U_Id        VARCHAR(15) NOT NULL,
+    Course_Id   VARCHAR(15) NOT NULL,
+    PRIMARY KEY (U_Id, Course_Id)
+);
