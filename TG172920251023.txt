@@ -1,0 +1,34 @@
+CREATE VIEW pending_medical_records AS
+SELECT 
+    m.Medical_Id,
+    m.ST_Id,
+    s.Fname,
+    s.Lname,
+    s.Department,
+    m.Course_code,
+    m.Date_Submit,
+    m.Valid_From,
+    m.Valid_To,
+    u.Fname AS Approver_Fname,
+    u.Lname AS Approver_Lname
+FROM medical_record m
+JOIN student s ON m.ST_Id = s.Registration_No
+LEFT JOIN user u ON m.Approved_By = u.U_Id
+WHERE m.Approve = 0;
+
+CREATE VIEW approved_medical_records AS
+SELECT 
+    m.Medical_Id,
+    m.ST_Id,
+    s.Fname,
+    s.Lname,
+    s.Department AS Student_Department,
+    m.Course_code,
+    m.Date_Submit,
+    m.Valid_From,
+    m.Valid_To,
+    m.Approve,
+    m.Approved_By
+FROM medical_record m
+JOIN student s ON m.ST_Id = s.Registration_No
+WHERE m.Approve = 1;
