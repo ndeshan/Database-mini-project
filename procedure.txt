@@ -214,6 +214,7 @@ END//
 DELIMITER ;
 
 
+call getstudentcourses('tg/2023/0006');
 
 
 
