@@ -7,9 +7,6 @@ Nipuna
 
 
 
-
-
-
 DELIMITER //
 
 CREATE PROCEDURE exam_enrollment_all()
@@ -66,9 +63,6 @@ call exam_enrollment_all();
 
 
 
-
-
-
 DELIMITER //
 
 CREATE PROCEDURE course_enrollment_new_insert (
@@ -97,7 +91,6 @@ BEGIN
     END IF;
 
 
-  
     SELECT CA_Marks INTO ca_score
     FROM student_result
     WHERE student_id = p_ST_Id AND course_code = p_Course_code
@@ -184,9 +177,41 @@ END //
 
 DELIMITER ;
 
-
-
 call getstudentresults('tg/2023/0002');
+
+
+
+
+
+
+
+-- meka awilla student_id eka input ekiak widiyata aragena student register wechcha course okkama details ekka pennanawa.e  ayage comfermation ekath ekka.
+
+
+DELIMITER //
+
+CREATE PROCEDURE getstudentcourses(IN student_id VARCHAR(20))
+BEGIN
+    SELECT DISTINCT 
+        c.Course_code,
+        c.Name AS Course_Name,
+        c.Type,
+        c.Credit,
+        c.Theory_Hours,
+        c.Practical_Hours,
+        c.Year AS Acedemic_year,
+        c.Semester,
+        c.Department_Offering,
+	ce.Official_Confirmation,
+	 c.Lec_Name AS Lecturer_name
+       
+    FROM student_course sc
+    JOIN course_unit c ON sc.Course_code = c.Course_code
+    join course_enrollment ce ON sc.ST_Id = ce.ST_Id
+    WHERE sc.ST_Id = student_id;
+END//
+
+DELIMITER ;
 
 
 
