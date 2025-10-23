@@ -516,3 +516,50 @@ DELIMITER ;
 
 CALL getcoursebatchsummary('BST1212');
 
+
+
+
+
+
+
+DELIMITER //
+
+CREATE PROCEDURE getstudentcoursesummary(
+    IN input_student_id VARCHAR(20),
+    IN input_course_code VARCHAR(15)
+)
+BEGIN
+    SELECT 
+        m.Quiz_01,
+        m.Quiz_02,
+        m.Quiz_03,
+        m.Assessment_01,
+        m.Mid_Practical,
+        m.Mid_Theory,
+        m.Final_Theory,
+        m.Final_Practical,
+        
+        sr.CA_marks,
+        sr.Final_Marks,
+        sr.Final_Grade,
+        sr.Result_Status,
+        sr.SGPA,
+        sr.CGPA
+        
+    FROM mark m
+    INNER JOIN student_result sr 
+        ON m.student_id = sr.student_id 
+        AND m.course_code = sr.course_code
+    WHERE 
+        m.student_id = input_student_id
+        AND m.course_code = input_course_code;
+END//
+
+DELIMITER ;
+
+
+
+CALL getstudentcoursesummary('tg/2023/0006', 'BST1212');
+
+
+
