@@ -3463,3 +3463,175 @@ mysql> call attendance_by_stid_cid_date("tg/2024/0006","BST1212","2025-3-31");
 | 2025-03-31   |          12 | Theory       | Present |
 +--------------+-------------+--------------+---------+
 36 rows in set (0.00 sec)
+//////////////////////////////////////////////////////////////
+mysql> call attendance_by_stid_cid_date("tg/2024/0001","ICT1222","t","2025-3-31");
+ERROR 1318 (42000): Incorrect number of arguments for PROCEDURE student_management.attendance_by_stid_cid_date; expected 3, got 4
+mysql> DROP procedure attendance_by_stid_cid_date;
+Query OK, 0 rows affected (0.06 sec)
+
+mysql> CALL attendance_by_stid_cid_seperate_type_date("tg/2024/001","ICT1222","t","2025-3-31");
+Empty set (0.00 sec)
+
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> CALL attendance_by_stid_cid_seperate_type_date("tg/2024/001","ICT1253","t","2025-3-31");
++--------------+-------------+--------------+---------+
+| Session_Date | Week_Number | Session_Type | Status  |
++--------------+-------------+--------------+---------+
+| 2025-01-13   |           1 | Theory       | Present |
+| 2025-01-20   |           2 | Theory       | Present |
+| 2025-01-27   |           3 | Theory       | Present |
+| 2025-02-03   |           4 | Theory       | Present |
+| 2025-02-10   |           5 | Theory       | Present |
+| 2025-02-17   |           6 | Theory       | Present |
+| 2025-02-24   |           7 | Theory       | Present |
+| 2025-03-03   |           8 | Theory       | Present |
+| 2025-03-10   |           9 | Theory       | Present |
+| 2025-03-17   |          10 | Theory       | Present |
+| 2025-03-24   |          11 | Theory       | Present |
+| 2025-03-31   |          12 | Theory       | Present |
+| 2025-01-13   |           1 | Theory       | Present |
+| 2025-01-20   |           2 | Theory       | Present |
+| 2025-01-27   |           3 | Theory       | Present |
+| 2025-02-03   |           4 | Theory       | Present |
+| 2025-02-10   |           5 | Theory       | Present |
+| 2025-02-17   |           6 | Theory       | Present |
+| 2025-02-24   |           7 | Theory       | Present |
+| 2025-03-03   |           8 | Theory       | Present |
+| 2025-03-10   |           9 | Theory       | Present |
+| 2025-03-17   |          10 | Theory       | Present |
+| 2025-03-24   |          11 | Theory       | Present |
+| 2025-03-31   |          12 | Theory       | Present |
+| 2025-01-13   |           1 | Theory       | Present |
+| 2025-01-20   |           2 | Theory       | Present |
+| 2025-01-27   |           3 | Theory       | Present |
+| 2025-02-03   |           4 | Theory       | Present |
+| 2025-02-10   |           5 | Theory       | Present |
+| 2025-02-17   |           6 | Theory       | Present |
+| 2025-02-24   |           7 | Theory       | Present |
+| 2025-03-03   |           8 | Theory       | Present |
+| 2025-03-10   |           9 | Theory       | Present |
+| 2025-03-17   |          10 | Theory       | Present |
+| 2025-03-24   |          11 | Theory       | Present |
+| 2025-03-31   |          12 | Theory       | Present |
+| 2025-01-13   |           1 | Theory       | Present |
+| 2025-01-20   |           2 | Theory       | Present |
+| 2025-01-27   |           3 | Theory       | Present |
+| 2025-02-03   |           4 | Theory       | Present |
+| 2025-02-10   |           5 | Theory       | Present |
+| 2025-02-17   |           6 | Theory       | Present |
+| 2025-02-24   |           7 | Theory       | Present |
+| 2025-03-03   |           8 | Theory       | Present |
+| 2025-03-10   |           9 | Theory       | Present |
+| 2025-03-17   |          10 | Theory       | Present |
+| 2025-03-24   |          11 | Theory       | Present |
+| 2025-03-31   |          12 | Theory       | Present |
+| 2025-01-13   |           1 | Theory       | Present |
+| 2025-01-20   |           2 | Theory       | Present |
+| 2025-01-27   |           3 | Theory       | Present |
+| 2025-02-03   |           4 | Theory       | Present |
+| 2025-02-10   |           5 | Theory       | Present |
+| 2025-02-17   |           6 | Theory       | Present |
+| 2025-02-24   |           7 | Theory       | Present |
+| 2025-03-03   |           8 | Theory       | Present |
+| 2025-03-10   |           9 | Theory       | Present |
+| 2025-03-17   |          10 | Theory       | Present |
+| 2025-03-24   |          11 | Theory       | Present |
+| 2025-03-31   |          12 | Theory       | Present |
+| 2025-01-13   |           1 | Theory       | Present |
+| 2025-01-20   |           2 | Theory       | Present |
+| 2025-01-27   |           3 | Theory       | Present |
+| 2025-02-03   |           4 | Theory       | Present |
+| 2025-02-10   |           5 | Theory       | Present |
+| 2025-02-17   |           6 | Theory       | Present |
+| 2025-02-24   |           7 | Theory       | Present |
+| 2025-03-03   |           8 | Theory       | Present |
+| 2025-03-10   |           9 | Theory       | Present |
+| 2025-03-17   |          10 | Theory       | Present |
+| 2025-03-24   |          11 | Theory       | Present |
+| 2025-03-31   |          12 | Theory       | Present |
++--------------+-------------+--------------+---------+
+72 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.28 sec)
+
+mysql> CALL attendance_by_stid_cid_seperate_type_date("tg/2024/001","ICT1253","p","2025-3-31");
++--------------+-------------+--------------+---------+
+| Session_Date | Week_Number | Session_Type | Status  |
++--------------+-------------+--------------+---------+
+| 2025-01-13   |           1 | Practical    | Present |
+| 2025-01-20   |           2 | Practical    | Present |
+| 2025-01-27   |           3 | Practical    | Present |
+| 2025-02-03   |           4 | Practical    | Present |
+| 2025-02-10   |           5 | Practical    | Present |
+| 2025-02-17   |           6 | Practical    | Present |
+| 2025-02-24   |           7 | Practical    | Present |
+| 2025-03-03   |           8 | Practical    | Present |
+| 2025-03-10   |           9 | Practical    | Present |
+| 2025-03-17   |          10 | Practical    | Present |
+| 2025-03-24   |          11 | Practical    | Present |
+| 2025-03-31   |          12 | Practical    | Present |
+| 2025-01-13   |           1 | Practical    | Present |
+| 2025-01-20   |           2 | Practical    | Present |
+| 2025-01-27   |           3 | Practical    | Present |
+| 2025-02-03   |           4 | Practical    | Present |
+| 2025-02-10   |           5 | Practical    | Present |
+| 2025-02-17   |           6 | Practical    | Present |
+| 2025-02-24   |           7 | Practical    | Present |
+| 2025-03-03   |           8 | Practical    | Present |
+| 2025-03-10   |           9 | Practical    | Present |
+| 2025-03-17   |          10 | Practical    | Present |
+| 2025-03-24   |          11 | Practical    | Present |
+| 2025-03-31   |          12 | Practical    | Present |
+| 2025-01-13   |           1 | Practical    | Present |
+| 2025-01-20   |           2 | Practical    | Present |
+| 2025-01-27   |           3 | Practical    | Present |
+| 2025-02-03   |           4 | Practical    | Present |
+| 2025-02-10   |           5 | Practical    | Present |
+| 2025-02-17   |           6 | Practical    | Present |
+| 2025-02-24   |           7 | Practical    | Present |
+| 2025-03-03   |           8 | Practical    | Present |
+| 2025-03-10   |           9 | Practical    | Present |
+| 2025-03-17   |          10 | Practical    | Present |
+| 2025-03-24   |          11 | Practical    | Present |
+| 2025-03-31   |          12 | Practical    | Present |
+| 2025-01-13   |           1 | Practical    | Present |
+| 2025-01-20   |           2 | Practical    | Present |
+| 2025-01-27   |           3 | Practical    | Present |
+| 2025-02-03   |           4 | Practical    | Present |
+| 2025-02-10   |           5 | Practical    | Present |
+| 2025-02-17   |           6 | Practical    | Present |
+| 2025-02-24   |           7 | Practical    | Present |
+| 2025-03-03   |           8 | Practical    | Present |
+| 2025-03-10   |           9 | Practical    | Present |
+| 2025-03-17   |          10 | Practical    | Present |
+| 2025-03-24   |          11 | Practical    | Present |
+| 2025-03-31   |          12 | Practical    | Present |
+| 2025-01-13   |           1 | Practical    | Present |
+| 2025-01-20   |           2 | Practical    | Present |
+| 2025-01-27   |           3 | Practical    | Present |
+| 2025-02-03   |           4 | Practical    | Present |
+| 2025-02-10   |           5 | Practical    | Present |
+| 2025-02-17   |           6 | Practical    | Present |
+| 2025-02-24   |           7 | Practical    | Present |
+| 2025-03-03   |           8 | Practical    | Present |
+| 2025-03-10   |           9 | Practical    | Present |
+| 2025-03-17   |          10 | Practical    | Present |
+| 2025-03-24   |          11 | Practical    | Present |
+| 2025-03-31   |          12 | Practical    | Present |
+| 2025-01-13   |           1 | Practical    | Present |
+| 2025-01-20   |           2 | Practical    | Present |
+| 2025-01-27   |           3 | Practical    | Present |
+| 2025-02-03   |           4 | Practical    | Present |
+| 2025-02-10   |           5 | Practical    | Present |
+| 2025-02-17   |           6 | Practical    | Present |
+| 2025-02-24   |           7 | Practical    | Present |
+| 2025-03-03   |           8 | Practical    | Present |
+| 2025-03-10   |           9 | Practical    | Present |
+| 2025-03-17   |          10 | Practical    | Absent  |
+| 2025-03-24   |          11 | Practical    | Absent  |
+| 2025-03-31   |          12 | Practical    | Absent  |
++--------------+-------------+--------------+---------+
+72 rows in set (0.00 sec)
+
+Query OK, 0 rows affected (0.68 sec)
