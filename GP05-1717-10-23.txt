@@ -443,13 +443,15 @@ BEGIN
         c.Credit,
         c.Theory_Hours,
         c.Practical_Hours,
-        c.Year,
+        c.Year AS Acedemic_year,
         c.Semester,
         c.Department_Offering,
-	 c.Lec_Name
+	ce.Official_Confirmation,
+	 c.Lec_Name AS Lecturer_name
        
     FROM student_course sc
     JOIN course_unit c ON sc.Course_code = c.Course_code
+    join course_enrollment ce ON sc.ST_Id = ce.ST_Id
     WHERE sc.ST_Id = student_id;
 END//
 
