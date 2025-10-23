@@ -32,3 +32,23 @@ SELECT
 FROM medical_record m
 JOIN student s ON m.ST_Id = s.Registration_No
 WHERE m.Approve = 1;
+
+
+
+CREATE VIEW student_full_info AS
+SELECT 
+    s.Registration_No,
+    s.Fname,
+    s.Lname,
+    s.Year,
+    s.Department AS Student_Department,
+    s.Batch,
+    
+    u.Email,
+    u.Address,
+    u.Gender,
+    u.Dob,
+    uc.Contact_No
+FROM student s
+JOIN user u ON s.Registration_No = u.U_Id
+LEFT JOIN user_contact uc ON u.U_Id = uc.U_Id;
