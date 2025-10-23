@@ -509,9 +509,9 @@ end Tharupama
 
 
 
-////////////////////////////////////////////////////////////////////////////////////
-\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ NAVEEN RASANKA\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
-///////////////////////////////////////////////////////////////////////////////////
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\ NAVEEN RASANKA\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 DELIMITER //
 CREATE PROCEDURE calculate_CA_marks()
@@ -955,3 +955,116 @@ CALL calculateCGPA();
 
 
 
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+                                                              Damika Sulakshana
+
+
+DELIMITER //
+CREATE PROCEDURE AddStudent(
+    IN p_U_Id VARCHAR(20),
+    IN p_Fname VARCHAR(45),
+    IN p_Lname VARCHAR(45),
+    IN p_Email VARCHAR(45),
+    IN p_Address VARCHAR(45),
+    IN p_Gender VARCHAR(10),
+    IN p_Dob DATE,
+    IN p_Department VARCHAR(45),
+    IN p_Year INT,
+    IN p_Batch INT
+    )
+BEGIN
+    
+    
+    INSERT INTO user (U_Id, Fname, Lname, Email, Address, Gender, Dob, Role, Department)
+    VALUES (p_U_Id, p_Fname, p_Lname, p_Email, p_Address, p_Gender, p_Dob, 'Student', p_Department);
+
+    INSERT INTO student (Registration_No, Fname, Lname, Year, Department, Batch)
+    VALUES (p_U_Id, p_Fname, p_Lname, p_Year, p_Department, p_Batch);
+
+    
+END //
+DELIMITER ;
+
+
+
+
+DELIMITER //
+
+CREATE PROCEDURE ApproveMedical(
+    IN p_Medical_Id VARCHAR(10),
+    IN p_Approved_By VARCHAR(20)
+)
+BEGIN
+    DECLARE v_ST_Id VARCHAR(20);
+    DECLARE v_Course_code VARCHAR(10);
+    DECLARE v_Valid_From DATE;
+    DECLARE v_Valid_To DATE;
+
+    
+    SELECT ST_Id, Course_code, Valid_From, Valid_To
+    INTO v_ST_Id, v_Course_code, v_Valid_From, v_Valid_To
+    FROM medical_record
+    WHERE Medical_Id = p_Medical_Id;
+
+    
+
+ 
+    UPDATE medical_record
+    SET Approve = 1,
+        Approved_By = p_Approved_By
+    WHERE Medical_Id = p_Medical_Id;
+
+    
+    UPDATE attendance
+    SET Status = 'Present'
+    WHERE ST_Id = v_ST_Id
+      AND Course_code = v_Course_code
+      AND Session_Date BETWEEN v_Valid_From AND v_Valid_To
+      AND Status = 'Absent';
+END//
+
+DELIMITER ;
+
+
+
+
+DELIMITER //
+
+CREATE PROCEDURE SubmitMedical(
+    IN p_Medical_Id VARCHAR(10),
+    IN p_ST_Id VARCHAR(20),
+    IN p_Course_code VARCHAR(10),
+    IN p_Date_Submit DATE,
+    IN p_Valid_From DATE,
+    IN p_Valid_To DATE,
+    IN p_Approved_By VARCHAR(20),
+    IN p_Approve TINYINT 
+)
+BEGIN
+    
+    INSERT INTO medical_record (
+        Medical_Id, ST_Id, Course_code, Date_Submit,
+        Valid_From, Valid_To, Approve, Approved_By
+    )
+    VALUES (
+        p_Medical_Id,
+        p_ST_Id,
+        p_Course_code,
+        p_Date_Submit,
+        p_Valid_From,
+        p_Valid_To,
+        p_Approve,
+        p_Approved_By    );
+
+   
+    IF p_Approve = 1 THEN
+        UPDATE attendance
+        SET Status = 'Present'
+        WHERE ST_Id = p_ST_Id
+          AND Course_code = p_Course_code
+          AND Session_Date BETWEEN p_Valid_From AND p_Valid_To
+          AND Status = 'Absent';
+    END IF;
+END//
+
+DELIMITER ;
