@@ -484,3 +484,35 @@ GROUP BY ST_Id, Course_code, Semester;
 
 
 SELECT * FROM exam_summary_detailed WHERE Student_ID = 'tg/2023/0006';
+
+
+
+
+
+
+
+
+
+
+DELIMITER //
+
+CREATE PROCEDURE getcoursebatchsummary(IN input_course_code VARCHAR(15))
+BEGIN
+    SELECT 
+        student_id,
+        course_code,
+        Semester,
+        CA_marks,
+        Final_Marks,
+        Final_Grade,
+        Result_Status
+    FROM student_result
+    WHERE course_code = input_course_code
+    ORDER BY student_id;
+END//
+
+DELIMITER ;
+
+
+CALL getcoursebatchsummary('BST1212');
+
