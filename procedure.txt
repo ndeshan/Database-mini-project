@@ -507,20 +507,19 @@ DELIMITER ;
 
 
 
-
--- insert attendace details
+--insert attendance details procedure
 DELIMITER //
 DROP PROCEDURE IF EXISTS add_attendance_for_student;
 CREATE PROCEDURE add_attendance_for_student(
     IN p_stid VARCHAR(50),
     IN p_course VARCHAR(50),
+    IN p_start_date DATE,
     IN p_session_type VARCHAR(20),
     IN p_status VARCHAR(10)
 )
 BEGIN
     DECLARE i INT DEFAULT 1;
     DECLARE seq_base INT DEFAULT 0;
-    DECLARE start_date DATE DEFAULT '2025-01-13';
     SELECT COALESCE(MAX(CAST(SUBSTRING(Attendance_Id,4) AS UNSIGNED)), 0) INTO seq_base FROM attendance WHERE Attendance_Id LIKE 'ATT%';
 
     IF p_course IS NOT NULL AND p_course <> '' THEN
@@ -530,13 +529,12 @@ BEGIN
             INSERT INTO attendance(
                 Attendance_Id, ST_Id, Course_code, Session_Date, Week_Number, Session_Type, Status
             ) VALUES (
-                @att_id, p_stid, p_course, DATE_ADD(start_date, INTERVAL (i-1) WEEK), i, p_session_type, p_status
+                @att_id, p_stid, p_course, DATE_ADD(p_start_date, INTERVAL (i-1) WEEK), i, p_session_type, p_status
             );
             SET i = i + 1;
         END WHILE;
     END IF;
 END //
-DELIMITER ;
 ///////////////////////////////////////////////////////////////////////////////
 end Tharupama
 \\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\\
