@@ -563,3 +563,14 @@ CALL getstudentcoursesummary('tg/2023/0006', 'BST1212');
 
 
 
+
+insert into course_enrollment (Enrollment_Id, ST_Id, Course_code, Enrolled_Date, Official_Confirmation, Semester) VALUES ('EcourseId/112','tg/2023/0016','ENG1222','2025-10-23','COMFIRMED','Semester 2'),
+('EcourseId/113','tg/2023/0016','ICT1212','2025-10-23','COMFIRMED','Semester 2'),
+('EcourseId/114','tg/2023/0016','ICT1222','2025-10-23','COMFIRMED','Semester 2'),
+('EcourseId/115','tg/2023/0016','ICT1233','2025-10-23','COMFIRMED','Semester 2'),
+('EcourseId/116','tg/2023/0016','ICT1242','2025-10-23','COMFIRMED','Semester 2'),
+('EcourseId/117','tg/2023/0016','ICT1253','2025-10-23','COMFIRMED','Semester 2'),
+('EcourseId/118','tg/2023/0016','TCS1212','2025-10-23','COMFIRMED','Semester 2'),
+('EcourseId/119','tg/2023/0016','TMS1233','2025-10-23','COMFIRMED','Semester 2');
+
+
