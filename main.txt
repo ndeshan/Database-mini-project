@@ -259,6 +259,14 @@ CREATE TABLE student_course (
     PRIMARY KEY (ST_Id, Course_code)
 );
 
+ALTER TABLE student_course
+    ADD CONSTRAINT fk_stucourse_student 
+        FOREIGN KEY (ST_Id) REFERENCES student(Registration_No)
+        ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE student_course
+    ADD CONSTRAINT fk_stucourse_course 
+        FOREIGN KEY (Course_code) REFERENCES course_unit(Course_code)
+        ON UPDATE CASCADE ON DELETE RESTRICT;
 
 
 CREATE TABLE user_course (
@@ -267,6 +275,14 @@ CREATE TABLE user_course (
     PRIMARY KEY (U_Id, Course_Id)
 );
 
+ALTER TABLE user_course
+    ADD CONSTRAINT fk_usercourse_user 
+        FOREIGN KEY (U_Id) REFERENCES user(U_Id)
+        ON UPDATE CASCADE ON DELETE CASCADE;
+ALTER TABLE user_course
+    ADD CONSTRAINT fk_usercourse_course 
+        FOREIGN KEY (Course_Id) REFERENCES course_unit(Course_code)
+        ON UPDATE CASCADE ON DELETE RESTRICT;
 
 CREATE TABLE user_role (
     Role_Name   VARCHAR(50) NOT NULL,
