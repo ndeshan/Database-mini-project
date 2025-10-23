@@ -1,4 +1,4 @@
-VIEW 1 සමරියක් විදියට subjet ඔක්කොගෙම පැය ගානෙන් 
+--VIEW 1 as a summary of whole batch course code calculated by hours
 DROP VIEW IF EXISTS attendance_percentage_by_hours;
 CREATE VIEW attendance_percentage_by_hours AS
 SELECT
@@ -35,7 +35,7 @@ JOIN course_unit cu ON cu.Course_code = a.Course_code
 GROUP BY a.ST_Id, a.Course_code;
 
 
-view 2 සමරියක් විදියට subjet ඔක්කොගෙම දිනවලින් 
+--view 2 as a summary of attendance caculated by days
 
 CREATE VIEW attendance_summary AS
      SELECT

@@ -3303,6 +3303,14 @@ mysql> SELECT * FROM attendance_percentage_by_hours;
 +--------------+-------------+----------------+---------+--------+------------+--------------+
 89 rows in set (0.01 sec)
 
+CREATE TABLE grade_scale (
+    ->     Min_Marks   DECIMAL(5,2) NOT NULL,
+    ->     Max_Marks   DECIMAL(5,2) NOT NULL,
+    ->     Grade       CHAR(2)      NOT NULL,
+    ->     Grade_Point DECIMAL(3,2) NOT NULL,
+    ->     PRIMARY KEY (Min_Marks, Max_Marks)
+    -> );
+
 mysql> INSERT INTO grade_scale (Min_Marks, Max_Marks, Grade, Grade_Point) VALUES
     -> (40.00, 44.99, 'D',  1.00),
     -> (45.00, 49.99, 'D+', 1.30),
@@ -3403,3 +3411,55 @@ mysql> SELECT * FROM AcademicGrades;
 | W           |       NULL | Withdrawn                                                                     |
 +-------------+------------+-------------------------------------------------------------------------------+
 5 rows in set (0.00 sec)
+//////////////////////////////////////////////////////////
+mysql> DELIMITER //
+mysql>  CREATE PROCEDURE attendance_by_stid_cid_date(IN st_id VARCHAR(20), IN c_id VARCHAR(20), IN until_date DATE)
+    ->      BEGIN
+    ->      SELECT Session_Date,Week_Number,Session_Type,Status FROM attendance WHERE ST_Id = st_id AND
+    ->      Course_code = c_id AND Session_Date <= until_date;
+    ->      END //
+Query OK, 0 rows affected (0.02 sec)
+
+mysql> DELIMITER ;
+mysql> call attendance_by_stid_cid_date("tg/2024/0006","BST1212","2025-3-31");
++--------------+-------------+--------------+---------+
+| Session_Date | Week_Number | Session_Type | Status  |
++--------------+-------------+--------------+---------+
+| 2025-01-13   |           1 | Theory       | Present |
+| 2025-01-20   |           2 | Theory       | Present |
+| 2025-01-27   |           3 | Theory       | Present |
+| 2025-02-03   |           4 | Theory       | Present |
+| 2025-02-10   |           5 | Theory       | Present |
+| 2025-02-17   |           6 | Theory       | Present |
+| 2025-02-24   |           7 | Theory       | Present |
+| 2025-03-03   |           8 | Theory       | Present |
+| 2025-03-10   |           9 | Theory       | Present |
+| 2025-03-17   |          10 | Theory       | Present |
+| 2025-03-24   |          11 | Theory       | Present |
+| 2025-03-31   |          12 | Theory       | Present |
+| 2025-01-13   |           1 | Theory       | Present |
+| 2025-01-20   |           2 | Theory       | Present |
+| 2025-01-27   |           3 | Theory       | Present |
+| 2025-02-03   |           4 | Theory       | Present |
+| 2025-02-10   |           5 | Theory       | Present |
+| 2025-02-17   |           6 | Theory       | Present |
+| 2025-02-24   |           7 | Theory       | Present |
+| 2025-03-03   |           8 | Theory       | Present |
+| 2025-03-10   |           9 | Theory       | Present |
+| 2025-03-17   |          10 | Theory       | Present |
+| 2025-03-24   |          11 | Theory       | Present |
+| 2025-03-31   |          12 | Theory       | Present |
+| 2025-01-13   |           1 | Theory       | Present |
+| 2025-01-20   |           2 | Theory       | Present |
+| 2025-01-27   |           3 | Theory       | Present |
+| 2025-02-03   |           4 | Theory       | Present |
+| 2025-02-10   |           5 | Theory       | Present |
+| 2025-02-17   |           6 | Theory       | Present |
+| 2025-02-24   |           7 | Theory       | Present |
+| 2025-03-03   |           8 | Theory       | Present |
+| 2025-03-10   |           9 | Theory       | Present |
+| 2025-03-17   |          10 | Theory       | Present |
+| 2025-03-24   |          11 | Theory       | Present |
+| 2025-03-31   |          12 | Theory       | Present |
++--------------+-------------+--------------+---------+
+36 rows in set (0.00 sec)

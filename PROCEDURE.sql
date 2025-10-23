@@ -1,5 +1,5 @@
 PROCEDURES
-1.තනි තනි අයගේ registation number එක දුන්නහම 
+--showing individual student eligibility by given registration number
 DELIMITER //
 CREATE PROCEDURE attendance_by_stid(IN p_stid VARCHAR(20))
     BEGIN
@@ -20,7 +20,7 @@ CREATE PROCEDURE attendance_by_stid(IN p_stid VARCHAR(20))
 
 DELIMITER ;
 
-2.තනි තනි අයගේ registation number එකයි course code එකයි දීලා එකම subject එකේ theory practicle දෙකම තියේනං වෙනවෙනම බලන එක.
+--by givin registation number and course code show all attendance records if there both theory and practicle in subject by giving special arg can show seperatly
 DELIMITER //
 CREATE PROCEDURE attendance_by_stid_cid_seperate_type(
       IN st_id VARCHAR(20),
@@ -48,7 +48,7 @@ CREATE PROCEDURE attendance_by_stid_cid_seperate_type(
      END //
 DELIMITER ;
 
-3.තනි තනි අයගේ registation number එකයි course code එකයි දුන්නහම වෙන වෙනම නොඑන theory practicle ekata ena eka.
+--by givin registation number and course code show all attendance records if there both theory and practicle in subject show combined 
 DELIMITER //
  CREATE PROCEDURE attendance_by_stid_cid(IN st_id VARCHAR(20), IN c_id VARCHAR(20))
      BEGIN
@@ -57,7 +57,7 @@ DELIMITER //
      END //
 DELIMITER ;
 
-4.attendance update proce-
+--attendance update proce-
  
  CREATE PROCEDURE update_attendance(
          IN in_ST_Id VARCHAR(50),
@@ -112,7 +112,7 @@ DELIMITER ;
 
 DELIMITER ;
 
-5.course_code එක දීලා සමරියක් විදියට මුළු බැච් එකේම 
+--show attendance with eligibility by given course code 
 DELIMITER //
 CREATE PROCEDURE attendance_summary_by_course_id(IN c_id VARCHAR(15))
 BEGIN
