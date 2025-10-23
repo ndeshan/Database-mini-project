@@ -91,3 +91,48 @@ BEGIN
     
 END //
 DELIMITER ;
+
+
+DELIMITER //
+
+CREATE PROCEDURE DeleteStudent(IN p_StudentId VARCHAR(20))
+BEGIN
+    
+   
+    DELETE FROM mark WHERE student_id = p_StudentId;
+
+    
+    DELETE FROM student_result WHERE student_id = p_StudentId;
+
+   
+    DELETE FROM exam_enrollment WHERE ST_Id = p_StudentId;
+
+   
+    DELETE FROM exam WHERE ST_Id = p_StudentId;
+
+    
+    DELETE FROM attendance WHERE ST_Id = p_StudentId;
+
+    
+    DELETE FROM course_enrollment WHERE ST_Id = p_StudentId;
+
+    
+    DELETE FROM medical_record WHERE ST_Id = p_StudentId;
+
+    
+    DELETE FROM student_course WHERE ST_Id = p_StudentId;
+
+   
+    DELETE FROM user_contact WHERE U_Id = p_StudentId;
+
+    
+    DELETE FROM student WHERE Registration_No = p_StudentId;
+
+   
+    DELETE FROM user WHERE U_Id = p_StudentId;
+
+    
+
+END //
+
+DELIMITER ;
