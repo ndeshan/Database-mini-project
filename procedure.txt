@@ -986,7 +986,7 @@ END //
 DELIMITER ;
 
 
-
+call addstudent("tg/2023/0016","Damika","Sulakshana","Damika2223@gmail.com","matara","M","2004-01-15","ICT",1,"2024");
 
 DELIMITER //
 
