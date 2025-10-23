@@ -52,3 +52,42 @@ SELECT
 FROM student s
 JOIN user u ON s.Registration_No = u.U_Id
 LEFT JOIN user_contact uc ON u.U_Id = uc.U_Id;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+DELIMITER //
+CREATE PROCEDURE AddStudent(
+    IN p_U_Id VARCHAR(20),
+    IN p_Fname VARCHAR(45),
+    IN p_Lname VARCHAR(45),
+    IN p_Email VARCHAR(45),
+    IN p_Address VARCHAR(45),
+    IN p_Gender VARCHAR(10),
+    IN p_Dob DATE,
+    IN p_Department VARCHAR(45),
+    IN p_Year INT,
+    IN p_Batch INT
+    )
+BEGIN
+    
+    
+    INSERT INTO user (U_Id, Fname, Lname, Email, Address, Gender, Dob, Role, Department)
+    VALUES (p_U_Id, p_Fname, p_Lname, p_Email, p_Address, p_Gender, p_Dob, 'Student', p_Department);
+
+    INSERT INTO student (Registration_No, Fname, Lname, Year, Department, Batch)
+    VALUES (p_U_Id, p_Fname, p_Lname, p_Year, p_Department, p_Batch);
+
+    
+END //
+DELIMITER ;
