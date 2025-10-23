@@ -1,0 +1,42 @@
+INSERT INTO mark( Mark_id,student_id,course_code,exam_id,Quiz_01, Quiz_02
+,Quiz_03,Assessment_01,Mid_Practical,Mid_Theory,Final_Theory,Final_Practical,Type)
+
+VALUES
+('M112', 'tg/2023/0016', 'ENG1222',778, 12, 21,9, 34, 0.00, 10, 23, 0.00, 'Theory'),
+('M113', 'tg/2023/0016', 'ICT1212', 785, 4, 5, 2, 10, 0.00, 34, 2, 0.00, 'Theory'),
+('M114', 'tg/2023/0016', 'ICT1222', 801, 5, 16, 23, 34, 23, 0, 0, 23, 'Practical'),
+('M115', 'tg/2023/0016', 'ICT1233',803, 3, 34,10, 31, 0, 12, 23, 11, 'Both'),
+('M116', 'tg/2023/0016', 'ICT1242', 806, 0,0, 0, 0, 0.00,0, 0, 0.00, 'Theory'),
+('M117', 'tg/2023/0016', 'ICT1253', 813, 0, 0,0,0, 0, 0, 0, 0, 'Both'),
+('M118', 'tg/2023/0016', 'TCS1212', 824 , 23,5, 34, 43, 0.00, 31, 56, 0.00, 'Theory'),
+('M119', 'tg/2023/0016', 'TMS1233', 827, 0, 6, 4, 3, 0.00, 0, 0, 0.00, 'Theory');
+
+
+UPDATE mark m
+JOIN course_unit c
+ON m.Course_code =c.Course_code
+SET m.Type=c.Type;
+
+SELECT * FROM mark;
+
+INSERT INTO student_result
+(student_id,course_code,Semester)
+VALUES
+('tg/2023/0016', 'ENG1222', 'Semester 2'),
+('tg/2023/0016', 'ICT1212', 'Semester 2'),
+('tg/2023/0016', 'ICT1222', 'Semester 2'),
+('tg/2023/0016', 'ICT1233', 'Semester 2'),
+('tg/2023/0016', 'ICT1242', 'Semester 2'),
+('tg/2023/0016', 'ICT1253', 'Semester 2'),
+('tg/2023/0016', 'TCS1212', 'Semester 2'),
+('tg/2023/0016', 'TMS1233', 'Semester 2');
+
+
+
+
+CALL  calculate_CA_marks();
+CALL calculateFinalMark();
+CALL calculateSGPA();
+CALL calculateCGPA();
+
+SELECT * FROM student_result;
