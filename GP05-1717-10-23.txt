@@ -429,3 +429,32 @@ INSERT INTO exam_enrollment (
 ('EEXM_tg/20_BST125', 'tg/2023/0015', 'Semester 2', 'BST1253', 1, 1, 1);
 
 
+
+
+
+DELIMITER //
+
+CREATE PROCEDURE getstudentcourses(IN student_id VARCHAR(20))
+BEGIN
+    SELECT DISTINCT 
+        c.Course_code,
+        c.Name AS Course_Name,
+        c.Type,
+        c.Credit,
+        c.Theory_Hours,
+        c.Practical_Hours,
+        c.Year,
+        c.Semester,
+        c.Department_Offering,
+	 c.Lec_Name
+       
+    FROM student_course sc
+    JOIN course_unit c ON sc.Course_code = c.Course_code
+    WHERE sc.ST_Id = student_id;
+END//
+
+DELIMITER ;
+
+
+
+call getstudentcourses('tg/2023/0006');
