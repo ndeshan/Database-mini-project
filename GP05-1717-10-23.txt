@@ -460,3 +460,27 @@ DELIMITER ;
 
 
 call getstudentcourses('tg/2023/0006');
+
+
+
+
+
+
+
+CREATE VIEW exam_summary_detailed AS
+SELECT 
+    ST_Id AS Student_ID,
+    Course_code,
+    Semester,
+    SUM(CASE WHEN Exam_Type LIKE 'Quiz%' THEN 1 ELSE 0 END) AS Quiz_Count,
+    SUM(CASE WHEN Exam_Type LIKE 'Assessment%' THEN 1 ELSE 0 END) AS Assessment_Count,
+    SUM(CASE WHEN Exam_Type = 'Mid_Semester' THEN 1 ELSE 0 END) AS Mid_Semester_Count,
+    SUM(CASE WHEN Exam_Type = 'Final' THEN 1 ELSE 0 END) AS Final_Count,
+    COUNT(*) AS Total_Exams,
+    MAX(Status) AS Status
+FROM exam
+GROUP BY ST_Id, Course_code, Semester;
+
+
+
+SELECT * FROM exam_summary_detailed WHERE Student_ID = 'tg/2023/0006';
