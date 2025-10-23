@@ -216,6 +216,40 @@ DELIMITER ;
 
 
 
+
+
+
+
+
+-- meka awilla corse code eka input eka widiyata aragena e course ekata adalawa whole batch ekema details tika pennana eka.
+
+
+
+DELIMITER //
+
+CREATE PROCEDURE getcoursebatchsummary(IN input_course_code VARCHAR(15))
+BEGIN
+    SELECT 
+        student_id,
+        course_code,
+        Semester,
+        CA_marks,
+        Final_Marks,
+        Final_Grade,
+        Result_Status
+    FROM student_result
+    WHERE course_code = input_course_code
+    ORDER BY student_id;
+END//
+
+DELIMITER ;
+
+
+CALL getcoursebatchsummary('BST1212');
+
+
+
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 Tharupama
 ///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
