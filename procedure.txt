@@ -375,6 +375,7 @@ DELIMITER ;
 
 
 --update procedure attendance ("tg/2024/0001","ICT1253",15,"t","a")
+DELIMITER //
  CREATE PROCEDURE update_attendance(
          IN in_ST_Id VARCHAR(50),
          IN in_Course_code VARCHAR(50),
