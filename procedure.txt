@@ -75,7 +75,7 @@ BEGIN
     DECLARE attend BOOLEAN DEFAULT 0;
     DECLARE camark BOOLEAN DEFAULT 0;
     DECLARE finalmark BOOLEAN DEFAULT 0;
-
+    DECLARE v_enroll_id VARCHAR(30);
     DECLARE attend_status VARCHAR(12) DEFAULT '';
     DECLARE ca_score DECIMAL(5,2) DEFAULT NULL;
 
@@ -112,11 +112,11 @@ BEGIN
 
 
   
-    SET @enroll_id = CONCAT(
+   SET v_enroll_id = CONCAT(
         'EEXM_',
-        REPLACE(LEFT(p_ST_Id, 10), '/', ''),  
+        LEFT(p_ST_Id, 5),   
         '_',
-        LEFT(p_Course_code, 7)                
+        LEFT(p_Course_code, 7)
     );
 
 
@@ -130,7 +130,7 @@ BEGIN
         CA_Eligible,
         Final_Eligible
     ) VALUES (
-        @enroll_id,
+        v_enroll_id,
         p_ST_Id,
         p_Semester,
         p_Course_code,
@@ -142,7 +142,6 @@ BEGIN
 END //
 
 DELIMITER ;
-
 
 
 call exam_enrollment_new_insert('tg/2023/0020', 'ICT1222', 'Semester 2');
