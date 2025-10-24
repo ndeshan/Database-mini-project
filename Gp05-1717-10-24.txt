@@ -77,3 +77,21 @@ BEGIN
 END //
 
 DELIMITER ;
+
+
+
+
+
+
+
+
+
+
+call exam_enrollment_new_insert('tg/2023/0016', 'ENG1222', 'Semester 2');
+call exam_enrollment_new_insert('tg/2023/0016', 'ICT1212', 'Semester 2');
+call exam_enrollment_new_insert('tg/2023/0016', 'ICT1222', 'Semester 2');
+call exam_enrollment_new_insert('tg/2023/0016', 'ICT1233', 'Semester 2');
+call exam_enrollment_new_insert('tg/2023/0016', 'ICT1242', 'Semester 2');
+call exam_enrollment_new_insert('tg/2023/0016', 'ICT1253', 'Semester 2');
+call exam_enrollment_new_insert('tg/2023/0016', 'TCS1212', 'Semester 2');
+call exam_enrollment_new_insert('tg/2023/0016', 'TMS1233', 'Semester 2');
