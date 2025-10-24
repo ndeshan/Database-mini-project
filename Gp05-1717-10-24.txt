@@ -1,0 +1,79 @@
+DELIMITER //
+
+CREATE PROCEDURE exam_enrollment_new_insert (
+    IN p_ST_Id VARCHAR(20),       
+    IN p_Course_code VARCHAR(15), 
+     IN p_Semester VARCHAR(20))
+ 
+BEGIN
+    
+    DECLARE attend BOOLEAN DEFAULT 0;
+    DECLARE camark BOOLEAN DEFAULT 0;
+    DECLARE finalmark BOOLEAN DEFAULT 0;
+    DECLARE v_enroll_id VARCHAR(30);
+    DECLARE attend_status VARCHAR(12) DEFAULT '';
+    DECLARE ca_score DECIMAL(5,2) DEFAULT NULL;
+
+    SELECT Eligibility INTO attend_status
+    FROM attendance_summary
+    WHERE ST_Id = p_ST_Id AND Course_code = p_Course_code
+    LIMIT 1;
+
+    IF attend_status = 'Eligible' THEN
+        SET attend = 1;
+    ELSE
+        SET attend = 0;  
+    END IF;
+
+
+    SELECT CA_Marks INTO ca_score
+    FROM student_result
+    WHERE student_id = p_ST_Id AND course_code = p_Course_code
+    LIMIT 1;
+
+    IF ca_score IS NOT NULL AND ca_score > 20 THEN
+        SET camark = 1; 
+    ELSE
+        SET camark = 0;  
+    END IF;
+
+
+    
+    IF attend = 1 AND camark = 1 THEN
+        SET finalmark = 1;
+    ELSE
+        SET finalmark = 0;  
+    END IF;
+
+
+  
+   SET v_enroll_id = CONCAT(
+        'EEXM_',
+        LEFT(p_ST_Id, 5),   
+        '_',
+        LEFT(p_Course_code, 7)
+    );
+
+
+    
+    INSERT INTO exam_enrollment (
+        Enrollment_Id,
+        ST_Id,
+        Semester,
+        Course_code,
+        Attendance_Eligible,
+        CA_Eligible,
+        Final_Eligible
+    ) VALUES (
+        v_enroll_id,
+        p_ST_Id,
+        p_Semester,
+        p_Course_code,
+        attend,
+        camark,
+        finalmark
+    );
+
+END //
+
+DELIMITER ;
