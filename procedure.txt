@@ -65,7 +65,7 @@ call exam_enrollment_all();
 
 DELIMITER //
 
-CREATE PROCEDURE course_enrollment_new_insert (
+CREATE PROCEDURE exam_enrollment_new_insert (
     IN p_ST_Id VARCHAR(20),       
     IN p_Course_code VARCHAR(15), 
      IN p_Semester VARCHAR(20))
@@ -145,7 +145,7 @@ DELIMITER ;
 
 
 
-call course_enrollment_new_insert('tg/2023/0020', 'ICT1222', 'Semester 2');
+call exam_enrollment_new_insert('tg/2023/0020', 'ICT1222', 'Semester 2');
 
 
 
