@@ -1,0 +1,18 @@
+
+CREATE USER  'Admin'@'localhost' IDENTIFIED BY 'admin_pass';
+CREATE USER  'Dean'@'localhost' IDENTIFIED BY 'dean_pass';
+CREATE USER 'Lecturer'@'localhost' IDENTIFIED BY 'lecturer_pass';
+CREATE USER  'TechnicalOfficer'@'localhost' IDENTIFIED BY 'tech_pass';
+CREATE USER  'Student'@'localhost' IDENTIFIED BY 'student_pass';
+
+GRANT ALL PRIVILEGES ON student_management.* TO 'Admin'@'localhost' WITH GRANT OPTION;
+GRANT ALL PRIVILEGES ON student_management.* TO 'Dean'@'localhost';
+GRANT ALL PRIVILEGES ON student_management.* TO 'Lecturer'@'localhost';
+
+
+GRANT SELECT, INSERT, UPDATE ON student_management.attendance TO 'TechnicalOfficer'@'localhost';
+GRANT SELECT ON student_management.student_result TO 'Student'@'localhost';
+GRANT SELECT ON student_management.mark TO 'Student'@'localhost';
+
+
+FLUSH PRIVILEGES;
