@@ -1,4 +1,13 @@
 <?php
+session_start();
+
+
+if (empty($_SESSION['admin_logged_in']) || $_SESSION['admin_logged_in'] !== true) {
+    header('Location: admin.php');
+    exit();
+    
+}
+
 include 'nav.php';
 
 ?>
