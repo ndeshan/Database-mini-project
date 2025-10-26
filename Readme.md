@@ -4,10 +4,12 @@
 > **Project**: Mini Project - Student Marks, Attendance & Result Management System  
 > **Compliance**: UGC Circular No. 12-2024  
 > **Submitted to**: Mr. P.H.P. Nuwan Laksiri  
-> **Group**: <Your Group Number>  
+> **Group**: 05  
 > **Submitted by**:  
-> - `<Index No> - <Full Name>`  
-> - `<Index No> - <Full Name>`  
+> - `TG1717 - G.Nipuna deshan`  
+> - `TG1718 - Tharupama nayana`
+> - `TG1719 - Naveen Rasanka`
+> - `TG1729 - Damika sulakshana`   
 
 ---
 
@@ -30,7 +32,6 @@ The system supports:
 ### 🎯 UGC 12-2024 Compliance
 - ✅ Grade Scale: A+ (90-100) to F (0-49.99) with Grade Points
 - ✅ Repeat Students → Max Grade = 'C'
-- ✅ Suspended Students → All Grades = 'WH'
 - ✅ Medical Certificate (MC) → Display 'MC' if medical submitted for CA/Final
 - ✅ Attendance Eligibility → ≥80% (Theory + Practical separately or combined)
 - ✅ CA Eligibility → CA Marks ≥40 to sit Final Exam
@@ -38,7 +39,6 @@ The system supports:
 ### 📊 Data Coverage
 - ✅ 10+ Proper Students
 - ✅ 5+ Repeat Students
-- ✅ 5+ Suspended Students
 - ✅ 5+ Lecturers
 - ✅ 5+ Technical Officers
 - ✅ Attendance: ≥80%, <80%, with/without medical
@@ -55,10 +55,8 @@ The system supports:
 
 ---
 
-## 🗃️ Database Schema
 
-### 🖼️ ER Diagram
-*(Insert screenshot of your ER Diagram here — e.g., `er_diagram.png`)*
+
 
 ### 📄 Relational Schema
 See `schema.sql` for full table structure.
@@ -75,7 +73,7 @@ Key Tables:
 
 - **Database**: MySQL 8.0+
 - **Tools**: MySQL Workbench, VS Code, GitHub
-- **Platform**: Localhost (XAMPP / Docker / Cloud-ready)
+- **Platform**: Localhost (XAMPP)
 
 ---
 
@@ -84,4 +82,4 @@ Key Tables:
 ### 1. Clone the Repository
 ```bash
 git clone https://github.com/ndeshan/Database-mini-project.git
-cd ict1222-mini-project
+
