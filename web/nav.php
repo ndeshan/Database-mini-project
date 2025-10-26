@@ -32,6 +32,9 @@
                     <option value="marks_view">Marks View</option>
                 </select>
             </li>
+            <li>
+                <input type="submit" value="logout" onclick="window.location.href='logout.php'" class="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded">
+            </li>
             <?php endif; ?>
         </ul>       
     </nav>
