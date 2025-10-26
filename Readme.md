@@ -4,10 +4,12 @@
 > **Project**: Mini Project - Student Marks, Attendance & Result Management System  
 > **Compliance**: UGC Circular No. 12-2024  
 > **Submitted to**: Mr. P.H.P. Nuwan Laksiri  
-> **Group**: <Your Group Number>  
+> **Group**: <05>  
 > **Submitted by**:  
-> - `<Index No> - <Full Name>`  
-> - `<Index No> - <Full Name>`  
+> - `<TG1717> - <G.Nipuna deshan>`  
+> - `<TG1718> - <Tharupama nayana>`
+> - `<TG1719> - <Naveen Rasanka>`
+> - `<TG1729> - <Damika sulakshana>`   
 
 ---
 
